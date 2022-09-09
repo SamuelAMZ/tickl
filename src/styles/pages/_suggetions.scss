@@ -1,0 +1,18 @@
+@import "../global/variables";
+
+.suggetions {
+  display: grid;
+  grid-template-columns: 0.7fr 5fr 2.5fr;
+  gap: 3rem;
+
+  .actual-suggetions {
+    margin: 3rem 0;
+    padding: 0 0.5rem 0 0;
+    // border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    overflow: auto;
+  }
+}

@@ -1,0 +1,7 @@
+@import "../global/variables";
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

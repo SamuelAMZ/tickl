@@ -1,0 +1,76 @@
+@import "../global/variables";
+
+.notification {
+  display: grid;
+  grid-template-columns: 0.7fr 5fr 2.5fr;
+  gap: 3rem;
+
+  .actual-notification {
+    margin: 3rem 0;
+    padding: 0 0.5rem 0 0;
+    // border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow: auto;
+
+    .tab {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        text-align: center;
+        padding: 1rem;
+        font-size: 17px;
+        cursor: pointer;
+        font-weight: 600;
+
+        &:nth-child(1) {
+          border-right: 1px solid $heading;
+        }
+        &.activeA {
+          background: #3e3e3e1a;
+          border-radius: 20px 0 0 20px;
+        }
+        &.activeB {
+          background: #3e3e3e1a;
+          border-radius: 0 20px 20px 0;
+        }
+      }
+    }
+
+    .notifications {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .single-notification {
+        background-color: #3e3e3e1a;
+        padding: 1rem;
+        border-radius: 20px;
+        position: relative;
+
+        .mention {
+          font-size: 15px;
+          font-weight: 600;
+        }
+
+        span {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 1rem;
+          border-radius: 100px;
+          font-size: 20px;
+          cursor: pointer;
+
+          svg {
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+}

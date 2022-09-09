@@ -1,0 +1,117 @@
+@import "../global/variables";
+
+// username tab style
+.form-style {
+  width: 100%;
+
+  form.fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    .field {
+      width: 100%;
+
+      p {
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.635);
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        font-size: 15px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.635);
+      }
+      textarea {
+        resize: vertical;
+        max-height: 200px;
+      }
+    }
+    button {
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      background-color: rgba(62, 62, 62, 0.1019607843);
+      color: $heading;
+      cursor: pointer;
+    }
+  }
+}
+
+// profil pictures tab style
+._settings-profil-pictures {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+
+  .main-picture,
+  .back-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    p {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.635);
+    }
+
+    .item {
+      width: 150px;
+      height: 150px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 50%;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+
+      label,
+      button {
+        padding: 0.7rem 1rem;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        background-color: rgba(62, 62, 62, 0.1019607843);
+        color: $heading;
+        cursor: pointer;
+      }
+      button {
+        background-color: rgba(255, 73, 73, 0.408);
+      }
+
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+    }
+  }
+
+  .back-picture {
+    width: 100%;
+
+    .item {
+      width: 70%;
+      height: 200px;
+      border-radius: 10px;
+    }
+  }
+}

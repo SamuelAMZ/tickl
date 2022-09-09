@@ -1,0 +1,38 @@
+@import "../global/variables";
+
+.login-content {
+  h2 {
+    font-size: 30px;
+    margin-bottom: 1rem;
+    color: $heading;
+  }
+  form {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+
+    input,
+    button {
+      width: 100%;
+      padding: 5px;
+      font-size: 15px;
+      font-weight: 600;
+      border: 1px solid $heading;
+      border-radius: 5px;
+    }
+
+    button {
+      cursor: pointer;
+      color: white;
+      background-color: $heading;
+      border: none;
+    }
+    .no-account {
+      margin-top: 1rem;
+      font-size: 13px;
+      a {
+        color: $heading;
+      }
+    }
+  }
+}

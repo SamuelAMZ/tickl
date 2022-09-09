@@ -1,0 +1,19 @@
+@import "../global/variables";
+
+.top-post {
+  .new-post {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 30px;
+      color: black;
+      cursor: pointer;
+    }
+    .search {
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+}
