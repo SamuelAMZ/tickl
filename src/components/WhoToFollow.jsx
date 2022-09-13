@@ -14,9 +14,9 @@ const WhoToFollow = () => {
         <FollowElm />
         <FollowElm />
       </div>
-      <button>
-        <NavLink to="/suggetions">Show More</NavLink>{" "}
-      </button>
+      <NavLink to="/suggetions">
+        <button>Show More</button>
+      </NavLink>{" "}
     </>
   );
 };

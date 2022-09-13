@@ -4,24 +4,23 @@ import {
   BiHomeCircle,
   BiHash,
   BiNotification,
-  BiMessageSquare,
   BiBookmark,
 } from "react-icons/bi";
 import { FaFeatherAlt } from "react-icons/fa";
-import { TbSocial } from "react-icons/tb";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 
 const Appbar = () => {
   return (
     <div className="app-bar">
-      <div className="logo">
-        <NavLink to="/home">
-          <TbSocial />
-        </NavLink>
-      </div>
       <div className="menu">
         <ul>
+          <div className="logo">
+            <NavLink to="/home">
+              <img src="/img/logo.png" alt="" />
+            </NavLink>
+          </div>
+
           <li className="active">
             <NavLink to="/home">
               <BiHomeCircle />
@@ -58,11 +57,14 @@ const Appbar = () => {
               <p>Settings</p>
             </NavLink>
           </li>
+          <li>
+            <div className="new-post">
+              <p>New Tickl</p>
+            </div>
+          </li>
         </ul>
       </div>
-      <div className="new-post">
-        <FaFeatherAlt />
-      </div>
+
       <NavLink to="/profil">
         <div className="profil">
           <MdOutlineAccountCircle />

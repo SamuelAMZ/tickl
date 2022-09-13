@@ -23,7 +23,7 @@ const Third = () => {
 
       <div
         className="featured"
-        style={{ backgroundImage: "url(/img/sport.jpeg)" }}
+        style={{ backgroundImage: "url(/img/sport.png)" }}
       >
         <a
           href="https://www.sportsnet.ca/"

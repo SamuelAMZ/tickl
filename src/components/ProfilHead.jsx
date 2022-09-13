@@ -7,13 +7,13 @@ const ProfilHead = () => {
     <div className="profil-head">
       <div
         className="profil-head-img"
-        style={{ backgroundImage: "url(/img/1.jpg)" }}
+        style={{ backgroundImage: "url(/img/1.jpeg)" }}
       ></div>
 
       <div className="profil-button">
         <div
           className="profil-main-img"
-          style={{ backgroundImage: "url(/img/3.jpg)" }}
+          style={{ backgroundImage: "url(/img/pro.jpeg)" }}
         ></div>
         <button>
           <NavLink to="/settings">Edit profile</NavLink>
@@ -22,11 +22,10 @@ const ProfilHead = () => {
 
       <div className="profil-details">
         <div className="profil-detail">
-          <h4>Lorem</h4>
-          <p className="profil-username">@Ipsumdolor</p>
+          <h4>Tony Montana</h4>
+          <p className="profil-username">@tony</p>
           <p className="profil-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi,
-            repellat...
+            Tony Montany profile here will share only interessing stuffs ...
           </p>
           <div className="profil-others">
             <div>

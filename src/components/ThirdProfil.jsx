@@ -6,12 +6,12 @@ const ThirdProfil = () => {
   return (
     <div className="third-profil">
       <div className="images">
-        <div style={{ backgroundImage: "url(/img/1.jpg)" }}></div>
-        <div style={{ backgroundImage: "url(/img/2.jpg)" }}></div>
-        <div style={{ backgroundImage: "url(/img/3.jpg)" }}></div>
-        <div style={{ backgroundImage: "url(/img/4.jpg)" }}></div>
-        <div style={{ backgroundImage: "url(/img/5.jpg)" }}></div>
-        <div style={{ backgroundImage: "url(/img/1.jpg)" }}></div>
+        <div style={{ backgroundImage: "url(/img/1.jpeg)" }}></div>
+        <div style={{ backgroundImage: "url(/img/2.jpeg)" }}></div>
+        <div style={{ backgroundImage: "url(/img/3.jpeg)" }}></div>
+        <div style={{ backgroundImage: "url(/img/4.jpeg)" }}></div>
+        <div style={{ backgroundImage: "url(/img/1.jpeg)" }}></div>
+        <div style={{ backgroundImage: "url(/img/2.jpeg)" }}></div>
       </div>
       <div className="who-follow">
         <WhoToFollow />

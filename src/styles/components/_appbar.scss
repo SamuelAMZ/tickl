@@ -1,3 +1,4 @@
+@use "../global/breakpoints" as b;
 @import "../global/variables";
 
 .app-bar {
@@ -9,9 +10,19 @@
   padding: 3rem 0;
   width: 100%;
 
+  @include b.breakpoint("900") {
+    display: none;
+  }
+
   .logo {
-    font-size: 40px;
-    padding: 0.5rem 1rem;
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      padding: 0.5rem;
+      // background-color: rgba(62, 62, 62, 0.1019607843);
+      border-radius: 100px;
+    }
   }
 
   .menu {
@@ -25,7 +36,7 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: start;
-      gap: 1.5rem;
+      gap: 0.5rem;
       width: 100%;
 
       li {
@@ -38,6 +49,7 @@
         p {
           font-size: 17px;
         }
+
         a {
           color: rgba(0, 0, 0, 0.489);
           display: flex;
@@ -49,7 +61,7 @@
           width: 100%;
           text-align: start;
           padding: 0.5rem 1rem;
-          border-radius: 20px;
+          border-radius: 100px;
 
           &:hover {
             background-color: rgba(62, 62, 62, 0.1019607843);
@@ -98,16 +110,17 @@
   }
 
   .new-post {
-    font-size: 30px;
+    font-size: 16px;
     background-color: $heading;
     color: white;
-    border-radius: 50%;
+    border-radius: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
     box-shadow: 0px 0px 10px $heading;
     margin: 0.5rem 1rem;
+    cursor: pointer;
   }
 
   .profil {

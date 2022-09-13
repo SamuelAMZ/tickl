@@ -1,9 +1,21 @@
+@use "../global/breakpoints" as b;
 @import "../global/variables";
 
 .settings-page {
   display: grid;
   grid-template-columns: 0.7fr 7.5fr;
   gap: 3rem;
+  @include b.breakpoint("1300") {
+    gap: 1.5;
+  }
+  @include b.breakpoint("1200") {
+    gap: 1rem;
+    grid-template-columns: 1fr 3fr;
+  }
+  @include b.breakpoint("900") {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 
   .actual-settings-page {
     margin: 3rem 0;
@@ -13,6 +25,13 @@
     flex-direction: column;
     gap: 2rem;
     overflow: auto;
+    overflow-x: hidden;
+
+    @include b.breakpoint("900") {
+      padding: 0 1rem;
+      margin: 0;
+      gap: 1rem;
+    }
 
     .settings-page-container {
       display: grid;

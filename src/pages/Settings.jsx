@@ -9,6 +9,7 @@ import Gender from "../components/settings/Gender";
 import Birthdate from "../components/settings/BirthDate";
 import Password from "../components/settings/Password";
 import Description from "../components/settings/Description";
+import MobilHeader from "../components/MobilHeader";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("username");
@@ -26,6 +27,7 @@ const Settings = () => {
       <div className="settings-page">
         <Appbar />
         <div className="actual-settings-page">
+          <MobilHeader />
           <div className="settings-page-container">
             <div className="settings-options">
               <div className="settings-account-informations">

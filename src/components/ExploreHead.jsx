@@ -6,7 +6,7 @@ const ExploreHead = () => {
     <>
       <div
         className="explore-head"
-        style={{ backgroundImage: "url(/img/3.jpg)" }}
+        style={{ backgroundImage: "url(/img/3.jpeg)" }}
       >
         <div className="second">
           {/* desc */}

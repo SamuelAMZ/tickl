@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Appbar from "../components/Appbar";
 import Third from "../components/Third";
 import Notification from "../components/Notification";
+import MobilHeader from "../components/MobilHeader";
 
 const Explore = (e) => {
   let mention;
@@ -45,6 +46,7 @@ const Explore = (e) => {
       <div className="notification">
         <Appbar />
         <div className="actual-notification">
+          <MobilHeader />
           <div className="tab">
             <p onClick={(e) => activeTabAll(e)} className="activeA">
               All

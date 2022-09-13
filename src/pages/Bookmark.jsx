@@ -2,6 +2,7 @@ import React from "react";
 import Appbar from "../components/Appbar";
 import Third from "../components/Third";
 import Post from "../components/Post";
+import MobilHeader from "../components/MobilHeader";
 
 const Explore = () => {
   return (
@@ -9,13 +10,14 @@ const Explore = () => {
       <div className="bookmark">
         <Appbar />
         <div className="actual-bookmark">
+          <MobilHeader />
           <div className="books">
             <h3 className="date">12-12-2022</h3>
             <div className="book">
               <div className="line"></div>
               <div className="book-posts">
-                <Post image={"url(/img/4.jpg)"} desc={"lorem ipsum"} />
-                <Post image={"url(/img/2.jpg)"} desc={"lorem ipsum"} />
+                <Post image={"url(/img/4.jpeg)"} desc={"lorem ipsum"} />
+                <Post image={"url(/img/2.jpeg)"} desc={"lorem ipsum"} />
               </div>
             </div>
           </div>
@@ -24,7 +26,7 @@ const Explore = () => {
             <div className="book">
               <div className="line"></div>
               <div className="book-posts">
-                <Post image={"url(/img/1.jpg)"} desc={"lorem ipsum"} />
+                <Post image={"url(/img/1.jpeg)"} desc={"lorem ipsum"} />
               </div>
             </div>
           </div>
@@ -33,9 +35,9 @@ const Explore = () => {
             <div className="book">
               <div className="line"></div>
               <div className="book-posts">
-                <Post image={"url(/img/5.jpg)"} desc={"lorem ipsum"} />
-                <Post image={"url(/img/1.jpg)"} desc={"lorem ipsum"} />
-                <Post image={"url(/img/3.jpg)"} desc={"lorem ipsum"} />
+                <Post image={"url(/img/4.jpeg)"} desc={"lorem ipsum"} />
+                <Post image={"url(/img/1.jpeg)"} desc={"lorem ipsum"} />
+                <Post image={"url(/img/3.jpeg)"} desc={"lorem ipsum"} />
               </div>
             </div>
           </div>

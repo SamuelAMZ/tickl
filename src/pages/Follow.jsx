@@ -3,6 +3,7 @@ import Appbar from "../components/Appbar";
 import Followers from "../components/Followers";
 import Following from "../components/Following";
 import Third from "../components/Third";
+import MobilHeader from "../components/MobilHeader";
 
 const Follow = () => {
   const [activeTab, setActiveTab] = useState("followers");
@@ -20,6 +21,8 @@ const Follow = () => {
       <div className="follow">
         <Appbar />
         <div className="actual-follow">
+          <MobilHeader />
+
           <div className="tab">
             <p
               className="items active"

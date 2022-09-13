@@ -1,3 +1,4 @@
+@use "../global/breakpoints" as b;
 @import "../global/variables";
 
 .top-post {
@@ -6,9 +7,13 @@
     align-items: center;
     justify-content: space-between;
 
+    @include b.breakpoint("900") {
+      display: none;
+    }
+
     h2 {
       font-size: 30px;
-      color: black;
+      color: rgba(0, 0, 0, 0.546);
       cursor: pointer;
     }
     .search {

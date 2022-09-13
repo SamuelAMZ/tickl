@@ -1,5 +1,5 @@
+@use "../global/breakpoints" as b;
 @import "./variables";
-
 * {
   padding: 0;
   margin: 0;
@@ -9,14 +9,14 @@
 
 /* scroll bar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
 }
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px #1013204a;
+  box-shadow: inset 0 0 5px #1013201d;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: $second-background;
+  background: $heading;
   border-radius: 10px;
 }
 
@@ -32,35 +32,9 @@ body {
 
 .pages {
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   margin: 0 auto;
   // border: 1px dashed black;
-}
-.login {
-  min-width: 100vw;
-  min-height: 100vh;
-  margin: 0 auto;
-
-  background: rgb(18, 0, 108);
-  background: -moz-linear-gradient(
-    86deg,
-    rgba(18, 0, 108, 1) 0%,
-    rgba(121, 95, 254, 1) 45%,
-    rgba(66, 76, 249, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    86deg,
-    rgba(18, 0, 108, 1) 0%,
-    rgba(121, 95, 254, 1) 45%,
-    rgba(66, 76, 249, 1) 100%
-  );
-  background: linear-gradient(
-    86deg,
-    rgba(18, 0, 108, 1) 0%,
-    rgba(121, 95, 254, 1) 45%,
-    rgba(66, 76, 249, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#12006c",endColorstr="#424cf9",GradientType=1);
 }
 
 .home,
@@ -71,13 +45,33 @@ body {
 .settings-page,
 .follow,
 .suggetions {
-  width: 1440px;
+  width: 1300px;
   height: 100vh;
   margin: 0 auto;
-  // border: 1px dashed blue;
+
+  @include b.breakpoint("1300") {
+    width: 90%;
+  }
+  @include b.breakpoint("700") {
+    width: 100%;
+  }
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+
+.notification-alert {
+  background-color: white;
+  color: black;
+  position: fixed;
+  top: 3%;
+  right: 2%;
+  width: fit-content;
+  padding: 0.7rem 1rem 0.7rem 1rem;
+  border-radius: 10px 10px 0 10px;
+  border-bottom: 0.3rem solid $heading;
+  z-index: 20000;
+  box-shadow: 0 0 12px 12px rgba(20, 20, 20, 0.09);
 }
