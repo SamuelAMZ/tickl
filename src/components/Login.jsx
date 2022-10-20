@@ -23,11 +23,12 @@ const Login = () => {
 
       try {
         const response = await fetch(
-          "https://dead-cyan-vulture-yoke.cyclic.app/twitter/api/user/login",
+          "http://localhost:5000/twitter/api/user/login",
           {
             method: "POST",
             headers: { "Content-Type": "Application/json" },
             body: JSON.stringify(data),
+            credentials: "include",
           }
         );
 

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { BiLinkAlt, BiCalendarEvent } from "react-icons/bi";
+import UserContext from "../context/UserContext";
 
 const ProfilHead = () => {
+  const { login, changeLogin } = useContext(UserContext);
+
   return (
     <div className="profil-head">
       <div
@@ -22,30 +25,34 @@ const ProfilHead = () => {
 
       <div className="profil-details">
         <div className="profil-detail">
-          <h4>Tony Montana</h4>
-          <p className="profil-username">@tony</p>
+          <h4>{login ? login.user.name : "null"}</h4>
+          <p className="profil-username">
+            @{login ? login.user.username : "null"}
+          </p>
           <p className="profil-desc">
-            Tony Montany profile here will share only interessing stuffs ...
+            {login ? login.user.desc : "No bio yet"}
           </p>
           <div className="profil-others">
             <div>
               <BiLinkAlt />
-              <p className="link">google.com</p>
+              <p className="link">
+                {login ? login.user.website : "No website yet"}
+              </p>
             </div>
             <div>
               <BiCalendarEvent />
-              <p>joined 20-09-2022</p>
+              <p>joined {login ? login.user.date.slice(0, 10) : "null"}</p>
             </div>
           </div>
           <div className="profil-follow">
             <div className="following">
               <NavLink to="/follow">
-                <span>12</span> following
+                <span> {login ? login.user.following : "null"}</span> following
               </NavLink>
             </div>
             <div className="followers">
               <NavLink to="/follow">
-                <span>22</span> followers
+                <span> {login ? login.user.followers : "null"}</span> followers
               </NavLink>
             </div>
           </div>

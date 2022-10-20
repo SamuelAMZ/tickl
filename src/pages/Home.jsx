@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Checks from "../components/Checks";
 import Appbar from "../components/Appbar";
 import Third from "../components/Third";
 import TopPost from "../components/TopPost";
 import Post from "../components/Post";
 import MobilHeader from "../components/MobilHeader";
+import notif from "../helpers/notif";
+import UserContext from "../context/UserContext";
 
 const Home = () => {
+  const { login, changeLogin } = useContext(UserContext);
   const data = [
     {
       image: "url(/img/4.jpeg)",
@@ -36,17 +40,28 @@ const Home = () => {
   return (
     <>
       <div className="home">
-        <Appbar />
-        <div className="actual-home">
-          <MobilHeader />
-          <TopPost />
-          <div className="posts">
-            {data.map((item, id) => (
-              <Post image={item.image} desc={item.desc} key={id} />
-            ))}
-          </div>
-        </div>
-        <Third />
+        <Checks />
+        {login && (
+          <>
+            <Appbar />
+            <div className="actual-home">
+              <MobilHeader />
+              <TopPost />
+              <div className="posts">
+                {data.map((item, id) => (
+                  <Post image={item.image} desc={item.desc} key={id} />
+                ))}
+              </div>
+            </div>
+            <Third />
+          </>
+        )}
+
+        {!login && (
+          <>
+            <h2>Loading ...</h2>
+          </>
+        )}
       </div>
     </>
   );

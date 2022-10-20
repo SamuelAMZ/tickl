@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../../context/UserContext";
 
 const Description = () => {
-  const [bioValue, setBioValue] = useState("");
-  const [websiteValue, setWebsiteValue] = useState("");
+  const { login, changeLogin } = useContext(UserContext);
+
+  const [bioValue, setBioValue] = useState(login ? login.user.desc : "");
+  const [websiteValue, setWebsiteValue] = useState(
+    login ? login.user.website : ""
+  );
 
   const changeBio = (e) => {
     setBioValue(e.target.value);
@@ -10,6 +15,14 @@ const Description = () => {
   const changeWebsite = (e) => {
     setWebsiteValue(e.target.value);
   };
+
+  // reset values on login state change
+  useEffect(() => {
+    if (login) {
+      setBioValue(login.user.desc);
+      setWebsiteValue(login.user.website);
+    }
+  }, [login]);
 
   return (
     <div className="_settings-description form-style">
@@ -21,7 +34,7 @@ const Description = () => {
             rows="3"
             onChange={(e) => changeBio(e)}
             value={bioValue}
-            placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, repellat"
+            placeholder="Type your description here"
           ></textarea>
         </div>
         <div className="field">
@@ -30,7 +43,7 @@ const Description = () => {
             type="text"
             onChange={(e) => changeWebsite(e)}
             value={websiteValue}
-            placeholder="lorem.com"
+            placeholder="yourwebsite.tld"
           />
         </div>
         <button>Update</button>

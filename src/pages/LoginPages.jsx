@@ -1,4 +1,5 @@
 import React from "react";
+import Checks from "../components/Checks";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import { LoginFormProvider } from "../context/LoginPagesContext";
@@ -6,6 +7,7 @@ import { LoginFormProvider } from "../context/LoginPagesContext";
 const LoginPages = () => {
   return (
     <LoginFormProvider>
+      <Checks />
       <div className="login">
         <div className="login-elm-parent">
           <div

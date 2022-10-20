@@ -78,6 +78,9 @@
               font-size: 15px;
               text-transform: capitalize;
             }
+            svg {
+              pointer-events: none;
+            }
           }
         }
       }

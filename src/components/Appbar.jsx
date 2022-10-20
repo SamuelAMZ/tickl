@@ -1,16 +1,22 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   BiHomeCircle,
   BiHash,
   BiNotification,
   BiBookmark,
 } from "react-icons/bi";
-import { FaFeatherAlt } from "react-icons/fa";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
+import UserContext from "../context/UserContext";
 
-const Appbar = () => {
+const Appbar = ({ user }) => {
+  const { login, changeLogin } = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(login);
+  }, []);
+
   return (
     <div className="app-bar">
       <div className="menu">
@@ -68,7 +74,7 @@ const Appbar = () => {
       <NavLink to="/profil">
         <div className="profil">
           <MdOutlineAccountCircle />
-          <p>Tony</p>
+          <p>{login ? login.user.username : "null"}</p>
         </div>
       </NavLink>
     </div>

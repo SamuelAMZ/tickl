@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../../context/UserContext";
 
 const Country = () => {
-  const [countryValue, setCountryValue] = useState("");
+  const { login, changeLogin } = useContext(UserContext);
+  const [countryValue, setCountryValue] = useState(
+    login ? login.user.country : ""
+  );
 
   const changeCountry = (e) => {
     setCountryValue(e.target.value);
   };
+
+  // reset values on login state change
+  useEffect(() => {
+    if (login) {
+      setCountryValue(login.user.country);
+    }
+  }, [login]);
 
   return (
     <div className="_settings-country form-style">

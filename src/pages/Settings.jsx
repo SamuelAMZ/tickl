@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Checks from "../components/Checks";
 import Appbar from "../components/Appbar";
 import { RiArrowRightSLine } from "react-icons/ri";
 import ProfilePictures from "../components/settings/ProfilePictures";
@@ -24,6 +25,7 @@ const Settings = () => {
 
   return (
     <>
+      <Checks />
       <div className="settings-page">
         <Appbar />
         <div className="actual-settings-page">

@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../../context/UserContext";
 
 const Birthdate = () => {
-  const [birthdateValue, setBirthdateValue] = useState("");
+  const { login, changeLogin } = useContext(UserContext);
+  const [birthdateValue, setBirthdateValue] = useState(
+    login ? login.user.bdate : ""
+  );
 
   const changeBirthdate = (e) => {
     setBirthdateValue(e.target.value);
   };
+
+  // reset values on login state change
+  useEffect(() => {
+    if (login) {
+      setBirthdateValue(login.user.bdate);
+    }
+  }, [login]);
 
   return (
     <div className="_settings-birthdate form-style">

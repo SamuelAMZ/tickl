@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../../context/UserContext";
 
 const Gender = () => {
-  const [genderValue, setGenderValue] = useState("male");
+  const { login, changeLogin } = useContext(UserContext);
+  const [genderValue, setGenderValue] = useState(
+    login ? login.user.gender : ""
+  );
 
   const changeGender = (e) => {
     setGenderValue(e.target.value);
   };
+
+  // reset values on login state change
+  useEffect(() => {
+    if (login) {
+      setGenderValue(login.user.gender);
+    }
+  }, [login]);
 
   return (
     <div className="_settings-gender form-style">
