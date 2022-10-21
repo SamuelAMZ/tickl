@@ -35,10 +35,6 @@ const Checks = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(login);
-  }, []);
-
   // check isLogin
   useEffect(() => {
     const check = async () => {
