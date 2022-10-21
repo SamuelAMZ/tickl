@@ -27,7 +27,7 @@ const Register = () => {
 
       try {
         const response = await fetch(
-          "http://localhost:5000/twitter/api/user/register",
+          "https://dead-cyan-vulture-yoke.cyclic.app/twitter/api/user/register",
           {
             method: "POST",
             headers: { "Content-Type": "Application/json" },

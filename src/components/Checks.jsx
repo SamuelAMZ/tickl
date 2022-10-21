@@ -12,7 +12,7 @@ const Checks = () => {
   const checkLoginUser = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/twitter/api/user/islogin",
+        "https://dead-cyan-vulture-yoke.cyclic.app/twitter/api/user/islogin",
         {
           method: "GET",
           headers: { "Content-Type": "Application/json" },
@@ -34,6 +34,10 @@ const Checks = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    console.log(login);
+  }, []);
 
   // check isLogin
   useEffect(() => {

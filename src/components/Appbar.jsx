@@ -13,10 +13,6 @@ import UserContext from "../context/UserContext";
 const Appbar = ({ user }) => {
   const { login, changeLogin } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(login);
-  }, []);
-
   return (
     <div className="app-bar">
       <div className="menu">
