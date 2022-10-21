@@ -33,7 +33,7 @@ const Register = () => {
         headers.append("GET", "POST", "OPTIONS");
         headers.append(
           "Access-Control-Allow-Origin",
-          process.env.REACT_APP_DOMAIN
+          `${process.env.REACT_APP_DOMAIN}`
         );
         headers.append("Access-Control-Allow-Credentials", "true");
 
