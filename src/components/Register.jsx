@@ -26,11 +26,23 @@ const Register = () => {
       const data = { username, name, email, password };
 
       try {
+        let headers = new Headers();
+
+        headers.append("Content-Type", "application/json");
+        headers.append("Accept", "application/json");
+        headers.append("GET", "POST", "OPTIONS");
+        headers.append(
+          "Access-Control-Allow-Origin",
+          "https://dead-cyan-vulture-yoke.cyclic.app"
+        );
+        headers.append("Access-Control-Allow-Credentials", "true");
+
         const response = await fetch(
           "https://dead-cyan-vulture-yoke.cyclic.app/twitter/api/user/register",
           {
+            mode: "cors",
             method: "POST",
-            headers: { "Content-Type": "Application/json" },
+            headers: headers,
             body: JSON.stringify(data),
             credentials: "include",
           }
