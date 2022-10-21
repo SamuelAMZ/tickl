@@ -8,6 +8,10 @@ node_modules
 # testing
 /coverage
 
+# envs
+.env.dev
+.env.prod
+
 # production
 
 # misc

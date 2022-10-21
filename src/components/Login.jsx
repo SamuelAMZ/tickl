@@ -29,12 +29,13 @@ const Login = () => {
         headers.append("GET", "POST", "OPTIONS");
         headers.append(
           "Access-Control-Allow-Origin",
-          "https://dead-cyan-vulture-yoke.cyclic.app"
+          process.env.REACT_APP_DOMAIN
         );
         headers.append("Access-Control-Allow-Credentials", "true");
 
         const response = await fetch(
-          "https://dead-cyan-vulture-yoke.cyclic.app/twitter/api/user/login",
+          // "https://dead-cyan-vulture-yoke.cyclic.app/twitter/api/user/login",
+          `${process.env.REACT_APP_DOMAIN}/twitter/api/user/login`,
           {
             mode: "cors",
             method: "POST",
