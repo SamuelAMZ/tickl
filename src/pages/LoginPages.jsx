@@ -16,6 +16,10 @@ const LoginPages = () => {
           ></div>
           <div className="account-content">
             <div className="login-content">
+              {/* logo */}
+              <div className="logo">
+                <img src="./img/logo.png" alt="logo" />
+              </div>
               <Login />
               <Register />
             </div>

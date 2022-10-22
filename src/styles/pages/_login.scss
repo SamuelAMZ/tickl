@@ -30,11 +30,15 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#12006c",endColorstr="#424cf9",GradientType=1);
 
+  @include b.breakpoint("700") {
+    padding-top: 2rem;
+  }
+
   .login-elm-parent {
     width: 1000px;
     height: auto;
     margin: 0 auto;
-    min-height: 600px;
+    height: 600px;
     border-radius: 20px;
     overflow: hidden;
 
@@ -48,6 +52,7 @@
     }
     @include b.breakpoint("700") {
       width: 90%;
+      height: 800px;
     }
 
     .image {
@@ -68,6 +73,14 @@
         flex-basis: 500px;
       }
 
+      .logo {
+        img {
+          width: 70px;
+          height: 70px;
+        }
+        margin-bottom: 2rem;
+      }
+
       .login-content {
         position: absolute;
         left: 50%;
@@ -82,6 +95,11 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
+        @include b.breakpoint("1000") {
+          height: fit-content;
+          width: 120%;
+        }
       }
       .register-content {
         position: absolute;
@@ -97,6 +115,10 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
+        @include b.breakpoint("1000") {
+          height: fit-content;
+        }
       }
     }
   }

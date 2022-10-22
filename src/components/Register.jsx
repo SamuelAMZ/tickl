@@ -113,7 +113,7 @@ const Register = () => {
           {isLoading && <button disabled>Loading...</button>}
 
           <p className="no-account">
-            Already have an account?{" "}
+            Already have an account?
             <a
               onClick={() => changeActive("login")}
               className="switch-views"

@@ -80,13 +80,13 @@ const Login = () => {
           {!isLoading && <button>Login</button>}
           {isLoading && <button disabled>Loading...</button>}
           <p className="no-account">
-            Don't registered yet?{" "}
+            Don't have an account yet?{" "}
             <a
               onClick={() => changeActive("register")}
               className="switch-views"
               href="#"
             >
-              Create an account
+              Register
             </a>
           </p>
         </form>
