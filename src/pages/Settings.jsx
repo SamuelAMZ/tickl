@@ -26,6 +26,7 @@ const Settings = () => {
   return (
     <>
       <Checks />
+
       <div className="settings-page">
         <Appbar />
         <div className="actual-settings-page">

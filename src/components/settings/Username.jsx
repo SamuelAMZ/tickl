@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../../context/UserContext";
 import Checks from "../Checks";
+import notif from "../../helpers/notif";
 
 const Username = () => {
   const { login, changeLogin } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [usernameValue, setUsernameValue] = useState(
     login ? login.user.username : "loading..."
@@ -41,11 +43,61 @@ const Username = () => {
     }
   }, [login]);
 
+  // update username
+  const updateHandler = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // getting data from field
+    const data = {
+      uid: login.user.id,
+      usernameValue,
+      firstnameValue,
+      lastnameValue,
+      displaynameValue,
+    };
+
+    // send update request to backend
+
+    try {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("Accept", "application/json");
+      headers.append("GET", "POST", "OPTIONS");
+      headers.append(
+        "Access-Control-Allow-Origin",
+        `${process.env.REACT_APP_DOMAIN}`
+      );
+      headers.append("Access-Control-Allow-Credentials", "true");
+
+      const response = await fetch(
+        `${process.env.REACT_APP_DOMAIN}/twitter/api/settings/username`,
+        {
+          mode: "cors",
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data),
+          credentials: "include",
+        }
+      );
+
+      const serverMessage = await response.json();
+      setIsLoading(false);
+      notif(serverMessage.message);
+
+      // reload component
+    } catch (err) {
+      notif("server error try again later");
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <Checks />
       <div className="_settings-username form-style">
-        <form className="fields">
+        <form className="fields" onSubmit={updateHandler}>
           <div className="field">
             <p>Username</p>
             <input
@@ -83,7 +135,8 @@ const Username = () => {
             />
           </div>
 
-          <button>Update</button>
+          {isLoading && <button>Updating ...</button>}
+          {!isLoading && <button>Update</button>}
         </form>
       </div>
     </>

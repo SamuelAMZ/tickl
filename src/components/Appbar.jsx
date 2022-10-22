@@ -10,7 +10,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import UserContext from "../context/UserContext";
 
-const Appbar = ({ user }) => {
+const Appbar = ({ user, update }) => {
   const { login, changeLogin } = useContext(UserContext);
 
   return (

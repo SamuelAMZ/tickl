@@ -11,7 +11,6 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e) => {
@@ -23,7 +22,6 @@ const Login = () => {
 
       try {
         let headers = new Headers();
-
         headers.append("Content-Type", "application/json");
         headers.append("Accept", "application/json");
         headers.append("GET", "POST", "OPTIONS");

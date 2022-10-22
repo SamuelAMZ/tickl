@@ -14,12 +14,20 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [secret, setSecret] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
   // handling registration function
   const handleRegistration = async (e) => {
     e.preventDefault();
+
+    // check secret pass (temp)
+    if (String(secret) !== "258357") {
+      notif("invalid secret");
+      return;
+    }
+
     setIsLoading(true);
 
     if (username !== "" && name !== "" && email !== "" && password !== "") {
@@ -94,6 +102,12 @@ const Register = () => {
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="secret pass"
+            value={secret}
+            onChange={(e) => setSecret(e.target.value)}
           />
           {!isLoading && <button>Register</button>}
           {isLoading && <button disabled>Loading...</button>}

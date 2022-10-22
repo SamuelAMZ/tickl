@@ -8,6 +8,10 @@ const Checks = () => {
   const location = useLocation();
   const { login, changeLogin } = useContext(UserContext);
 
+  useEffect(() => {
+    console.log(login);
+  }, []);
+
   // check if user is login or not function
   const checkLoginUser = async () => {
     try {
