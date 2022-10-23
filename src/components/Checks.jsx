@@ -3,7 +3,7 @@ import notif from "../helpers/notif";
 import UserContext from "../context/UserContext";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
-const Checks = () => {
+const Checks = ({ idx }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, changeLogin } = useContext(UserContext);
@@ -83,7 +83,11 @@ const Checks = () => {
       });
   }, []);
 
-  return <></>;
+  return (
+    <div key={idx} style={{ display: "none" }}>
+      elm
+    </div>
+  );
 };
 
 export default Checks;

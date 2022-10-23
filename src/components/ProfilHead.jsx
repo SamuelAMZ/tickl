@@ -8,16 +8,34 @@ const ProfilHead = () => {
 
   return (
     <div className="profil-head">
-      <div
-        className="profil-head-img"
-        style={{ backgroundImage: "url(/img/1.jpeg)" }}
-      ></div>
+      {login ? (
+        <div
+          className="profil-head-img"
+          style={{ backgroundImage: `url(${login.user.profileback.normal})` }}
+        ></div>
+      ) : (
+        <div
+          className="profil-head-img"
+          style={{
+            backgroundImage: `url(https://res.cloudinary.com/dm7pcraut/image/upload/v1666500653/u_profile_main/dvux_fyhbql.png)`,
+          }}
+        ></div>
+      )}
 
       <div className="profil-button">
-        <div
-          className="profil-main-img"
-          style={{ backgroundImage: "url(/img/pro.jpeg)" }}
-        ></div>
+        {login ? (
+          <div
+            className="profil-main-img"
+            style={{ backgroundImage: `url(${login.user.profileicon.normal})` }}
+          ></div>
+        ) : (
+          <div
+            className="profil-main-img"
+            style={{
+              backgroundImage: `url(https://res.cloudinary.com/dm7pcraut/image/upload/v1666499517/u_profile_main/1946429_dpitlh.png)`,
+            }}
+          ></div>
+        )}
         <button>
           <NavLink to="/settings">Edit profile</NavLink>
         </button>

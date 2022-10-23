@@ -68,10 +68,17 @@ const Appbar = ({ user, update }) => {
       </div>
 
       <NavLink to="/profil">
-        <div className="profil">
-          <MdOutlineAccountCircle />
-          <p>{login ? login.user.username : "null"}</p>
-        </div>
+        {login ? (
+          <div className="profil">
+            <img src={`${login.user.profileicon.thumb}`} alt="profile icon" />
+            <p>{login ? login.user.username : "null"}</p>
+          </div>
+        ) : (
+          <div className="profil">
+            <MdOutlineAccountCircle />
+            <p>{login ? login.user.username : "null"}</p>
+          </div>
+        )}
       </NavLink>
     </div>
   );

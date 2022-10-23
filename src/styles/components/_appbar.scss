@@ -124,11 +124,10 @@
   }
 
   .profil {
-    font-size: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2px;
+    gap: 5px;
 
     // border: 1px solid $heading;
     padding: 0.5rem 1rem;
@@ -136,6 +135,13 @@
     border-radius: 20px;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.122);
+
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
     p {
       font-size: 15px;
