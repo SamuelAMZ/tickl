@@ -62,6 +62,11 @@ const ProfilePictures = () => {
   // creating widget on comp mount
   useEffect(() => {
     uploadFiles();
+
+    // remove widget from dome on unmount
+    return () => {
+      cloudinaryWidget.current.destroy({ removeThumbnails: true });
+    };
   }, []);
 
   // sending files to server
