@@ -83,11 +83,7 @@ const Checks = ({ idx }) => {
       });
   }, []);
 
-  return (
-    <div key={idx} style={{ display: "none" }}>
-      elm
-    </div>
-  );
+  return <></>;
 };
 
 export default Checks;
