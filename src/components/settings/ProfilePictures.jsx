@@ -108,7 +108,13 @@ const ProfilePictures = () => {
           notifLoading("", "updatepro");
           notif(serverMessage.message);
 
-          // update the component
+          if (serverMessage.status === "ok") {
+            // reload component
+            changeLogin({
+              message: serverMessage.message,
+              user: serverMessage.user,
+            });
+          }
 
           // reload component
         } catch (err) {
@@ -184,11 +190,14 @@ const ProfilePictures = () => {
 
           // update the component
           setRemoving(false);
-          // reload component
-          changeLogin({
-            message: serverMessage.message,
-            user: serverMessage.user,
-          });
+
+          if (serverMessage.status === "ok") {
+            // reload component
+            changeLogin({
+              message: serverMessage.message,
+              user: serverMessage.user,
+            });
+          }
         } catch (err) {
           notif("server error try again later");
           console.log(err);
