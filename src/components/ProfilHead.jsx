@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { BiLinkAlt, BiCalendarEvent } from "react-icons/bi";
+import { FiMapPin } from "react-icons/fi";
 import UserContext from "../context/UserContext";
 
 const ProfilHead = () => {
@@ -51,12 +52,19 @@ const ProfilHead = () => {
             {login ? login.user.desc : "No bio yet"}
           </p>
           <div className="profil-others">
-            <div>
-              <BiLinkAlt />
-              <p className="link">
-                {login ? login.user.website : "No website yet"}
-              </p>
-            </div>
+            {login && login.user.country !== "no country yet" && (
+              <div>
+                <FiMapPin />
+                <p className="location">{login.user.country}</p>
+              </div>
+            )}
+
+            {login && login.user.website !== "no link yet" && (
+              <div>
+                <BiLinkAlt />
+                <p className="link">{login.user.website}</p>
+              </div>
+            )}
             <div>
               <BiCalendarEvent />
               <p>joined {login ? login.user.date.slice(0, 10) : "null"}</p>
