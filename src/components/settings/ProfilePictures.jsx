@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Checks from "../../components/Checks";
 import notifLoading from "../../helpers/notifLoading";
 import notif from "../../helpers/notif";
@@ -8,94 +8,52 @@ const ProfilePictures = () => {
   const { login, changeLogin } = useContext(UserContext);
   const [uploading, setUploading] = useState(false);
   const [need, setNeed] = useState([]);
+  const [type, setType] = useState("");
+  const [cloudResult, setCloudResult] = useState(null);
+
+  const cloudinary = useRef();
+  cloudinary.current = window.cloudinary;
+  const cloudinaryWidget = useRef();
 
   // upload files func
-  const uploadFiles = (folder, type) => {
+  const uploadFiles = () => {
     const cloudName = "dm7pcraut"; // replace with your own cloud name
     const uploadPreset = "rqrjioh3"; // replace with your own upload preset
 
-    const myWidget = window.cloudinary.createUploadWidget(
+    cloudinaryWidget.current = cloudinary.current.createUploadWidget(
       {
         cloudName: cloudName,
         uploadPreset: uploadPreset,
         cropping: true, //add a cropping step
-        // showAdvancedOptions: true, //add advanced options (public_id and tag)
         sources: ["local"], // restrict the upload sources to URL and local files
         multiple: false, //restrict upload to a single file
-        folder: `${folder}`, //upload files to the specified folder
-        // tags: ["users", "profile"], //add the given tags to the uploaded files
-        // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
         clientAllowedFormats: ["jpg", "jpeg", "png"], //restrict uploading to image files only
         maxImageFileSize: 5000000, //restrict file size to less than 2MB
         maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
         theme: "blue", //change to a purple theme
       },
-      async (error, result) => {
+      (error, result) => {
         if (error) {
           console.log(error);
         }
         if (!error && result && result.event === "success") {
           console.log(result);
-          // set uploading
-          setUploading(true);
-          setNeed([]);
-          // sending file to server
-          const data = {
-            uid: login.user.id,
-            imageType: type,
-            imageUri: result.info.url,
-            imageUriSmall: result.info.thumbnail_url,
-          };
-
-          // send update to server
-          try {
-            let headers = new Headers();
-            headers.append("Content-Type", "application/json");
-            headers.append("Accept", "application/json");
-            headers.append("GET", "POST", "OPTIONS");
-            headers.append(
-              "Access-Control-Allow-Origin",
-              `${process.env.REACT_APP_DOMAIN}`
-            );
-            headers.append("Access-Control-Allow-Credentials", "true");
-
-            const response = await fetch(
-              `${process.env.REACT_APP_DOMAIN}/twitter/api/settings/profileimg`,
-              {
-                mode: "cors",
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(data),
-                credentials: "include",
-              }
-            );
-
-            const serverMessage = await response.json();
-            setUploading(false);
-            notif(serverMessage.message);
-
-            // update the component
-            setNeed(["now"]);
-
-            // reload component
-          } catch (err) {
-            notif("server error try again later");
-            console.log(err);
-            setUploading(false);
-          }
+          setCloudResult(result);
         }
       }
     );
-    myWidget.open();
+    // myWidget.open();
   };
 
   // upload files main
   const handleUploadMain = () => {
-    uploadFiles("u_profile_main", "icon");
+    setType("icon");
+    cloudinaryWidget.current.open();
   };
   // upload files back
   const handleUploadBack = () => {
-    uploadFiles("u_profile_back", "back");
+    setType("back");
+    cloudinaryWidget.current.open();
   };
 
   useEffect(() => {
@@ -103,6 +61,68 @@ const ProfilePictures = () => {
       notifLoading("uploading...");
     }
   }, [uploading]);
+
+  // creating widget on comp mount
+  useEffect(() => {
+    uploadFiles();
+  }, []);
+
+  // sending files to server
+  useEffect(() => {
+    const sendUpdate = async () => {
+      if (cloudResult) {
+        // set uploading
+        setUploading(true);
+        setNeed([]);
+        // sending file to server
+        const data = {
+          uid: login.user.id,
+          imageType: type,
+          imageUri: cloudResult.info.url,
+          imageUriSmall: cloudResult.info.thumbnail_url,
+        };
+
+        // send update to server
+        try {
+          let headers = new Headers();
+          headers.append("Content-Type", "application/json");
+          headers.append("Accept", "application/json");
+          headers.append("GET", "POST", "OPTIONS");
+          headers.append(
+            "Access-Control-Allow-Origin",
+            `${process.env.REACT_APP_DOMAIN}`
+          );
+          headers.append("Access-Control-Allow-Credentials", "true");
+
+          const response = await fetch(
+            `${process.env.REACT_APP_DOMAIN}/twitter/api/settings/profileimg`,
+            {
+              mode: "cors",
+              method: "POST",
+              headers: headers,
+              body: JSON.stringify(data),
+              credentials: "include",
+            }
+          );
+
+          const serverMessage = await response.json();
+          setUploading(false);
+          notif(serverMessage.message);
+
+          // update the component
+          setNeed(["now"]);
+
+          // reload component
+        } catch (err) {
+          notif("server error try again later");
+          console.log(err);
+          setUploading(false);
+        }
+      }
+    };
+
+    sendUpdate();
+  }, [cloudResult]);
 
   return (
     <>
