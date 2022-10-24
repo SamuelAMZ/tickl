@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import notif from "../helpers/notif";
+import notifLoading from "../helpers/notifLoading";
 import UserContext from "../context/UserContext";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
@@ -14,6 +15,11 @@ const Checks = ({ idx }) => {
 
   // check if user is login or not function
   const checkLoginUser = async () => {
+    // make appear of loader on login pages only
+    if (location.pathname === "/") {
+      notifLoading("Checking", "check");
+    }
+
     try {
       let headers = new Headers();
 
@@ -38,6 +44,11 @@ const Checks = ({ idx }) => {
 
       const serverMessage = await response.json();
 
+      // make appear of loader on login pages only
+      if (location.pathname === "/") {
+        notifLoading("", "check");
+      }
+
       // if token not valid
       if (serverMessage.status === "false") {
         return { message: serverMessage.message, user: "null" };
@@ -46,6 +57,11 @@ const Checks = ({ idx }) => {
         return { message: serverMessage.message, user: serverMessage.user };
       }
     } catch (error) {
+      // make appear of loader on login pages only
+      if (location.pathname === "/") {
+        notifLoading("", "check");
+      }
+
       notif("server error 'code: 001'");
       console.log(error);
     }
