@@ -48,7 +48,7 @@ const Appbar = ({ user, update }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profil">
+            <NavLink to="/profile">
               <MdOutlineAccountCircle />
               <p>Profile</p>
             </NavLink>
@@ -67,7 +67,7 @@ const Appbar = ({ user, update }) => {
         </ul>
       </div>
 
-      <NavLink to="/profil">
+      <NavLink to="/profile">
         {login ? (
           <div className="profil">
             <img src={`${login.user.profileicon.thumb}`} alt="profile icon" />

@@ -22,7 +22,7 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/explore" element={<Explore />} />
               <Route path="/notification" element={<Notification />} />
-              <Route path="/profil" element={<Profil />} />
+              <Route path="/profile" element={<Profil />} />
               <Route path="/bookmark" element={<Bookmark />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/follow" element={<Follow />} />

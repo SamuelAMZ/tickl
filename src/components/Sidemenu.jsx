@@ -46,7 +46,7 @@ const Sidemenu = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profil" onClick={() => changeActive(false)}>
+            <NavLink to="/profile" onClick={() => changeActive(false)}>
               <MdOutlineAccountCircle />
               <p>Profile</p>
             </NavLink>

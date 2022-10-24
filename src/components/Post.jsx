@@ -8,7 +8,7 @@ const Post = ({ image, desc }) => {
     <>
       <div className="post">
         {/* user */}
-        <NavLink to="/profil">
+        <NavLink to="/profile">
           <div
             className="user"
             style={{ backgroundImage: "url(/img/3.jpeg)" }}
