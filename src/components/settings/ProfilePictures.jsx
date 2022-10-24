@@ -59,18 +59,6 @@ const ProfilePictures = () => {
     cloudinaryWidget.current.open();
   };
 
-  useEffect(() => {
-    if (uploading) {
-      notifLoading("uploading...");
-    }
-  }, [uploading]);
-
-  useEffect(() => {
-    if (removing) {
-      notifLoading("removing...");
-    }
-  }, [removing]);
-
   // creating widget on comp mount
   useEffect(() => {
     uploadFiles();
@@ -81,7 +69,7 @@ const ProfilePictures = () => {
     const sendUpdate = async () => {
       if (cloudResult) {
         // set uploading
-        setUploading(true);
+        notifLoading("uploading...", "updatepro");
         setNeed([]);
         // sending file to server
         const data = {
@@ -115,7 +103,7 @@ const ProfilePictures = () => {
           );
 
           const serverMessage = await response.json();
-          setUploading(false);
+          notifLoading("", "updatepro");
           notif(serverMessage.message);
 
           // update the component
@@ -157,7 +145,7 @@ const ProfilePictures = () => {
   useEffect(() => {
     (async () => {
       if (removeData) {
-        setRemoving(true);
+        notifLoading("removing...", "removepro");
         setNeed([]);
         // sending file to server
         const data = {
@@ -191,7 +179,7 @@ const ProfilePictures = () => {
           );
 
           const serverMessage = await response.json();
-          setUploading(false);
+          notifLoading("", "removepro");
           notif(serverMessage.message);
 
           // update the component

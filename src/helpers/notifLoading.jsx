@@ -1,8 +1,14 @@
-const notifLoading = (text) => {
+const notifLoading = (text, idx) => {
+  // remove if already exist in dom to prevent bug
+  if (document.querySelector("." + idx)) {
+    return document.querySelector("." + idx).remove();
+  }
+
   const header = document.querySelector(".notif");
 
   let notif = document.createElement("div");
   notif.classList.add("notification-alert");
+  notif.classList.add(idx);
   notif.innerText = text;
 
   header.appendChild(notif);
