@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../../context/UserContext";
-import Checks from "../Checks";
 import notif from "../../helpers/notif";
 
 const Username = () => {
@@ -85,7 +84,13 @@ const Username = () => {
       setIsLoading(false);
       notif(serverMessage.message);
 
-      // reload component
+      if (serverMessage.status === "ok") {
+        // reload component
+        changeLogin({
+          message: serverMessage.message,
+          user: serverMessage.user,
+        });
+      }
     } catch (err) {
       notif("server error try again later");
       console.log(err);
@@ -95,7 +100,6 @@ const Username = () => {
 
   return (
     <>
-      <Checks />
       <div className="_settings-username form-style">
         <form className="fields" onSubmit={updateHandler}>
           <div className="field">

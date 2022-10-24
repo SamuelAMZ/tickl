@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import Checks from "../../components/Checks";
 import notifLoading from "../../helpers/notifLoading";
 import notif from "../../helpers/notif";
 import UserContext from "../../context/UserContext";
@@ -8,7 +7,6 @@ const ProfilePictures = () => {
   const { login, changeLogin } = useContext(UserContext);
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
-  const [need, setNeed] = useState([]);
   const [type, setType] = useState("");
   const [cloudResult, setCloudResult] = useState(null);
   const [removeData, setRemoveData] = useState(null);
@@ -75,7 +73,6 @@ const ProfilePictures = () => {
       if (cloudResult) {
         // set uploading
         notifLoading("uploading...", "updatepro");
-        setNeed([]);
         // sending file to server
         const data = {
           uid: login.user.id,
@@ -112,7 +109,6 @@ const ProfilePictures = () => {
           notif(serverMessage.message);
 
           // update the component
-          setNeed(["now"]);
 
           // reload component
         } catch (err) {
@@ -151,7 +147,6 @@ const ProfilePictures = () => {
     (async () => {
       if (removeData) {
         notifLoading("removing...", "removepro");
-        setNeed([]);
         // sending file to server
         const data = {
           uid: login.user.id,
@@ -189,9 +184,11 @@ const ProfilePictures = () => {
 
           // update the component
           setRemoving(false);
-          setNeed(["now"]);
-
           // reload component
+          changeLogin({
+            message: serverMessage.message,
+            user: serverMessage.user,
+          });
         } catch (err) {
           notif("server error try again later");
           console.log(err);
@@ -202,11 +199,6 @@ const ProfilePictures = () => {
 
   return (
     <>
-      {need.map((elm, idx) => (
-        <div key={idx}>
-          <Checks />
-        </div>
-      ))}
       <div className="_settings-profil-pictures">
         {/* main image */}
         <div className="main-picture">
