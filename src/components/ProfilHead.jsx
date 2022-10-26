@@ -37,9 +37,11 @@ const ProfilHead = () => {
             }}
           ></div>
         )}
-        <button>
-          <NavLink to="/settings">Edit profile</NavLink>
-        </button>
+        <NavLink to="/settings">
+          <button className="btn btn-active btn-neutral capitalize">
+            Edit profile
+          </button>
+        </NavLink>
       </div>
 
       <div className="profil-details">
@@ -60,10 +62,19 @@ const ProfilHead = () => {
             )}
 
             {login && login.user.website !== "no link yet" && (
-              <div>
-                <BiLinkAlt />
-                <p className="link">{login.user.website}</p>
-              </div>
+              <a
+                href={
+                  login.user.website.includes("http")
+                    ? login.user.website
+                    : `http://${login.user.website}`
+                }
+                target="BLANK"
+              >
+                <div>
+                  <BiLinkAlt />
+                  <p className="link">{login.user.website}</p>
+                </div>
+              </a>
             )}
             <div>
               <BiCalendarEvent />

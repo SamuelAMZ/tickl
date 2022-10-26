@@ -1,6 +1,9 @@
 import React from "react";
-import { MdOutlineAccountCircle } from "react-icons/md";
-import { BiCommentDetail, BiRepost, BiLike } from "react-icons/bi";
+import { FiMoreHorizontal } from "react-icons/fi";
+import { BiCommentDetail, BiLike } from "react-icons/bi";
+import { FiRepeat } from "react-icons/fi";
+import { BsUpload } from "react-icons/bs";
+import { AiOutlineEye } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 const Post = ({ image, desc }) => {
@@ -32,18 +35,53 @@ const Post = ({ image, desc }) => {
 
           {/* actions */}
           <div className="actions">
-            <div className="comment">
+            <div className="btn comment">
               <BiCommentDetail />
               <p>122</p>
             </div>
-            <div className="repost">
-              <BiRepost />
+            <div className="btn repost">
+              <FiRepeat />
               <p>12k</p>
             </div>
-            <div className="like">
+            <div className="btn like">
               <BiLike />
               <p>4k</p>
             </div>
+            <div className="btn eye">
+              <AiOutlineEye />
+              <p>1.2k</p>
+            </div>
+            <div className="btn more-actions">
+              <BsUpload />
+            </div>
+          </div>
+        </div>
+
+        <div className="post-more">
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn m-1 bg-white">
+              <FiMoreHorizontal />
+            </label>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a>Follow @user</a>
+              </li>
+              <li>
+                <a>Like Post</a>
+              </li>
+              <li>
+                <a>Bookmark Post</a>
+              </li>
+              <li>
+                <a>Visit Profile</a>
+              </li>
+              <li>
+                <a>Report</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

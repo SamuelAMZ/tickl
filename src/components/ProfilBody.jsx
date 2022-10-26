@@ -114,7 +114,7 @@ const ProfilBody = () => {
 
   return (
     <div className="profil-body">
-      <div className="tab">
+      <div className="thetabs">
         <p
           onClick={(e) => activeTabPosts(e, "active", "posts")}
           className="active"

@@ -2,12 +2,14 @@ import React from "react";
 import Appbar from "../components/Appbar";
 import Third from "../components/Third";
 import Post from "../components/Post";
+import Header from "../components/Header";
 import MobilHeader from "../components/MobilHeader";
 
 const Explore = () => {
   return (
     <>
-      <div className="bookmark">
+      <Header title={"Bookmark"} />
+      <div className="bookmark md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-bookmark">
           <MobilHeader />

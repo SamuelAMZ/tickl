@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Appbar from "../components/Appbar";
 import Third from "../components/Third";
 import Notification from "../components/Notification";
+import Header from "../components/Header";
 import MobilHeader from "../components/MobilHeader";
 
 const Explore = (e) => {
@@ -43,7 +44,8 @@ const Explore = (e) => {
 
   return (
     <>
-      <div className="notification">
+      <Header title={"Notifications"} />
+      <div className="notification md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-notification">
           <MobilHeader />

@@ -2,23 +2,50 @@
 @import "../global/variables";
 
 .top-post {
+  min-height: 108px;
+  padding-bottom: 1rem;
+
   .new-post {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    height: 100%;
+    .top {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 1rem;
+      height: 100%;
 
-    @include b.breakpoint("900") {
-      display: none;
-    }
+      .top-elms {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0.8rem 0;
 
-    h2 {
-      font-size: 30px;
-      color: rgba(0, 0, 0, 0.546);
-      cursor: pointer;
-    }
-    .search {
-      font-size: 30px;
-      cursor: pointer;
+        p {
+          font-size: 19px;
+          text-transform: capitalize;
+        }
+
+        div {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          font-size: 15px;
+
+          svg {
+            color: #2a6da8;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #d1d5db;
+            }
+          }
+        }
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
     }
   }
 }

@@ -11,6 +11,7 @@ import Birthdate from "../components/settings/BirthDate";
 import Password from "../components/settings/Password";
 import Description from "../components/settings/Description";
 import MobilHeader from "../components/MobilHeader";
+import Header from "../components/Header";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("username");
@@ -27,7 +28,9 @@ const Settings = () => {
     <>
       <Checks />
 
-      <div className="settings-page">
+      <Header title={"Settings"} />
+
+      <div className="settings-page md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-settings-page">
           <MobilHeader />

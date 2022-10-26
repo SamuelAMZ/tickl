@@ -10,7 +10,7 @@ const FollowElm = () => {
         <p className="user-first">Paris Saint</p>
         <p className="user-name">@paris</p>
       </div>
-      <button>
+      <button className="btn">
         <AiOutlinePlus />
       </button>
     </div>

@@ -3,6 +3,7 @@ import Appbar from "../components/Appbar";
 import Third from "../components/Third";
 import Post from "../components/Post";
 import ExploreHead from "../components/ExploreHead";
+import Header from "../components/Header";
 import MobilHeader from "../components/MobilHeader";
 
 const Explore = () => {
@@ -37,7 +38,8 @@ const Explore = () => {
 
   return (
     <>
-      <div className="explore">
+      <Header title={"Explore"} />
+      <div className="explore md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-explore">
           <MobilHeader />

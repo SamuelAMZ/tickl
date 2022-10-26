@@ -3,6 +3,7 @@ import Appbar from "../components/Appbar";
 import Followers from "../components/Followers";
 import Following from "../components/Following";
 import Third from "../components/Third";
+import Header from "../components/Header";
 import MobilHeader from "../components/MobilHeader";
 
 const Follow = () => {
@@ -18,7 +19,8 @@ const Follow = () => {
 
   return (
     <>
-      <div className="follow">
+      <Header title={"Followers"} />
+      <div className="follow md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-follow">
           <MobilHeader />
