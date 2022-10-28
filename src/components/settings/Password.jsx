@@ -87,6 +87,7 @@ const Password = () => {
           <p>Current Password</p>
           <input
             type="text"
+            className="input input-bordered w-full"
             onChange={(e) => changeOldPassword(e)}
             value={oldPasswordValue}
             placeholder="*******"
@@ -96,6 +97,7 @@ const Password = () => {
           <p>New Password</p>
           <input
             type="text"
+            className="input input-bordered w-full"
             onChange={(e) => changeNewPassword(e)}
             value={newPasswordValue}
             placeholder="*******"
@@ -105,13 +107,20 @@ const Password = () => {
           <p>Comfirm New Password</p>
           <input
             type="text"
+            className="input input-bordered w-full"
             onChange={(e) => changeComfirmNewPassword(e)}
             value={comfirmNewPasswordValue}
             placeholder="*******"
           />
         </div>
-        {isLoading && <button>Updating ...</button>}
-        {!isLoading && <button>Update</button>}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Updating ...
+          </button>
+        )}
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Update</button>
+        )}
       </form>
     </div>
   );

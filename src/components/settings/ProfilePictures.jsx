@@ -230,12 +230,18 @@ const ProfilePictures = () => {
               <label
                 id="u_main"
                 htmlFor="main-picture"
+                className="btn btn-primary capitalize"
                 onClick={handleUploadMain}
               >
                 Change
               </label>
             </form>
-            <button onClick={removeIcon}>Remove</button>
+            <button
+              className="btn btn-error capitalize text-white"
+              onClick={removeIcon}
+            >
+              Remove
+            </button>
           </div>
         </div>
 
@@ -257,11 +263,20 @@ const ProfilePictures = () => {
           )}
           <div className="actions">
             <form>
-              <label htmlFor="back-picture" onClick={handleUploadBack}>
+              <label
+                className="btn btn-primary capitalize"
+                htmlFor="back-picture"
+                onClick={handleUploadBack}
+              >
                 Change
               </label>
             </form>
-            <button onClick={removeBack}>Remove</button>
+            <button
+              className="btn btn-error capitalize text-white"
+              onClick={removeBack}
+            >
+              Remove
+            </button>
           </div>
         </div>
       </div>

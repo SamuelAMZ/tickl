@@ -75,13 +75,20 @@ const Birthdate = () => {
           <p>Birthdate</p>
           <input
             type="date"
+            className="input input-bordered w-full"
             onChange={(e) => changeBirthdate(e)}
             value={birthdateValue}
             placeholder="12-12-2022"
           />
         </div>
-        {isLoading && <button>Updating ...</button>}
-        {!isLoading && <button>Update</button>}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Updating ...
+          </button>
+        )}
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Update</button>
+        )}
       </form>
     </div>
   );

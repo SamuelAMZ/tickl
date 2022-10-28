@@ -73,13 +73,20 @@ const Email = () => {
           <p>Email</p>
           <input
             type="text"
+            className="input input-bordered w-full"
             onChange={(e) => changeEmail(e)}
             value={emailValue}
             placeholder="youremail@exemple.tld"
           />
         </div>
-        {isLoading && <button>Updating ...</button>}
-        {!isLoading && <button>Update</button>}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Updating ...
+          </button>
+        )}
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Update</button>
+        )}
       </form>
     </div>
   );

@@ -106,6 +106,7 @@ const Username = () => {
             <p>Username</p>
             <input
               type="text"
+              className="input input-bordered w-full "
               onChange={(e) => changeUsername(e)}
               value={usernameValue}
               placeholder="lorem"
@@ -115,6 +116,7 @@ const Username = () => {
             <p>First Name</p>
             <input
               type="text"
+              className="input input-bordered w-full"
               onChange={(e) => changeFirstname(e)}
               value={firstnameValue}
               placeholder="Type first name"
@@ -124,6 +126,7 @@ const Username = () => {
             <p>Last Name</p>
             <input
               type="text"
+              className="input input-bordered w-full"
               onChange={(e) => changeLastname(e)}
               value={lastnameValue}
               placeholder="Type last name"
@@ -133,14 +136,21 @@ const Username = () => {
             <p>Display Name</p>
             <input
               type="text"
+              className="input input-bordered w-full"
               onChange={(e) => changeDisplayname(e)}
               value={displaynameValue}
               placeholder="Type your public name"
             />
           </div>
 
-          {isLoading && <button>Updating ...</button>}
-          {!isLoading && <button>Update</button>}
+          {isLoading && (
+            <button className="btn btn-primary loading capitalize">
+              Updating ...
+            </button>
+          )}
+          {!isLoading && (
+            <button className="btn btn-primary capitalize">Update</button>
+          )}
         </form>
       </div>
     </>

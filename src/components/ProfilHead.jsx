@@ -1,11 +1,47 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { BiLinkAlt, BiCalendarEvent } from "react-icons/bi";
 import { FiMapPin } from "react-icons/fi";
 import UserContext from "../context/UserContext";
+import trimData from "../helpers/trim";
+import { useEffect } from "react";
 
 const ProfilHead = () => {
   const { login, changeLogin } = useContext(UserContext);
+  const [descLength, setDescLength] = useState(false);
+  const [nameLength, setNameLength] = useState(false);
+  const [usernameLength, setUsernameLenght] = useState(false);
+
+  // show all desc when it was trim down
+  const showAll = (e, elm, type) => {
+    if (!login) return;
+
+    if (elm === "desc") {
+      if (type === "more") {
+        setDescLength(true);
+      }
+      if (type === "less") {
+        setDescLength(false);
+      }
+    }
+
+    if (elm === "name") {
+      if (type === "more") {
+        setNameLength(true);
+      }
+      if (type === "less") {
+        setNameLength(false);
+      }
+    }
+    if (elm === "username") {
+      if (type === "more") {
+        setUsernameLenght(true);
+      }
+      if (type === "less") {
+        setUsernameLenght(false);
+      }
+    }
+  };
 
   return (
     <div className="profil-head">
@@ -46,23 +82,105 @@ const ProfilHead = () => {
 
       <div className="profil-details">
         <div className="profil-detail">
-          <h4>{login ? login.user.name : "null"}</h4>
+          <h4>
+            {login ? !nameLength && trimData(login.user.name, 30) : "null"}
+            {login ? nameLength && login.user.name : "null"}
+            {/* more btn */}
+            {!nameLength && (
+              <>
+                <span> </span>
+                <button
+                  className="btn btn-xs"
+                  onClick={(e) => showAll(e, "name", "more")}
+                >
+                  More
+                </button>
+              </>
+            )}
+            {/* less btn */}
+            {nameLength && (
+              <>
+                <span> </span>
+                <button
+                  className="btn btn-xs"
+                  onClick={(e) => showAll(e, "name", "less")}
+                >
+                  Less
+                </button>
+              </>
+            )}
+          </h4>
           <p className="profil-username">
-            @{login ? login.user.username : "null"}
+            {login
+              ? !usernameLength && "@" + trimData(login.user.username, 30)
+              : "null"}
+            {login ? usernameLength && "@" + login.user.username : "null"}
+            {/* more btn */}
+            {!usernameLength && (
+              <>
+                <span> </span>
+                <button
+                  className="btn btn-xs"
+                  onClick={(e) => showAll(e, "username", "more")}
+                >
+                  More
+                </button>
+              </>
+            )}
+            {/* less btn */}
+            {usernameLength && (
+              <>
+                <span> </span>
+                <button
+                  className="btn btn-xs"
+                  onClick={(e) => showAll(e, "username", "less")}
+                >
+                  Less
+                </button>
+              </>
+            )}
           </p>
           <p className="profil-desc">
-            {login ? login.user.desc : "No bio yet"}
+            {login
+              ? !descLength && trimData(login.user.desc, 300)
+              : "No bio yet"}
+            {login ? descLength && login.user.desc : "No bio yet"}
+            {/* more btn */}
+            {!descLength && (
+              <>
+                <span> </span>
+                <button
+                  className="btn btn-xs"
+                  onClick={(e) => showAll(e, "desc", "more")}
+                >
+                  More
+                </button>
+              </>
+            )}
+            {/* less btn */}
+            {descLength && (
+              <>
+                <span> </span>
+                <button
+                  className="btn btn-xs"
+                  onClick={(e) => showAll(e, "desc", "less")}
+                >
+                  Less
+                </button>
+              </>
+            )}
           </p>
           <div className="profil-others">
             {login && login.user.country !== "no country yet" && (
               <div>
                 <FiMapPin />
-                <p className="location">{login.user.country}</p>
+                <p className="location">{trimData(login.user.country, 10)}</p>
               </div>
             )}
 
             {login && login.user.website !== "no link yet" && (
               <a
+                className="link link-primary"
                 href={
                   login.user.website.includes("http")
                     ? login.user.website
@@ -72,7 +190,9 @@ const ProfilHead = () => {
               >
                 <div>
                   <BiLinkAlt />
-                  <p className="link">{login.user.website}</p>
+                  <p className="link link-primary">
+                    {trimData(login.user.website, 15)}
+                  </p>
                 </div>
               </a>
             )}

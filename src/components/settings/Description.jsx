@@ -81,6 +81,7 @@ const Description = () => {
           <p>Bio</p>
           <textarea
             id="description"
+            className="textarea textarea-bordered w-full"
             rows="3"
             onChange={(e) => changeBio(e)}
             value={bioValue}
@@ -91,13 +92,20 @@ const Description = () => {
           <p>Website</p>
           <input
             type="text"
+            className="input input-bordered w-full"
             onChange={(e) => changeWebsite(e)}
             value={websiteValue}
             placeholder="yourwebsite.tld"
           />
         </div>
-        {isLoading && <button>Updating ...</button>}
-        {!isLoading && <button>Update</button>}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Updating ...
+          </button>
+        )}
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Update</button>
+        )}
       </form>
     </div>
   );

@@ -11,8 +11,9 @@ import { IoSettingsOutline } from "react-icons/io5";
 import UserContext from "../context/UserContext";
 import notifLoading from "../helpers/notifLoading";
 import notif from "../helpers/notif";
+import trimData from "../helpers/trim";
 
-const Appbar = ({ user, update }) => {
+const Appbar = () => {
   const { login, changeLogin } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -118,9 +119,9 @@ const Appbar = ({ user, update }) => {
                 alt="profile icon"
               />
               <div className="flex gap-1 flex-col justify-start align-top text-start">
-                <p>{login ? login.user.name : "null"}</p>
+                <p>{login ? trimData(login.user.name, 10) : "null"}</p>
                 <p style={{ fontSize: "13px", fontWeight: "400" }}>
-                  @{login ? login.user.username : "null"}
+                  @{login ? trimData(login.user.username, 10) : "null"}
                 </p>
               </div>
               <div className="threedots">...</div>

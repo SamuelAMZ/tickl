@@ -1,28 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checks from "../components/Checks";
 import Appbar from "../components/Appbar";
 import { RiArrowRightSLine } from "react-icons/ri";
-import ProfilePictures from "../components/settings/ProfilePictures";
-import Username from "../components/settings/Username";
-import Email from "../components/settings/Email";
-import Country from "../components/settings/Country";
-import Gender from "../components/settings/Gender";
-import Birthdate from "../components/settings/BirthDate";
-import Password from "../components/settings/Password";
-import Description from "../components/settings/Description";
+import { BiEnvelope } from "react-icons/bi";
+import { HiOutlinePhotograph } from "react-icons/hi";
+import { AiOutlineUser, AiOutlineCalendar } from "react-icons/ai";
+import { BsTextParagraph, BsGenderAmbiguous } from "react-icons/bs";
+import { FiMapPin } from "react-icons/fi";
+import { MdOutlinePassword } from "react-icons/md";
 import MobilHeader from "../components/MobilHeader";
 import Header from "../components/Header";
+import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState("username");
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const changeTab = (e, current) => {
-    Array.from(e.target.parentElement.children).forEach((item) =>
-      item.classList.remove("active")
-    );
-    e.target.classList.add("active");
-    setActiveTab(current);
-  };
+  // auto move user to username route
+  useEffect(() => {
+    if (
+      location.pathname === "/settings/" ||
+      location.pathname === "/settings"
+    ) {
+      navigate("/settings/username");
+    }
+  }, []);
 
   return (
     <>
@@ -37,64 +39,67 @@ const Settings = () => {
           <div className="settings-page-container">
             <div className="settings-options">
               <div className="settings-account-informations">
-                <div
-                  className="items active"
-                  onClick={(e) => changeTab(e, "username")}
-                >
-                  <div className="item-username">Username</div>
-                  <RiArrowRightSLine />
-                </div>
-                <div
-                  className="items"
-                  onClick={(e) => changeTab(e, "pictures")}
-                >
-                  <div className="item-profil-pictures">profile pictures</div>
-                  <RiArrowRightSLine />
-                </div>
-                <div
-                  className="items"
-                  onClick={(e) => changeTab(e, "description")}
-                >
-                  <div className="item-description">Description</div>
-                  <RiArrowRightSLine />
-                </div>
-                <div className="items" onClick={(e) => changeTab(e, "email")}>
-                  <div className="item-email">email</div>
-                  <RiArrowRightSLine />
-                </div>
-                <div className="items" onClick={(e) => changeTab(e, "country")}>
-                  <div className="item-country">Country</div>
-                  <RiArrowRightSLine />
-                </div>
-                <div className="items" onClick={(e) => changeTab(e, "gender")}>
-                  <div className="item-gender">gender</div>
-                  <RiArrowRightSLine />
-                </div>
-                <div
-                  className="items"
-                  onClick={(e) => changeTab(e, "birthdate")}
-                >
-                  <div className="item-birthdate">birth date</div>
-                  <RiArrowRightSLine />
-                </div>
-                <div
-                  className="items"
-                  onClick={(e) => changeTab(e, "password")}
-                >
-                  <div className="item-password">Change Password</div>
-                  <RiArrowRightSLine />
-                </div>
+                <NavLink to={"/settings/username"}>
+                  <div className="items active">
+                    <AiOutlineUser />
+                    <div className="item-username">Username</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
+                <NavLink to={"/settings/images"}>
+                  <div className="items">
+                    <HiOutlinePhotograph />
+                    <div className="item-profil-pictures">profile pictures</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
+                <NavLink to={"/settings/description"}>
+                  <div className="items">
+                    <BsTextParagraph />
+                    <div className="item-description">Description</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
+                <NavLink to={"/settings/email"}>
+                  <div className="items">
+                    <BiEnvelope />
+                    <div className="item-email">email</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
+                <NavLink to={"/settings/country"}>
+                  <div className="items">
+                    <FiMapPin />
+                    <div className="item-country">Country</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
+                <NavLink to={"/settings/gender"}>
+                  <div className="items">
+                    <BsGenderAmbiguous />
+                    <div className="item-gender">gender</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
+                <NavLink to={"/settings/birthdate"}>
+                  <div className="items">
+                    <AiOutlineCalendar />
+                    <div className="item-birthdate">birth date</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
+                <NavLink to={"/settings/password"}>
+                  <div className="items">
+                    <MdOutlinePassword />
+                    <div className="item-password">Change Password</div>
+                    <RiArrowRightSLine />
+                  </div>
+                </NavLink>
               </div>
             </div>
             <div className="settings-values">
-              {activeTab === "username" && <Username />}
-              {activeTab === "pictures" && <ProfilePictures />}
-              {activeTab === "description" && <Description />}
-              {activeTab === "email" && <Email />}
-              {activeTab === "country" && <Country />}
-              {activeTab === "gender" && <Gender />}
-              {activeTab === "birthdate" && <Birthdate />}
-              {activeTab === "password" && <Password />}
+              {/* sub routes */}
+              <Outlet />
             </div>
           </div>
         </div>

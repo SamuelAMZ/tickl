@@ -75,6 +75,7 @@ const Gender = () => {
           <p>Gender</p>
           <select
             id="gender"
+            className="select select-bordered w-full"
             value={genderValue}
             onChange={(e) => changeGender(e)}
           >
@@ -84,8 +85,14 @@ const Gender = () => {
             <option value="private">Private</option>
           </select>
         </div>
-        {isLoading && <button>Updating ...</button>}
-        {!isLoading && <button>Update</button>}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Updating ...
+          </button>
+        )}
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Update</button>
+        )}
       </form>
     </div>
   );

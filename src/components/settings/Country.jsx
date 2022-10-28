@@ -75,13 +75,20 @@ const Country = () => {
           <p>Country</p>
           <input
             type="text"
+            className="input input-bordered w-full"
             onChange={(e) => changeCountry(e)}
             value={countryValue}
             placeholder="canada"
           />
         </div>
-        {isLoading && <button>Updating ...</button>}
-        {!isLoading && <button>Update</button>}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Updating ...
+          </button>
+        )}
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Update</button>
+        )}
       </form>
     </div>
   );
