@@ -43,13 +43,13 @@ const Third = () => {
           ></div>
         </a>
         <a
-          href="https://paradisespaandtanning.ca/"
+          href="https://carriesvip.ca/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <div
             className="featured"
-            style={{ backgroundImage: "url(/img/paradise.jpeg)" }}
+            style={{ backgroundImage: "url(/img/carries.jpg)" }}
           ></div>
         </a>
 
@@ -78,13 +78,13 @@ const Third = () => {
           ></div>
         </a>
         <a
-          href="https://paradisespaandtanning.ca/"
+          href="https://carriesvip.ca/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <div
             className="featured"
-            style={{ backgroundImage: "url(/img/paradise.jpeg)" }}
+            style={{ backgroundImage: "url(/img/carries.jpg)" }}
           ></div>
         </a>
 

@@ -14,7 +14,7 @@ const Home = () => {
   const { login, changeLogin } = useContext(UserContext);
   const data = [
     {
-      image: "url(/img/4.jpeg)",
+      image: "url(/img/5.jpg)",
       desc: "Oh ya baby got back be sure and Tickl her page",
     },
     {
