@@ -39,10 +39,10 @@ const Explore = () => {
   return (
     <>
       <Header title={"Explore"} />
-      <div className="explore md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
+      <div className="explore md:max-w-7xl xl:max-w-screen-xl mx-auto p-2 md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-explore">
-          <MobilHeader />
+          <MobilHeader title={"Explore"} />
           <ExploreHead />
           <div className="posts">
             {data.map((item, id) => (

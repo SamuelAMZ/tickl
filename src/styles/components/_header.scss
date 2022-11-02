@@ -1,4 +1,11 @@
+@use "../global/breakpoints" as b;
+@import "../global/variables";
+
 .header-container {
+  display: none;
+  @include b.breakpoint("768") {
+    display: block;
+  }
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -12,10 +19,15 @@
 
 .logo {
   height: 100%;
+
   img {
     width: auto;
     height: 70px;
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 0;
+
+    @include b.breakpoint("1280") {
+      padding: 0.5rem 1rem;
+    }
   }
 }
 
@@ -27,6 +39,11 @@
 
 .search-header {
   width: 100%;
+  display: none;
+
+  @include b.breakpoint("1280") {
+    display: block;
+  }
 
   .form-wrapper {
     width: 100%;

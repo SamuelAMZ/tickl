@@ -51,17 +51,6 @@ const Sidemenu = () => {
               <p>Profile</p>
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink to="/settings" onClick={() => changeActive(false)}>
-              <IoSettingsOutline />
-              <p>Settings</p>
-            </NavLink>
-          </li> */}
-          {/* <li>
-          <div className="new-post">
-            <p>New Tickl</p>
-          </div>
-        </li> */}
         </ul>
       </div>
     </div>

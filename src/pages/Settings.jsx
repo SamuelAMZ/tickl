@@ -10,21 +10,48 @@ import { FiMapPin } from "react-icons/fi";
 import { MdOutlinePassword } from "react-icons/md";
 import MobilHeader from "../components/MobilHeader";
 import Header from "../components/Header";
+import SingleHeader from "../components/SingleHeader";
 import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Settings = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [mobileStyle, setMobileStyle] = useState(true);
+  const [subPage, setSubPage] = useState(false);
 
   // auto move user to username route
   useEffect(() => {
-    if (
-      location.pathname === "/settings/" ||
-      location.pathname === "/settings"
-    ) {
-      navigate("/settings/username");
+    // autoredirect to username page on desktop and tablet
+    if (window.screen.width >= 768) {
+      setMobileStyle(false);
+      if (
+        location.pathname === "/settings/" ||
+        location.pathname === "/settings"
+      ) {
+        navigate("/settings/username");
+      }
+    } else {
+      setMobileStyle(true);
     }
   }, []);
+
+  // detect subpage
+  useEffect(() => {
+    const loc = location.pathname;
+    let subString = null;
+    subString = loc.split("/settings/");
+
+    if (
+      subString[1] !== null &&
+      subString[1] !== "" &&
+      subString[0] !== "/settings"
+    ) {
+      setSubPage(true);
+    } else {
+      setSubPage(false);
+    }
+    console.log(subString, subPage);
+  }, [location.pathname]);
 
   return (
     <>
@@ -32,12 +59,32 @@ const Settings = () => {
 
       <Header title={"Settings"} />
 
-      <div className="settings-page md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
+      <div
+        className={
+          mobileStyle
+            ? "settings-page-mob md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5"
+            : "settings-page-desk md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5"
+        }
+      >
         <Appbar />
         <div className="actual-settings-page">
-          <MobilHeader />
-          <div className="settings-page-container">
-            <div className="settings-options">
+          {mobileStyle === subPage ? (
+            <SingleHeader title={location.pathname.replace("/settings/", "")} />
+          ) : (
+            <MobilHeader title={"Settings"} />
+          )}
+          <div
+            className={
+              mobileStyle
+                ? "settings-page-container-mob"
+                : "settings-page-container-desk"
+            }
+          >
+            <div
+              className={
+                mobileStyle === subPage ? "hide-on-sub" : "settings-options"
+              }
+            >
               <div className="settings-account-informations">
                 <NavLink to={"/settings/username"}>
                   <div className="items active">

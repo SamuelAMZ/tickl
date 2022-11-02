@@ -9,10 +9,10 @@ const Explore = () => {
   return (
     <>
       <Header title={"Bookmark"} />
-      <div className="bookmark md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
+      <div className="bookmark md:max-w-7xl xl:max-w-screen-xl mx-auto p-2 md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-bookmark">
-          <MobilHeader />
+          <MobilHeader title={"Bookmark"} />
           <div className="books">
             <h3 className="date">12-12-2022</h3>
             <div className="book">

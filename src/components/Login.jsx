@@ -70,17 +70,26 @@ const Login = () => {
             placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="input input-bordered w-full"
+            autoFocus
           />
           <input
             type="text"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="input input-bordered w-full"
           />
-          {!isLoading && <button>Login</button>}
-          {isLoading && <button disabled>Loading...</button>}
+          {!isLoading && (
+            <button className="btn btn-primary capitalize">Login</button>
+          )}
+          {isLoading && (
+            <button className="btn btn-primary loading capitalize">
+              Loading...
+            </button>
+          )}
           <p className="no-account">
-            Don't have an account yet?{" "}
+            Don't have an account yet?
             <a
               onClick={() => changeActive("register")}
               className="switch-views"

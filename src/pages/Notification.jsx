@@ -45,10 +45,10 @@ const Explore = (e) => {
   return (
     <>
       <Header title={"Notifications"} />
-      <div className="notification md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
+      <div className="notification md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-notification">
-          <MobilHeader />
+          <MobilHeader title={"Notifications"} />
           <div className="tab">
             <p onClick={(e) => activeTabAll(e)} className="activeA">
               All

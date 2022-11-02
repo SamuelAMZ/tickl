@@ -1,0 +1,28 @@
+.single-header {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
+  height: 85px;
+  background-color: #f9f9f9 !important;
+  border-bottom: 1px solid #d2d2d293;
+
+  div {
+    padding-left: 1.5rem;
+  }
+
+  .backicon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+      font-size: 28px;
+      font-weight: 900;
+    }
+  }
+  .singletitle {
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+}

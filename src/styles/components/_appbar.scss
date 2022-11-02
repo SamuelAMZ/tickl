@@ -2,36 +2,26 @@
 @import "../global/variables";
 
 .app-bar {
-  // display: flex;
-  // flex-direction: column;
-  // gap: 2rem;
-  // align-items: flex-start;
-  // justify-content: space-between;
-  // padding: 3rem 0;
-  // width: 100%;
-
+  display: none;
   position: sticky;
   top: 70px;
   height: 100vh;
 
-  @include b.breakpoint("900") {
-    display: none;
+  @include b.breakpoint("768") {
+    display: block;
   }
 
-  .logo {
-    img {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      padding: 0.5rem;
-      // background-color: rgba(62, 62, 62, 0.1019607843);
-      border-radius: 100px;
+  .menu-mobile {
+    ul {
+      li {
+        font-size: 37px !important;
+        padding: 0.5rem 0 !important;
+      }
     }
   }
 
   .menu {
     width: 100%;
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
 
@@ -101,18 +91,6 @@
 
           visibility: hidden;
           opacity: 0;
-
-          // &::before {
-          //   content: "";
-          //   position: absolute;
-          //   top: 0;
-          //   left: 50%;
-          //   width: 10px;
-          //   height: 10px;
-          //   transform: translate(-50%, 0%) rotate(45deg);
-          //   background-color: rgba(192, 192, 192, 0.812);
-          //   z-index: 1;
-          // }
         }
         &:hover span {
           visibility: visible;
@@ -152,9 +130,16 @@
     position: relative;
 
     .profile-img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
+      width: 80%;
+      height: 80%;
+      margin: 0 auto;
+
+      @include b.breakpoint("1280") {
+        width: 35px;
+        height: 35px;
+        margin: 0;
+      }
+      border-radius: 40%;
       object-fit: cover;
     }
     p {

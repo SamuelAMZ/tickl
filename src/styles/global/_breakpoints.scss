@@ -1,9 +1,10 @@
 $breakpoint-n: (
   "500": 500px,
-  "700": 700px,
+  "768": 768px,
+  "800": 800px,
   "900": 900px,
   "1000": 1000px,
-  "1200": 1200px,
+  "1280": 1280px,
   "1300": 1300px,
   "1440": 1440px,
   "my": 1680px,
@@ -11,7 +12,7 @@ $breakpoint-n: (
 );
 
 @mixin breakpoint($size) {
-  @media (max-width: map-get($breakpoint-n, $size)) {
+  @media (min-width: map-get($breakpoint-n, $size)) {
     @content;
   }
 }

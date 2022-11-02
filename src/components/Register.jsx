@@ -24,7 +24,7 @@ const Register = () => {
 
     // check secret pass (temp)
     if (String(secret) !== "258357") {
-      notif("invalid secret");
+      notif("invalid secret pass");
       return;
     }
 
@@ -84,33 +84,45 @@ const Register = () => {
             placeholder="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className="input input-bordered w-full"
+            autoFocus
           />
           <input
             type="text"
             placeholder="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="input input-bordered w-full"
           />
           <input
             type="text"
             placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="input input-bordered w-full"
           />
           <input
             type="text"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="input input-bordered w-full"
           />
           <input
             type="text"
             placeholder="secret pass"
             value={secret}
             onChange={(e) => setSecret(e.target.value)}
+            className="input input-bordered w-full"
           />
-          {!isLoading && <button>Register</button>}
-          {isLoading && <button disabled>Loading...</button>}
+          {!isLoading && (
+            <button className="btn btn-primary capitalize">Register</button>
+          )}
+          {isLoading && (
+            <button className="btn btn-primary loading capitalize">
+              Loading...
+            </button>
+          )}
 
           <p className="no-account">
             Already have an account?

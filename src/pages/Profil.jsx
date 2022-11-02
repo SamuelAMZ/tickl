@@ -20,7 +20,7 @@ const Profil = () => {
         <div className="profil-page md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
           <Appbar />
           <div className="actual-profil-page">
-            <MobilHeader />
+            <MobilHeader title={"Profile"} />
             <ProfilHead />
             <ProfilBody />
           </div>

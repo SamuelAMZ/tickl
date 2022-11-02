@@ -9,10 +9,10 @@ const Suggetions = () => {
   return (
     <>
       <Header title={"Suggetions"} />
-      <div className="suggetions md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
+      <div className="suggetions md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-suggetions">
-          <MobilHeader />
+          <MobilHeader title={"Suggetions"} />
           <div className="follow-container">
             <Suggetion />
             <Suggetion />

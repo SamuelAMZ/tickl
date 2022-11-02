@@ -20,10 +20,10 @@ const Follow = () => {
   return (
     <>
       <Header title={"Followers"} />
-      <div className="follow md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
+      <div className="follow md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
         <Appbar />
         <div className="actual-follow">
-          <MobilHeader />
+          <MobilHeader title={"Followers"} />
 
           <div className="tab">
             <p

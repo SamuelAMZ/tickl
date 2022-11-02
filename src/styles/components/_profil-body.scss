@@ -18,10 +18,10 @@
       font-weight: 600;
       border-right: 1px solid $heading;
 
-      @include b.breakpoint("700") {
-        font-size: 12px;
-        padding: 0.7rem;
-      }
+      // @include b.breakpoint("700") {
+      //   font-size: 12px;
+      //   padding: 0.7rem;
+      // }
 
       &:last-child {
         border-right: none;

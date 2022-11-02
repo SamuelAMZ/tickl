@@ -30,47 +30,36 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#12006c",endColorstr="#424cf9",GradientType=1);
 
-  @include b.breakpoint("700") {
-    padding-top: 2rem;
-  }
-
   .login-elm-parent {
-    width: 1000px;
-    height: auto;
+    width: 90%;
+    height: fit-content;
     margin: 0 auto;
-    height: 600px;
     border-radius: 20px;
     overflow: hidden;
 
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr;
 
-    @include b.breakpoint("1000") {
-      display: flex;
-      flex-direction: column;
-      width: 60%;
-    }
-    @include b.breakpoint("700") {
-      width: 90%;
-      height: 800px;
+    @include b.breakpoint("1280") {
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: 1fr;
+      width: 1000px;
+      height: 650px;
     }
 
     .image {
       background-repeat: no-repeat;
       background-size: cover;
-
-      @include b.breakpoint("1000") {
-        flex-basis: 100px;
-      }
     }
     .account-content {
       position: relative;
       background-color: white;
       width: 100%;
-      height: 100%;
+      height: 650px;
 
-      @include b.breakpoint("1000") {
-        flex-basis: 500px;
+      @include b.breakpoint("1280") {
+        height: 100%;
       }
 
       .logo-login {
@@ -89,16 +78,15 @@
         width: 100%;
         height: 100%;
         background-color: white;
-        padding: 4rem;
+        padding: 1.5rem;
 
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
 
-        @include b.breakpoint("1000") {
-          height: fit-content;
-          width: 120%;
+        @include b.breakpoint("768") {
+          padding: 4rem;
         }
       }
       .register-content {
@@ -115,10 +103,6 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-
-        @include b.breakpoint("1000") {
-          height: fit-content;
-        }
       }
     }
   }

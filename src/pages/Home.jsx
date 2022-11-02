@@ -42,13 +42,13 @@ const Home = () => {
   return (
     <>
       <Header title={"Home"} />
-      <div className="home md:max-w-7xl xl:max-w-screen-xl mx-auto md:px-10 xl:px-5">
+      <MobilHeader title={"Home"} />
+      <div className="home md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
         <Checks />
         {login && (
           <>
             <Appbar />
             <div className="actual-home">
-              <MobilHeader />
               <TopPost />
               <div className="posts">
                 {data.map((item, id) => (

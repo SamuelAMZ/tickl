@@ -8,7 +8,7 @@ const LoginPages = () => {
   return (
     <LoginFormProvider>
       <Checks />
-      <div className="login">
+      <div className="login md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
         <div className="login-elm-parent">
           <div
             className="image"

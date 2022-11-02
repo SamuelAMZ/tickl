@@ -48,16 +48,25 @@ body {
 .settings-page,
 .follow,
 .suggetions {
-  width: 1300px;
+  @include b.breakpoint("800") {
+    width: 800px;
+  }
+  @include b.breakpoint("1000") {
+    width: 950px;
+  }
+  @include b.breakpoint("1280") {
+    width: 1300px;
+  }
+
   // height: 100vh;
   margin: 0 auto;
 
-  @include b.breakpoint("1300") {
-    width: 90%;
-  }
-  @include b.breakpoint("700") {
-    width: 100%;
-  }
+  // @include b.breakpoint("1300") {
+  //   width: 90%;
+  // }
+  // @include b.breakpoint("700") {
+  //   width: 100%;
+  // }
 }
 
 a {
@@ -90,4 +99,10 @@ a {
   text-transform: capitalize;
   height: 60px;
   border-radius: 20px;
+
+  padding: 0;
+
+  @include b.breakpoint("1280") {
+    padding: 0 1rem;
+  }
 }

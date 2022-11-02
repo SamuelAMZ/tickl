@@ -1,92 +1,90 @@
 @use "../global/breakpoints" as b;
 @import "../global/variables";
 
-.settings-page {
+.settings-page-desk {
   display: grid;
   grid-template-columns: 197px 1fr;
   gap: 3rem;
-  @include b.breakpoint("1300") {
-    gap: 1.5;
-  }
-  @include b.breakpoint("1200") {
-    gap: 1rem;
-    grid-template-columns: 1fr 3fr;
-  }
-  @include b.breakpoint("900") {
+}
+.settings-page-mob {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.actual-settings-page {
+  padding: 0 0.5rem 0 0;
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow: auto;
+  overflow-x: hidden;
+
+  .settings-page-container-mob {
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 0;
+    height: 100%;
   }
 
-  .actual-settings-page {
-    padding: 0 0.5rem 0 0;
-    // border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  .settings-page-container-desk {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    height: 100%;
+  }
+
+  .hide-on-sub {
+    display: none;
+  }
+
+  .settings-options,
+  .settings-values {
+    border-right: 1px solid rgba(62, 62, 62, 0.1019607843);
+    height: 100%;
     overflow: auto;
-    overflow-x: hidden;
+  }
 
-    @include b.breakpoint("900") {
-      padding: 0 1rem;
-      margin: 0;
-      gap: 1rem;
-    }
+  .settings-options {
+    border-left: 1px solid rgba(62, 62, 62, 0.1019607843);
 
-    .settings-page-container {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      height: 100%;
+    .settings-account-informations {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
 
-      .settings-options,
-      .settings-values {
-        border-right: 1px solid rgba(62, 62, 62, 0.1019607843);
-        height: 100%;
-        overflow: auto;
-      }
-
-      .settings-options {
-        border-left: 1px solid rgba(62, 62, 62, 0.1019607843);
-
-        .settings-account-informations {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-
-          a {
-            &.active {
-              background-color: #d1d5db;
-              border-right: 2px solid $heading;
-            }
-          }
-
-          .items {
-            display: grid;
-            grid-template-columns: 8% 1fr 5%;
-            padding: 1rem;
-            cursor: pointer;
-            font-size: 20px;
-            background-color: transparent;
-
-            &:hover {
-              opacity: 0.8;
-            }
-
-            div {
-              color: black;
-              font-size: 15px;
-              text-transform: capitalize;
-              pointer-events: none;
-            }
-            svg {
-              pointer-events: none;
-            }
-          }
+      a {
+        &.active {
+          background-color: #d1d5db;
+          border-right: 2px solid $heading;
         }
       }
 
-      .settings-values {
-        padding: 0 1.5rem;
+      .items {
+        display: grid;
+        grid-template-columns: 8% 1fr 5%;
+        padding: 1rem;
+        cursor: pointer;
+        font-size: 20px;
+        background-color: transparent;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        div {
+          color: black;
+          font-size: 15px;
+          text-transform: capitalize;
+          pointer-events: none;
+        }
+        svg {
+          pointer-events: none;
+        }
       }
     }
+  }
+
+  .settings-values {
+    padding: 0 1.5rem;
   }
 }
