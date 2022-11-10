@@ -48,6 +48,12 @@ const LoginPages = () => {
               </div>
             </div>
           </div>
+          <div className="brand">
+            <div>
+              <img src="/img/back_logo.png" alt="" />
+              <h3>Tickl.ch</h3>
+            </div>
+          </div>
         </div>
 
         {/* layer */}

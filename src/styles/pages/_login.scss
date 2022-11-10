@@ -2,26 +2,7 @@
 @import "../global/variables";
 
 .loginpages-container {
-  background: rgb(18, 0, 108);
-  background: -moz-linear-gradient(
-    86deg,
-    rgba(18, 0, 108, 1) 0%,
-    rgba(121, 95, 254, 1) 45%,
-    rgba(66, 76, 249, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    86deg,
-    rgba(18, 0, 108, 1) 0%,
-    rgba(121, 95, 254, 1) 45%,
-    rgba(66, 76, 249, 1) 100%
-  );
-  background: linear-gradient(
-    86deg,
-    rgba(18, 0, 108, 1) 0%,
-    rgba(121, 95, 254, 1) 45%,
-    rgba(66, 76, 249, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#12006c",endColorstr="#424cf9",GradientType=1);
+  background: white;
 
   width: 100%;
   min-height: 100vh;
@@ -51,6 +32,38 @@
       justify-content: center;
     }
 
+    .brand {
+      position: relative;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: center;
+      color: white;
+      width: 500px;
+
+      @include b.breakpoint("1280") {
+        display: flex;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-left: -2rem;
+      }
+
+      img {
+        height: 400px;
+        width: auto;
+      }
+      h3 {
+        font-size: 38px;
+        color: $heading;
+      }
+    }
+
     .testimonials {
       position: relative;
       display: none;
@@ -64,6 +77,7 @@
 
       @include b.breakpoint("1280") {
         display: flex;
+        display: none; //
       }
 
       .quote-icon {
@@ -88,6 +102,7 @@
 
       // partners
       .partners {
+        display: none;
         position: absolute;
         bottom: 3rem;
         width: 100%;
@@ -169,6 +184,7 @@
 
     @include b.breakpoint("768") {
       width: 180px;
+      display: none; //
     }
   }
 }
