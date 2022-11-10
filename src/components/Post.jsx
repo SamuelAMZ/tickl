@@ -11,18 +11,18 @@ const Post = ({ image, desc }) => {
     <>
       <div className="post">
         {/* user */}
-        <NavLink to="/profile">
+        <NavLink to="/tickltechtteam">
           <div
             className="user"
-            style={{ backgroundImage: "url(/img/3.jpeg)" }}
+            style={{ backgroundImage: "url(/img/back_logo.png)" }}
           ></div>
         </NavLink>
 
         <div>
           <div className="user-detail">
-            <p className="user-first">Tony</p>
-            <p className="user-name">@Tony</p>
-            <p className="date">19/09</p>
+            <p className="user-first">Tickl</p>
+            <p className="user-name">@tickl</p>
+            <p className="date">19/10</p>
           </div>
 
           <div className="desc">
