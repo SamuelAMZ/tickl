@@ -1,0 +1,43 @@
+.usercard {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+
+  &:hover {
+    background-color: rgba(213, 213, 213, 0.238);
+    border-radius: 20px;
+  }
+
+  .user-img {
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  .user-details {
+    position: relative;
+    p,
+    h4 {
+      font-size: 15px;
+    }
+    h4 {
+      font-weight: 600;
+    }
+    .profile-username {
+      color: #656565;
+    }
+    .user-action {
+      color: white;
+      font-weight: 500;
+      text-transform: capitalize;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}

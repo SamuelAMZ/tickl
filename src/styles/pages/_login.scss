@@ -1,14 +1,7 @@
 @use "../global/breakpoints" as b;
 @import "../global/variables";
 
-.login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-width: 100vw;
-  min-height: 100vh;
-  margin: 0 auto;
+.loginpages-container {
   background: rgb(18, 0, 108);
   background: -moz-linear-gradient(
     86deg,
@@ -30,80 +23,152 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#12006c",endColorstr="#424cf9",GradientType=1);
 
-  .login-elm-parent {
-    width: 90%;
-    height: fit-content;
-    margin: 0 auto;
-    border-radius: 20px;
-    overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  color: black;
 
+  .loginpages-content {
+    width: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 50px 1fr;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
 
     @include b.breakpoint("1280") {
-      grid-template-columns: 1.5fr 1fr;
-      grid-template-rows: 1fr;
-      width: 1000px;
-      height: 650px;
+      grid-template-columns: 58fr 32fr;
     }
 
-    .image {
-      background-repeat: no-repeat;
-      background-size: cover;
+    .forms-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    .account-content {
+
+    .testimonials {
       position: relative;
-      background-color: white;
-      width: 100%;
-      height: 650px;
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: center;
+      color: white;
+      margin-top: -20vh;
+      width: 400px;
 
       @include b.breakpoint("1280") {
-        height: 100%;
-      }
-
-      .logo-login {
-        img {
-          width: 70px;
-          height: 70px;
-        }
-        margin-bottom: 2rem;
-      }
-
-      .login-content {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
-        background-color: white;
-        padding: 1.5rem;
-
         display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+      }
 
-        @include b.breakpoint("768") {
-          padding: 4rem;
+      .quote-icon {
+        font-size: 60px;
+      }
+      .quote-text {
+        font-size: 21px;
+        font-weight: 600;
+      }
+      .quoter {
+        margin-top: 1rem;
+
+        h4 {
+          font-size: 18px;
+          text-transform: capitalize;
+        }
+        p {
+          font-size: 15px;
+          text-transform: capitalize;
         }
       }
-      .register-content {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
-        background-color: white;
-        padding: 4rem;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+      // partners
+      .partners {
+        position: absolute;
+        bottom: 3rem;
+        width: 100%;
+
+        .line-partners {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr 100px 1fr;
+          align-items: center;
+          justify-content: center;
+
+          span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.426);
+          }
+          p {
+            text-align: center;
+          }
+        }
+
+        .partners-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          gap: 0.2rem;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem 0;
+
+          p {
+            text-align: center;
+          }
+        }
       }
+    }
+  }
+}
+
+.login-content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+
+  @include b.breakpoint("768") {
+    width: 350px;
+  }
+}
+
+// layer
+.big-layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+  background-position: calc(50% - 214px) -216px;
+  background-size: 1344px 1315px;
+  background-repeat: no-repeat;
+
+  @include b.breakpoint("1280") {
+    background-position: calc(50% - 554px) -216px;
+  }
+}
+
+// logo
+.login-logo {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  z-index: 10;
+
+  img {
+    width: 130px;
+    height: auto;
+
+    @include b.breakpoint("768") {
+      width: 180px;
     }
   }
 }

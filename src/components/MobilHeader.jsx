@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -15,6 +15,11 @@ const MobilHeader = ({ title }) => {
   const { active } = useContext(MenuActiveContext);
   const { changeActive } = useContext(MenuActiveContext);
 
+  // auto close sidemenu on header first mount
+  useEffect(() => {
+    changeActive(false);
+  }, []);
+
   return (
     <>
       {/* white space for mobile */}
@@ -22,7 +27,7 @@ const MobilHeader = ({ title }) => {
 
       <div className="mobil-header px-4 py-2">
         <div className="mobil-logo">
-          <NavLink to="/profile">
+          <NavLink to={"/" + login.user.username}>
             {login && (
               <img src={`${login.user.profileicon.thumb}`} alt="profile icon" />
             )}
@@ -48,6 +53,7 @@ const MobilHeader = ({ title }) => {
       </div>
 
       {/* bottom navigation bar */}
+
       <div className="bottom-nav">
         <ul>
           <li>
@@ -61,7 +67,7 @@ const MobilHeader = ({ title }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/profile"}>
+            <NavLink to={`/${login.user.username}`}>
               <MdOutlineAccountCircle />
             </NavLink>
           </li>

@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginFormsContext from "../context/LoginPagesContext";
 import notif from "../helpers/notif";
+import LoginFormsContext from "../context/LoginPagesContext";
 
 const Login = () => {
-  const { active } = useContext(LoginFormsContext);
-  const { changeActive } = useContext(LoginFormsContext);
-
+  const { active, changeActive } = useContext(LoginFormsContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -60,48 +58,43 @@ const Login = () => {
     }
   };
 
-  if (active === "login") {
-    return (
-      <>
-        <h2>Login</h2>
-        <form className="login-form" onSubmit={(e) => handleLogin(e)}>
-          <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input input-bordered w-full"
-            autoFocus
-          />
-          <input
-            type="text"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input input-bordered w-full"
-          />
-          {!isLoading && (
-            <button className="btn btn-primary capitalize">Login</button>
-          )}
-          {isLoading && (
-            <button className="btn btn-primary loading capitalize">
-              Loading...
-            </button>
-          )}
-          <p className="no-account">
-            Don't have an account yet?
-            <a
-              onClick={() => changeActive("register")}
-              className="switch-views"
-              href="#"
-            >
-              Register
-            </a>
-          </p>
-        </form>
-      </>
-    );
-  }
+  return (
+    <>
+      <h2>Login</h2>
+      <form className="login-form" onSubmit={(e) => handleLogin(e)}>
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="input input-primary input-bordered w-full"
+          autoFocus
+        />
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="input input-primary input-bordered w-full"
+        />
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Login</button>
+        )}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Loading...
+          </button>
+        )}
+        <p className="no-account">
+          Don't have an account yet?
+          <a className="switch-views" onClick={() => changeActive(false)}>
+            {" "}
+            Register
+          </a>
+        </p>
+      </form>
+    </>
+  );
 };
 
 export default Login;

@@ -9,10 +9,6 @@ const Checks = ({ idx }) => {
   const location = useLocation();
   const { login, changeLogin } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(login);
-  }, []);
-
   // check if user is login or not function
   const checkLoginUser = async () => {
     // make appear of loader on login pages only

@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginFormsContext from "../context/LoginPagesContext";
 import notif from "../helpers/notif";
+import LoginFormsContext from "../context/LoginPagesContext";
 
 const Register = () => {
-  const { active } = useContext(LoginFormsContext);
-  const { changeActive } = useContext(LoginFormsContext);
-
+  const { active, changeActive } = useContext(LoginFormsContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -23,9 +20,15 @@ const Register = () => {
     e.preventDefault();
 
     // check secret pass (temp)
-    if (String(secret) !== "258357") {
+    if (String(secret) !== "454350") {
       notif("invalid secret pass");
       return;
+    }
+
+    // verify if username don't have spaces and special caracters
+    let format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    if (format.test(username)) {
+      return notif("verify username no space, no special characters");
     }
 
     setIsLoading(true);
@@ -74,70 +77,65 @@ const Register = () => {
     }
   };
 
-  if (active === "register") {
-    return (
-      <>
-        <h2>Register</h2>
-        <form onSubmit={(e) => handleRegistration(e)} className="register-form">
-          <input
-            type="text"
-            placeholder="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="input input-bordered w-full"
-            autoFocus
-          />
-          <input
-            type="text"
-            placeholder="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="input input-bordered w-full"
-          />
-          <input
-            type="text"
-            placeholder="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input input-bordered w-full"
-          />
-          <input
-            type="text"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input input-bordered w-full"
-          />
-          <input
-            type="text"
-            placeholder="secret pass"
-            value={secret}
-            onChange={(e) => setSecret(e.target.value)}
-            className="input input-bordered w-full"
-          />
-          {!isLoading && (
-            <button className="btn btn-primary capitalize">Register</button>
-          )}
-          {isLoading && (
-            <button className="btn btn-primary loading capitalize">
-              Loading...
-            </button>
-          )}
+  return (
+    <>
+      <h2>Register</h2>
+      <form onSubmit={(e) => handleRegistration(e)} className="register-form">
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="input input-primary input-bordered w-full"
+          autoFocus
+        />
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="input input-primary input-bordered w-full"
+        />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="input input-primary input-bordered w-full"
+        />
+        <input
+          type="text"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="input input-primary input-bordered w-full"
+        />
+        <input
+          type="text"
+          placeholder="Secret pass"
+          value={secret}
+          onChange={(e) => setSecret(e.target.value)}
+          className="input input-primary input-bordered w-full"
+        />
+        {!isLoading && (
+          <button className="btn btn-primary capitalize">Register</button>
+        )}
+        {isLoading && (
+          <button className="btn btn-primary loading capitalize">
+            Loading...
+          </button>
+        )}
 
-          <p className="no-account">
-            Already have an account?
-            <a
-              onClick={() => changeActive("login")}
-              className="switch-views"
-              href="#"
-            >
-              Login
-            </a>
-          </p>
-        </form>
-      </>
-    );
-  }
+        <p className="no-account">
+          Already have an account?
+          <a className="switch-views" onClick={() => changeActive(true)}>
+            {" "}
+            Login
+          </a>
+        </p>
+      </form>
+    </>
+  );
 };
 
 export default Register;

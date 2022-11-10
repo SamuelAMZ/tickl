@@ -16,51 +16,6 @@ import trimData from "../helpers/trim";
 
 const Appbar = () => {
   const { login, changeLogin } = useContext(UserContext);
-  const navigate = useNavigate();
-
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    notifLoading("processing", "logout");
-
-    if (login) {
-      try {
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-        headers.append("Accept", "application/json");
-        headers.append("GET", "POST", "OPTIONS");
-        headers.append(
-          "Access-Control-Allow-Origin",
-          `${process.env.REACT_APP_DOMAIN}`
-        );
-        headers.append("Access-Control-Allow-Credentials", "true");
-
-        const response = await fetch(
-          `${process.env.REACT_APP_DOMAIN}/twitter/api/user/logout`,
-          {
-            mode: "cors",
-            method: "GET",
-            headers: headers,
-            credentials: "include",
-          }
-        );
-
-        const serverMessage = await response.json();
-        notifLoading("", "logout");
-        notif(serverMessage.message);
-
-        if (serverMessage.code === "ok") {
-          navigate("/");
-        }
-      } catch (err) {
-        notif("server error try again later");
-        console.log(err);
-        notifLoading("", "logout");
-      }
-    } else {
-      notifLoading("", "logout");
-      return notif("Verify your fields");
-    }
-  };
 
   return (
     <div className="app-bar">
@@ -92,7 +47,7 @@ const Appbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile">
+            <NavLink to={`/${login.user.username}`}>
               <MdOutlineAccountCircle />
               <p>Profile</p>
             </NavLink>
@@ -135,7 +90,7 @@ const Appbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile">
+            <NavLink to={`/${login.user.username}`}>
               <MdOutlineAccountCircle />
             </NavLink>
           </li>
@@ -174,8 +129,8 @@ const Appbar = () => {
               tabIndex={0}
               className="dropdown-content menu p-2 shadow bg-neutral rounded-box xl:w-52"
             >
-              <li onClick={handleLogout} className="w-full">
-                <a>logout</a>
+              <li className="w-full">
+                <NavLink to={"/logout"}>logout</NavLink>
               </li>
             </ul>
           </div>

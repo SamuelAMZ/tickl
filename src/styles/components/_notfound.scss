@@ -1,0 +1,17 @@
+.notfound {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -15vh;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 17px;
+  }
+}

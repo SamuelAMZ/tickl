@@ -1,0 +1,59 @@
+@use "../global/breakpoints" as b;
+@import "../global/variables";
+
+.more-container {
+  background-color: rgba(240, 248, 255, 0.483);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 20;
+}
+
+.more-content {
+  z-index: 21;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: fit-content;
+  max-height: 500px;
+  overflow: auto;
+  background-color: white;
+  color: black;
+  border-radius: 20px 20px 0 0;
+  padding: 2rem 1.3rem;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.128);
+
+  @include b.breakpoint("768") {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    padding: 2rem;
+  }
+
+  .actual-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h3 {
+      font-size: 17px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    p {
+      font-size: 15px;
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 27px;
+  cursor: pointer;
+}

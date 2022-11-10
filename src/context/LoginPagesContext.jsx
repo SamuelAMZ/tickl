@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 const LoginFormsContext = createContext();
 
 export const LoginFormProvider = ({ children }) => {
-  const [active, setActive] = useState("login");
+  const [active, setActive] = useState(true);
 
   const changeActive = (newActive) => {
     setActive(newActive);

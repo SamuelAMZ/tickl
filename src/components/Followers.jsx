@@ -1,5 +1,6 @@
 import React from "react";
 import { MdOutlineAccountCircle } from "react-icons/md";
+import UserCard from "./UserCard";
 
 const Followers = () => {
   return (

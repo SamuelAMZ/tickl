@@ -8,7 +8,7 @@
   }
   form {
     display: grid;
-    gap: 1rem;
+    gap: 1.5rem;
     width: 100%;
 
     input,
@@ -17,7 +17,6 @@
       padding: 5px;
       font-size: 15px;
       font-weight: 600;
-      border: 1px solid $heading;
       border-radius: 5px;
     }
 
@@ -29,9 +28,11 @@
     }
     .no-account {
       margin-top: 1rem;
-      font-size: 13px;
+      font-size: 15px;
       a {
+        font-weight: 600;
         color: $heading;
+        cursor: pointer;
       }
     }
   }

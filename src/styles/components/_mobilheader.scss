@@ -87,6 +87,20 @@
             }
           }
         }
+
+        .logout {
+          width: 80%;
+          position: absolute;
+          bottom: 1rem;
+          left: 50%;
+          transform: translate(-50%, 0);
+          p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: capitalize;
+          }
+        }
       }
     }
     .close-menu {
@@ -149,7 +163,7 @@
     justify-content: space-between;
 
     li {
-      height: 50px;
+      height: 55px;
       width: 100%;
       a {
         display: flex;

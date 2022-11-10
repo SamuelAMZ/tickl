@@ -1,9 +1,10 @@
+@use "../global/breakpoints" as b;
 @import "../global/variables";
 
 .profil-head {
   .profil-head-img {
     width: 100%;
-    min-height: 250px;
+    min-height: 150px;
 
     position: relative;
     overflow: hidden;
@@ -12,15 +13,22 @@
     background-repeat: no-repeat;
     box-shadow: inset 0 0 0 200px rgba(9, 9, 9, 0.173);
 
-    border-radius: 20px;
+    border-radius: 0 0 10px 10px;
     color: white;
     padding: 2rem;
+    margin-top: -10px;
     cursor: pointer;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+
+    @include b.breakpoint("768") {
+      margin-top: 0;
+      border-radius: 20px;
+      min-height: 250px;
+    }
   }
 
   .profil-button {
@@ -28,30 +36,47 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
+    padding-bottom: 2rem;
     margin-top: -1rem;
 
+    @include b.breakpoint("768") {
+      padding-bottom: 0.5rem;
+    }
+
     .profil-main-img {
-      width: 140px;
-      height: 140px;
+      width: 100px;
+      height: 100px;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       border-radius: 50%;
-      transform: translate(0, -40%);
+      transform: translate(0, -30%);
       cursor: pointer;
       z-index: 1;
       border: 1px solid rgba(0, 0, 0, 0.277);
       background-color: white;
       border: 4px solid white;
+
+      @include b.breakpoint("768") {
+        width: 140px;
+        height: 140px;
+        transform: translate(0, -40%);
+      }
     }
     button {
-      margin-top: -3rem;
-      font-size: 15px;
-      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      font-size: 14px;
+      padding: 0.5rem 0.9rem;
       border-radius: 20px;
       cursor: pointer;
       background-color: rgba(0, 0, 0, 0.122);
       z-index: 3;
+
+      @include b.breakpoint("768") {
+        margin-top: -3rem;
+        font-size: 15px;
+        padding: 0.5rem 1rem;
+      }
     }
   }
 
@@ -69,6 +94,7 @@
         color: black;
         text-transform: capitalize;
         font-weight: 600;
+        margin: 5px 0 5px 0;
       }
       .profil-username {
         font-size: 15px;
@@ -82,10 +108,17 @@
         margin-bottom: 1rem;
       }
       .profil-others {
-        display: flex;
-        gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
         margin-bottom: 1rem;
         color: rgba(0, 0, 0, 0.635);
+
+        @include b.breakpoint("768") {
+          display: flex;
+          gap: 2rem;
+        }
+
         div {
           display: flex;
           gap: 0.5rem;
@@ -115,4 +148,9 @@
       }
     }
   }
+}
+
+.become-fan {
+  background-color: #0f1419 !important;
+  color: white;
 }

@@ -1,0 +1,36 @@
+@use "../global/breakpoints" as b;
+@import "../global/variables";
+
+.tab-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+
+  a {
+    font-size: 17px;
+    font-weight: 600;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    text-transform: capitalize;
+
+    &.active {
+      border-bottom: 2px solid $heading;
+    }
+  }
+}
+
+.nodata {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2.5rem 0;
+}

@@ -37,7 +37,8 @@
   text-transform: capitalize;
 }
 
-.search-header {
+.search-header,
+.search-pages {
   width: 100%;
   display: none;
 
@@ -56,6 +57,7 @@
 
     .icon {
       width: 50px;
+      cursor: pointer;
     }
 
     form {
@@ -69,4 +71,8 @@
       }
     }
   }
+}
+
+.search-pages {
+  display: block !important;
 }

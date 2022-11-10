@@ -45,6 +45,13 @@ const Username = () => {
   // update username
   const updateHandler = async (e) => {
     e.preventDefault();
+
+    // verify if username don't have spaces and special caracters
+    let format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    if (format.test(usernameValue)) {
+      return notif("verify username no space, no special characters");
+    }
+
     setIsLoading(true);
 
     // getting data from field

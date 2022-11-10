@@ -6,12 +6,13 @@ import {
   BiNotification,
   BiBookmark,
 } from "react-icons/bi";
-import { FaFeatherAlt } from "react-icons/fa";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoSettingsOutline, IoClose } from "react-icons/io5";
 import MenuActiveContext from "../context/MenuActive";
+import UserContext from "../context/UserContext";
 
 const Sidemenu = () => {
+  const { login, changeLogin } = useContext(UserContext);
   const { changeActive } = useContext(MenuActiveContext);
 
   return (
@@ -46,9 +47,18 @@ const Sidemenu = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile" onClick={() => changeActive(false)}>
+            <NavLink
+              to={`/${login.user.username}`}
+              onClick={() => changeActive(false)}
+            >
               <MdOutlineAccountCircle />
               <p>Profile</p>
+            </NavLink>
+          </li>
+
+          <li className="btn logout">
+            <NavLink to={"/logout"}>
+              <p>Logout</p>
             </NavLink>
           </li>
         </ul>
