@@ -16,7 +16,10 @@ const Login = () => {
     setIsLoading(true);
 
     if (email !== "" && password !== "") {
-      const data = { email: email.toLowerCase(), password };
+      const data = {
+        email: email.toLowerCase().trim(),
+        password: password.trim(),
+      };
 
       try {
         let headers = new Headers();
