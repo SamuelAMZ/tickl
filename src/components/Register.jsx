@@ -34,7 +34,7 @@ const Register = () => {
     setIsLoading(true);
 
     if (username !== "" && name !== "" && email !== "" && password !== "") {
-      const data = { username, name, email, password };
+      const data = { username, name, email: email.toLowerCase(), password };
 
       try {
         let headers = new Headers();
