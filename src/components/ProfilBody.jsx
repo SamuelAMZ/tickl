@@ -1,77 +1,79 @@
 import React, { useState } from "react";
-import Post from "./Post";
+import Posts from "./Posts";
+// contexts
+import { HomeReRenderProvider } from "../context/HomeRerenderContext";
 
 const ProfilBody = () => {
-  const data = [
-    {
-      image: "url(/img/2.jpeg)",
-      desc: "What do you think do men prefer curvy women. Well I think .....",
-    },
-    {
-      image: "url(/img/4.jpeg)",
-      desc: "Oh ya baby got back be sure and Tickl her page",
-    },
-    {
-      image: "url(/img/1.jpeg)",
-      desc: "Now this is worth waiting for 2023 corvette",
-    },
-    {
-      image: "url(/img/3.jpeg)",
-      desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
-    },
-    {
-      image: "url(/img/elisabeth.jpeg)",
-      desc: "Queen her legacy will live on forever.",
-    },
-    {
-      image: "url(/img/paradise1.jpeg)",
-      desc: "I was looking at sites and came across this one and just had to tickl it. There is a lot of beautiful woman in Ottawa",
-    },
-  ];
-  const dataLikes = [
-    {
-      image: "url(/img/4.jpeg)",
-      desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
-    },
-    {
-      image: "url(/img/1.jpeg)",
-      desc: "Now this is worth waiting for 2023 corvette",
-    },
-    {
-      image: "url(/img/paradise1.jpeg)",
-      desc: "I was looking at sites and came across this one and just had to tickl it. There is a lot of beautiful woman in Ottawa",
-    },
-    {
-      image: "url(/img/2.jpeg)",
-      desc: "What do you think do men prefer curvy women. Well I think .....",
-    },
-  ];
-  const dataReplies = [
-    {
-      image: "url(/img/3.jpeg)",
-      desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
-    },
-    {
-      image: "url(/img/4.jpeg)",
-      desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
-    },
-    {
-      image: "url(/img/1.jpeg)",
-      desc: "Now this is worth waiting for 2023 corvette",
-    },
-    {
-      image: "url(/img/elisabeth.jpeg)",
-      desc: "Queen her legacy will live on forever.",
-    },
-    {
-      image: "url(/img/paradise1.jpeg)",
-      desc: "I was looking at sites and came across this one and just had to tickl it. There is a lot of beautiful woman in Ottawa",
-    },
-    {
-      image: "url(/img/2.jpeg)",
-      desc: "What do you think do men prefer curvy women. Well I think .....",
-    },
-  ];
+  // const data = [
+  //   {
+  //     image: "url(/img/2.jpeg)",
+  //     desc: "What do you think do men prefer curvy women. Well I think .....",
+  //   },
+  //   {
+  //     image: "url(/img/4.jpeg)",
+  //     desc: "Oh ya baby got back be sure and Tickl her page",
+  //   },
+  //   {
+  //     image: "url(/img/1.jpeg)",
+  //     desc: "Now this is worth waiting for 2023 corvette",
+  //   },
+  //   {
+  //     image: "url(/img/3.jpeg)",
+  //     desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
+  //   },
+  //   {
+  //     image: "url(/img/elisabeth.jpeg)",
+  //     desc: "Queen her legacy will live on forever.",
+  //   },
+  //   {
+  //     image: "url(/img/paradise1.jpeg)",
+  //     desc: "I was looking at sites and came across this one and just had to tickl it. There is a lot of beautiful woman in Ottawa",
+  //   },
+  // ];
+  // const dataLikes = [
+  //   {
+  //     image: "url(/img/4.jpeg)",
+  //     desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
+  //   },
+  //   {
+  //     image: "url(/img/1.jpeg)",
+  //     desc: "Now this is worth waiting for 2023 corvette",
+  //   },
+  //   {
+  //     image: "url(/img/paradise1.jpeg)",
+  //     desc: "I was looking at sites and came across this one and just had to tickl it. There is a lot of beautiful woman in Ottawa",
+  //   },
+  //   {
+  //     image: "url(/img/2.jpeg)",
+  //     desc: "What do you think do men prefer curvy women. Well I think .....",
+  //   },
+  // ];
+  // const dataReplies = [
+  //   {
+  //     image: "url(/img/3.jpeg)",
+  //     desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
+  //   },
+  //   {
+  //     image: "url(/img/4.jpeg)",
+  //     desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
+  //   },
+  //   {
+  //     image: "url(/img/1.jpeg)",
+  //     desc: "Now this is worth waiting for 2023 corvette",
+  //   },
+  //   {
+  //     image: "url(/img/elisabeth.jpeg)",
+  //     desc: "Queen her legacy will live on forever.",
+  //   },
+  //   {
+  //     image: "url(/img/paradise1.jpeg)",
+  //     desc: "I was looking at sites and came across this one and just had to tickl it. There is a lot of beautiful woman in Ottawa",
+  //   },
+  //   {
+  //     image: "url(/img/2.jpeg)",
+  //     desc: "What do you think do men prefer curvy women. Well I think .....",
+  //   },
+  // ];
 
   const activeTabPosts = (e, active, tab) => {
     e.target.parentElement.children[0].classList.remove(active);
@@ -87,27 +89,30 @@ const ProfilBody = () => {
   const posts = () => {
     return (
       <div className="profil-posts">
-        {data.map((item, id) => (
-          <Post image={item.image} desc={item.desc} key={id} />
-        ))}
+        {/* rerender provider */}
+        <HomeReRenderProvider>
+          <Posts />
+        </HomeReRenderProvider>
       </div>
     );
   };
   const likes = () => {
     return (
       <div className="profil-posts">
-        {dataLikes.map((item, id) => (
-          <Post image={item.image} desc={item.desc} key={id} />
-        ))}
+        {/* rerender provider */}
+        <HomeReRenderProvider>
+          <Posts />
+        </HomeReRenderProvider>
       </div>
     );
   };
   const replies = () => {
     return (
       <div className="profil-posts">
-        {dataReplies.map((item, id) => (
-          <Post image={item.image} desc={item.desc} key={id} />
-        ))}
+        {/* rerender provider */}
+        <HomeReRenderProvider>
+          <Posts />
+        </HomeReRenderProvider>
       </div>
     );
   };

@@ -1,41 +1,15 @@
 import React from "react";
 import Appbar from "../components/Appbar";
 import Third from "../components/Third";
-import Post from "../components/Post";
+import Posts from "../components/Posts";
 import ExploreHead from "../components/ExploreHead";
 import Header from "../components/Header";
 import MobilHeader from "../components/MobilHeader";
 
+// contexts
+import { HomeReRenderProvider } from "../context/HomeRerenderContext";
+
 const Explore = () => {
-  const data = [
-    {
-      image: "url(/img/1.jpeg)",
-      desc: "Now this is worth waiting for 2023 corvette",
-    },
-    {
-      image: "url(/img/4.jpeg)",
-      desc: "Oh ya baby got back be sure and Tickl her page",
-    },
-
-    {
-      image: "url(/img/elisabeth.jpeg)",
-      desc: "Queen her legacy will live on forever.",
-    },
-
-    {
-      image: "url(/img/paradise1.jpeg)",
-      desc: "I was looking at sites and came across this one and just had to tickl it. There is a lot of beautiful woman in Ottawa",
-    },
-    {
-      image: "url(/img/2.jpeg)",
-      desc: "What do you think do men prefer curvy women. Well I think .....",
-    },
-    {
-      image: "url(/img/3.jpeg)",
-      desc: "What do you think do men like cuddling more than women. Because of where it may lead.",
-    },
-  ];
-
   return (
     <>
       <Header title={"Explore"} />
@@ -45,9 +19,10 @@ const Explore = () => {
           <MobilHeader title={"Explore"} />
           <ExploreHead />
           <div className="posts">
-            {data.map((item, id) => (
-              <Post image={item.image} desc={item.desc} key={id} />
-            ))}
+            {/* rerender provider */}
+            <HomeReRenderProvider>
+              <Posts />
+            </HomeReRenderProvider>
           </div>
         </div>
         <Third />
