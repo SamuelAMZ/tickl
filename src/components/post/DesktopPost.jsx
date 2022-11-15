@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   BsImage,
   BsFillCameraVideoFill,
@@ -14,10 +14,17 @@ import DesktopPostActiveContext from "../../context/DesktopPostContext";
 
 const DesktopPost = () => {
   const { login, changeLogin } = useContext(UserContext);
-  const { deskActive, changeDeskActive } = useContext(DesktopPostActiveContext);
   let { reRender, changeRerender } = useContext(HomeReRenderContext);
+  const { deskActive, changeDeskActive } = useContext(DesktopPostActiveContext);
   const [newPostText, setNewPostText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(location);
+  }, []);
 
   function OnInput(e) {
     this.style.height = 0;
@@ -98,9 +105,14 @@ const DesktopPost = () => {
         setNewPostText("");
         // success message
         notif(serverMessage.message);
-        // close and rerender posts
+        // close and rerender posts or just redirect to home page if current page is not home
         changeDeskActive(false);
-        changeRerender(reRender + 1);
+
+        if (location.pathname !== "/home") {
+          navigate("/home");
+        } else {
+          changeRerender(reRender + 1);
+        }
       }
     } catch (err) {
       notif("server error try again later");
