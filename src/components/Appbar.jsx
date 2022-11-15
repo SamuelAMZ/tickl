@@ -10,12 +10,14 @@ import {
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import UserContext from "../context/UserContext";
+import DesktopPostActiveContext from "../context/DesktopPostContext";
 import notifLoading from "../helpers/notifLoading";
 import notif from "../helpers/notif";
 import trimData from "../helpers/trim";
 
 const Appbar = () => {
   const { login, changeLogin } = useContext(UserContext);
+  const { deskActive, changeDeskActive } = useContext(DesktopPostActiveContext);
 
   return (
     <div className="app-bar">
@@ -58,7 +60,7 @@ const Appbar = () => {
               <p>Settings</p>
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => changeDeskActive(true)}>
             <button className="btn btn-active btn-primary text-white btn-r">
               New Tickl
             </button>
