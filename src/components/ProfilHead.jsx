@@ -153,7 +153,7 @@ const ProfilHead = ({ user }) => {
           ></div>
         )}
         {isThirdUser ? (
-          <NavLink to={"#"} onClick={(e) => handleBecomeFan(e, "follow")}>
+          <NavLink to={"#"}>
             <button className="btn btn-active capitalize become-fan">
               Become Fan
             </button>
