@@ -52,8 +52,6 @@ const Post = ({ data }) => {
         } else {
           setOwner(serverMessage.data);
         }
-
-        console.log(serverMessage.data);
       } catch (err) {
         notif("error try again later");
         console.log(err);

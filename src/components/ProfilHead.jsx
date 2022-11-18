@@ -6,6 +6,7 @@ import MoreDetail from "./MoreDetail";
 import UserContext from "../context/UserContext";
 import MoreDetailsContext from "../context/MoreDetailContext";
 import trimData from "../helpers/trim";
+import notif from "../helpers/notif";
 
 const ProfilHead = ({ user }) => {
   const { login, changeLogin } = useContext(UserContext);
@@ -13,6 +14,7 @@ const ProfilHead = ({ user }) => {
     useContext(MoreDetailsContext);
 
   const [isThirdUser, setIsThirdUser] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // user = current fetched user
@@ -72,6 +74,54 @@ const ProfilHead = ({ user }) => {
     changeShowMoreDetail(true);
   };
 
+  // handle become fan button
+  // const handleBecomeFan = async (e, type) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   const data = {
+  //     currentUserId: login.user.id,
+  //     targetUserId: user.id,
+  //     type,
+  //   };
+
+  //   try {
+  //     let headers = new Headers();
+  //     headers.append("Content-Type", "application/json");
+  //     headers.append("Accept", "application/json");
+  //     headers.append("GET", "POST", "OPTIONS");
+  //     headers.append(
+  //       "Access-Control-Allow-Origin",
+  //       `${process.env.REACT_APP_DOMAIN}`
+  //     );
+  //     headers.append("Access-Control-Allow-Credentials", "true");
+
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_DOMAIN}/twitter/api/user/follow-unfollow`,
+  //       {
+  //         mode: "cors",
+  //         method: "POST",
+  //         headers: headers,
+  //         body: JSON.stringify(data),
+  //         credentials: "include",
+  //       }
+  //     );
+
+  //     const serverMessage = await response.json();
+  //     notif(serverMessage.message);
+  //     setIsLoading(false);
+
+  //     if (serverMessage.code === "ok") {
+  //       // actions
+  //       console.log("good");
+  //     }
+  //   } catch (err) {
+  //     notif("server error try again later");
+  //     console.log(err);
+  //     setIsLoading(false);
+  //   }
+  // };
+
   return (
     <div className="profil-head">
       {login ? (
@@ -103,7 +153,7 @@ const ProfilHead = ({ user }) => {
           ></div>
         )}
         {isThirdUser ? (
-          <NavLink to={"#"}>
+          <NavLink to={"#"} onClick={(e) => handleBecomeFan(e, "follow")}>
             <button className="btn btn-active capitalize become-fan">
               Become Fan
             </button>

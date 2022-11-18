@@ -23,7 +23,7 @@ const Third = () => {
         </div>
 
         <a
-          href="https://paradisespaandtanning.ca/"
+          href="http://www.pickeringangels.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -33,7 +33,7 @@ const Third = () => {
           ></div>
         </a>
         <a
-          href="https://paradisespaandtanning.ca/"
+          href="http://lavillaspa.ca/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -58,7 +58,7 @@ const Third = () => {
         </div>
 
         <a
-          href="https://paradisespaandtanning.ca/"
+          href="http://www.pickeringangels.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -68,7 +68,7 @@ const Third = () => {
           ></div>
         </a>
         <a
-          href="https://paradisespaandtanning.ca/"
+          href="http://lavillaspa.ca/"
           target="_blank"
           rel="noopener noreferrer"
         >
