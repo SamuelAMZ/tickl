@@ -22,12 +22,16 @@
   }
 
   .user-detail {
-    font-size: 17px;
+    font-size: 14px;
     display: flex;
     gap: 0.5rem;
     align-items: center;
     justify-content: flex-start;
     padding-bottom: 0.5rem;
+
+    @include b.breakpoint("768") {
+      font-size: 17px;
+    }
 
     .user-first {
       font-weight: 600;
@@ -59,18 +63,20 @@
   }
 
   .desc {
-    font-size: 15px;
-    padding: 0.5rem 1rem 1rem 0;
+    font-size: 14px;
+    padding: 0.5rem 1rem 0 0;
     color: black;
 
     @include b.breakpoint("768") {
-      padding: 0rem 1rem 1rem 0;
+      font-size: 15px;
+      padding: 0rem 1rem 0 0;
     }
   }
 
   .actions {
     display: flex;
     align-items: center;
+    padding-top: 1rem;
 
     gap: 0.5rem;
     width: 60%;

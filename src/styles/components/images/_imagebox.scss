@@ -1,0 +1,65 @@
+@use "../../global/breakpoints" as b;
+@import "../../global/variables";
+
+#images-box-container {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+
+  .single-image-uploaded {
+    position: relative;
+    width: 100%;
+    height: 8rem;
+    overflow: hidden;
+
+    @include b.breakpoint("768") {
+      height: 12rem;
+    }
+  }
+
+  #images-uploaded {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+
+    @include b.breakpoint("768") {
+      border-radius: 20px;
+    }
+  }
+}
+.remove-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+
+  svg {
+    pointer-events: none;
+    border-radius: 50%;
+    color: white;
+    background-color: white;
+  }
+}
+
+// dynamic image columns
+.one-image {
+  grid-template-columns: 1fr;
+
+  .single-image-uploaded {
+    height: auto !important;
+    width: auto !important;
+    min-width: 75% !important;
+    max-width: 100% !important;
+    min-height: 120px !important;
+    max-height: 500px !important;
+  }
+}
+.two-multi-images {
+  grid-template-columns: 1fr 1fr;
+}
+.span-one {
+  grid-row: 1 / span 2;
+  height: 25rem !important;
+}

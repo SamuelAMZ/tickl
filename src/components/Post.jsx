@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+// icons
 import { FiMoreHorizontal } from "react-icons/fi";
 import { BiCommentDetail, BiLike } from "react-icons/bi";
 import { FiRepeat } from "react-icons/fi";
 import { BsUpload } from "react-icons/bs";
 import { AiOutlineEye } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+
+// helpers
 import trimData from "../helpers/trim";
 import notif from "../helpers/notif";
+
+// components
+import PostImagesBox from "./images/PostImagesBox";
 
 const Post = ({ data }) => {
   let dateTrimed = data.date.split("T")[0];
@@ -58,6 +65,7 @@ const Post = ({ data }) => {
         setIsLoading(false);
       }
     };
+
     send();
   }, []);
 
@@ -74,6 +82,7 @@ const Post = ({ data }) => {
           </NavLink>
 
           <div>
+            {/* user details */}
             <div className="user-detail">
               {/* mobile phones */}
               <p className="user-first md:hidden">{trimData(owner.name, 14)}</p>
@@ -89,11 +98,13 @@ const Post = ({ data }) => {
               <p className="date">{dateTrimed}</p>
             </div>
 
-            <div className="desc">{data.postText}</div>
+            {/* post description */}
+            {data.postText && <div className="desc">{data.postText}</div>}
 
-            {/* <div className="image">
-             <img src={image.replace("url(", "").replace(")", "")} /> 
-          </div> */}
+            {/* post images */}
+            {data.postImages.length >= 1 && (
+              <PostImagesBox images={data.postImages} />
+            )}
 
             {/* actions */}
             <div className="actions">
@@ -119,6 +130,7 @@ const Post = ({ data }) => {
             </div>
           </div>
 
+          {/* more btn */}
           <div className="post-more">
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn  btn-sm m-1 bg-white">

@@ -18,36 +18,50 @@
         padding-top: 3px;
       }
 
+      .tickltextarea {
+        padding: 1rem;
+        padding-left: 0;
+        background-color: transparent;
+
+        &::placeholder {
+          color: rgba(0, 0, 0, 0.717);
+        }
+
+        &:focus {
+          outline: none !important;
+        }
+      }
+
       .top-elms {
         height: 100%;
         display: flex;
         flex-direction: column;
-
-        .tickltextarea {
-          padding: 1rem;
-          padding-left: 0;
-          background-color: transparent;
-
-          &::placeholder {
-            color: rgba(0, 0, 0, 0.717);
-          }
-
-          &:focus {
-            outline: none !important;
-          }
-        }
+        position: relative;
 
         p {
           font-size: 19px;
           text-transform: capitalize;
         }
 
-        div {
+        .submitbtn {
+          position: absolute;
+          bottom: 1.5rem;
+          right: 0;
+        }
+      }
+
+      .top-elms-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+
+        .top-elm-actions {
           display: flex;
           flex-direction: row;
-          gap: 1rem;
+          gap: 0.5rem;
           font-size: 15px;
-          margin-top: 0.5rem;
 
           svg {
             color: #2a6da8;
@@ -59,12 +73,6 @@
           }
         }
       }
-      .top-elms-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
       img {
         width: 50px;
         height: 50px;
@@ -72,4 +80,9 @@
       }
     }
   }
+}
+
+// image upload button
+#imageupload {
+  display: none;
 }

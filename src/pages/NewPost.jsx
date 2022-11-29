@@ -1,21 +1,36 @@
 import React, { useState, useEffect, useContext } from "react";
-import Checks from "../components/Checks";
-import Loading from "../components/Loading";
-import notif from "../helpers/notif";
 import { Link, useNavigate } from "react-router-dom";
+
+// icons
 import {
   BsImage,
   BsFillCameraVideoFill,
   BsFillEmojiSmileFill,
 } from "react-icons/bs";
 import { RiFileGifFill } from "react-icons/ri";
-import SingleHeader from "../components/SingleHeader";
+
+// context
 import UserContext from "../context/UserContext";
+import ImagesUploadedContext from "../context/ImagesUploadedContext";
+
+// helpers
+import notif from "../helpers/notif";
+import notifLoading from "../helpers/notifLoading";
+
+// componenes
+import Checks from "../components/Checks";
+import Loading from "../components/Loading";
+import SingleHeader from "../components/SingleHeader";
+import ImagesBox from "../components/images/ImagesBox";
 
 const NewPost = () => {
   const { login, changeLogin } = useContext(UserContext);
   const [newPostText, setNewPostText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // images array state
+  const { images, setImages } = useContext(ImagesUploadedContext);
+  const [uploadTracker, setUploadTracker] = useState(0);
 
   const navigate = useNavigate();
 
@@ -50,15 +65,22 @@ const NewPost = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!newPostText) {
+    if (!newPostText && images.length === 0) {
       setIsLoading(false);
       return notif("Verify the post field");
     }
+
+    // extract images url from images state
+    const imagesUrls = [];
+    images.forEach((img) => {
+      imagesUrls.push(img.imgUrl);
+    });
 
     // getting data
     const data = {
       ownerId: login.user.id,
       newPostText,
+      newPostImages: imagesUrls,
     };
 
     // sending request
@@ -98,7 +120,9 @@ const NewPost = () => {
         setNewPostText("");
         // success message
         notif(serverMessage.message);
-        // redirect to home
+        // reset images state
+        setImages([]);
+        // navigate to home
         navigate("/home");
       }
     } catch (err) {
@@ -108,6 +132,80 @@ const NewPost = () => {
     }
   };
 
+  // upload images
+  const uploadImages = async (e) => {
+    e.preventDefault();
+
+    const url = "https://api.cloudinary.com/v1_1/dm7pcraut/image/upload";
+
+    const files = document.querySelector("[type=file]").files;
+
+    // restrict files size
+    let MAXFILESIZE = 5;
+    let found = [];
+    Array.from(files).forEach((elm) => {
+      if (elm.size / 1024 / 1000 > MAXFILESIZE) {
+        found.push(1);
+      }
+    });
+    if (found.length >= 1) {
+      notif(`files must be less than ${MAXFILESIZE}MB`);
+      return;
+    }
+
+    // restrict to four max images
+    let MAXFILES = 4;
+    if (Array.from(files).length + images.length > MAXFILES) {
+      notif(`you can have only ${MAXFILES} images per post`);
+      return;
+    }
+
+    // start loader
+    notifLoading(`uploading.. ${uploadTracker} done!`, "upload");
+
+    const formData = new FormData();
+
+    try {
+      let imagesArr = [];
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        formData.append("file", file);
+        formData.append("upload_preset", "g12k3hld");
+
+        const send = await fetch(url, {
+          method: "POST",
+          body: formData,
+        });
+        const data = await send.json();
+        imagesArr.push({
+          imgName: data.original_filename,
+          imgUrl: data.secure_url,
+          imgId: data.asset_id,
+        });
+
+        // tracker value
+        setUploadTracker(uploadTracker + 1);
+      }
+
+      // update images state
+      setImages([...images, ...imagesArr]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // stop uploading message
+      notifLoading("", "upload");
+      // reset upload tracker
+      setUploadTracker(0);
+    }
+  };
+
+  useEffect(() => {
+    if (uploadTracker > 0) {
+      notifLoading(``, "upload");
+      notifLoading(`uploading.. ${uploadTracker} done!`, "upload");
+    }
+  }, [uploadTracker]);
+
   return (
     <>
       <SingleHeader title={"New Post"} />
@@ -116,49 +214,82 @@ const NewPost = () => {
         {login && (
           <>
             <div className="actual-home">
-              <div className="top-post">
+              <div className="top-post md:hidden">
                 <div className="new-post">
                   <div className="top">
                     {login && (
                       <>
-                        <Link to={"/profile"}>
+                        <Link to={`/${login.user.username}`}>
                           <img
                             className="profile-img"
                             src={`${login.user.profileicon.thumb}`}
                             alt="profile icon"
                           />
                         </Link>
-                        <form onSubmit={newPost}>
-                          <div className="top-elms">
+
+                        <div className="top-elms">
+                          {/* texts form */}
+                          <form onSubmit={newPost}>
                             <textarea
                               rows="1"
-                              className="w-full text-lg tickltextarea"
+                              className="w-full text-md tickltextarea"
                               placeholder="What's happening?"
-                              autoFocus
                               value={newPostText}
                               onChange={(e) => setNewPostText(e.target.value)}
                             ></textarea>
-                            <div className="top-elms-container">
-                              <div>
-                                <BsImage />
+                            {/* submit btn */}
+                            <div className="submitbtn">
+                              {isLoading ? (
+                                <button className="btn btn-sm btn-primary capitalize loading">
+                                  Posting...
+                                </button>
+                              ) : (
+                                <button className="btn btn-sm btn-primary capitalize">
+                                  Tickl
+                                </button>
+                              )}
+                            </div>
+                          </form>
+
+                          {/* images box */}
+                          {images.length >= 1 && <ImagesBox />}
+
+                          <div className="top-elms-container ">
+                            <div className="top-elm-actions mt-2">
+                              <span
+                                className="tooltip tooltip-bottom"
+                                data-tip="image"
+                              >
+                                <label
+                                  htmlFor="imageupload"
+                                  className="btn btn-sm"
+                                >
+                                  <BsImage />
+                                </label>
+
+                                {/* images form */}
+                                <form encType="multipart/form-data">
+                                  <input
+                                    id="imageupload"
+                                    type="file"
+                                    name="files[]"
+                                    multiple
+                                    onChange={uploadImages}
+                                  />
+                                </form>
+                              </span>
+                              <span className="btn btn-sm">
                                 <BsFillCameraVideoFill />
+                              </span>
+                              <span className="btn btn-sm">
                                 <BsFillEmojiSmileFill />
+                              </span>
+                              <span className="btn btn-sm">
                                 <RiFileGifFill />
-                              </div>
-                              <div>
-                                {isLoading ? (
-                                  <button className="btn btn-sm btn-primary capitalize loading">
-                                    Posting...
-                                  </button>
-                                ) : (
-                                  <button className="btn btn-sm btn-primary capitalize">
-                                    Tickl
-                                  </button>
-                                )}
-                              </div>
+                              </span>
                             </div>
                           </div>
-                        </form>
+                        </div>
                       </>
                     )}
                   </div>

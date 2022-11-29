@@ -11,22 +11,31 @@ import Loading from "../components/Loading";
 import NotFound from "../components/NotFound";
 import notif from "../helpers/notif";
 import BarLoader from "react-spinners/BarLoader";
+
+// context
 import UserContext from "../context/UserContext";
+import TargetUserContext from "../context/TargetUserContext";
 
 const Profil = () => {
+  // context
   const { login, changeLogin } = useContext(UserContext);
-  const [targetUser, setTargetUser] = useState(null);
+  const { targetUser, setTargetUser } = useContext(TargetUserContext);
+
+  // state
   const [notFound, setNotFound] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
   let pathname = location.pathname;
+
   // userdate request function
   const userdataReq = async (targetUsername) => {
     // loading start
     setIsLoading(true);
 
-    const data = { targetUsername };
+    console.log(login);
+
+    const data = { targetUsername, currentUserId: login.user.id };
 
     try {
       let headers = new Headers();
@@ -79,6 +88,7 @@ const Profil = () => {
     urlArr[0] = "";
     const targetUserName = urlArr.join("").trim();
     //  sending a request to the user data if exist
+
     const userData = async () => {
       let data = await userdataReq(targetUserName);
       if (data.user === null) {
@@ -86,8 +96,14 @@ const Profil = () => {
       }
       setTargetUser(data.user);
     };
-    userData();
-  }, [pathname]);
+
+    if (login) {
+      userData();
+    }
+
+    // reset
+    return () => setTargetUser(null);
+  }, [pathname, login]);
 
   return (
     <>
@@ -117,8 +133,8 @@ const Profil = () => {
               />
               {targetUser && (
                 <>
-                  <ProfilHead user={targetUser} />
-                  <ProfilBody user={targetUser} />
+                  <ProfilHead />
+                  <ProfilBody />
                 </>
               )}
               {notFound && (

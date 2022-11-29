@@ -23,19 +23,21 @@ const Home = () => {
         <>
           <Header title={"Home"} />
           <MobilHeader title={"Home"} />
-          <div className="home md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
-            <Appbar />
+          <HomeReRenderProvider>
+            <div className="home md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
+              <Appbar />
 
-            <div className="actual-home">
-              <TopPost />
+              <div className="actual-home">
+                <TopPost />
 
-              <div className="posts">
-                <Posts />
+                <div className="posts">
+                  <Posts />
+                </div>
               </div>
-            </div>
 
-            <Third />
-          </div>
+              <Third />
+            </div>
+          </HomeReRenderProvider>
         </>
       )}
 

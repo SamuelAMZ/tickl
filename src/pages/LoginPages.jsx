@@ -12,6 +12,11 @@ const LoginPages = () => {
     <>
       <Checks />
       <div className="loginpages-container">
+        {/* logo */}
+        <div className="login-logo">
+          <img src="/img/tickl_logo.png" alt="tickl logo" />
+        </div>
+
         <div className="loginpages-content">
           <div className="forms-container">
             <div className="login-content">
@@ -61,11 +66,6 @@ const LoginPages = () => {
           className="big-layer"
           style={{ backgroundImage: "url(/img/icons/bg.svg)" }}
         ></div>
-
-        {/* logo */}
-        <div className="login-logo">
-          <img src="/img/tickl_logo.png" alt="tickl logo" />
-        </div>
       </div>
     </>
   );

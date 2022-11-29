@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import FollowElm from "./FollowElm";
-
-// helper
+// helpers
 import notif from "../helpers/notif";
 
-const WhoToFollow = () => {
-  const [usersData, setUsersData] = useState(null);
+const FollowList = ({ data }) => {
+  const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const send = async () => {
       // send search request to backend
       setIsLoading(true);
+      const userData = { uid: data };
 
       try {
         let headers = new Headers();
@@ -27,11 +26,12 @@ const WhoToFollow = () => {
         headers.append("Access-Control-Allow-Credentials", "true");
 
         const response = await fetch(
-          `${process.env.REACT_APP_DOMAIN}/twitter/api/user/whotofollow`,
+          `${process.env.REACT_APP_DOMAIN}/twitter/api/user/singleuser`,
           {
             mode: "cors",
-            method: "GET",
+            method: "POST",
             headers: headers,
+            body: JSON.stringify(userData),
             credentials: "include",
           }
         );
@@ -41,7 +41,7 @@ const WhoToFollow = () => {
 
         //   check if data > 1
         if (serverMessage.status === "ok") {
-          setUsersData(serverMessage.users);
+          setUserData(serverMessage.user);
         }
       } catch (err) {
         notif("error try again later");
@@ -50,30 +50,30 @@ const WhoToFollow = () => {
       }
     };
     send();
-
-    // reset
-    return () => setUsersData(null);
   }, []);
 
   return (
-    usersData && (
-      <>
-        <div className="title">
-          <p>Who to follow</p>
+    userData && (
+      <Link to={`/${userData.username}`}>
+        <div className="usercard">
+          <div className="user-img">
+            <img src={userData.profileicon.thumb} alt="" />
+          </div>
+          <div className="user-details">
+            <div className="top">
+              <div className="name">
+                <h4>{userData.name}</h4>
+                <p className="profile-username">@{userData.username}</p>
+              </div>
+            </div>
+            <p className="profil-desc">{userData.desc}</p>
+
+            <button className="btn btn-sm bg-black user-action">view</button>
+          </div>
         </div>
-        <div className="elm-parent">
-          {usersData.map((elm, idx) => {
-            return <FollowElm data={elm} key={idx} />;
-          })}
-        </div>
-        <NavLink to="/suggetions">
-          <button className="btn btn-md btn-active  text-white ">
-            Show More
-          </button>
-        </NavLink>
-      </>
+      </Link>
     )
   );
 };
 
-export default WhoToFollow;
+export default FollowList;

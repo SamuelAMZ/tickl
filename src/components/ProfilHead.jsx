@@ -3,28 +3,35 @@ import { NavLink } from "react-router-dom";
 import { BiLinkAlt, BiCalendarEvent } from "react-icons/bi";
 import { FiMapPin } from "react-icons/fi";
 import MoreDetail from "./MoreDetail";
+import notif from "../helpers/notif";
+import trimData from "../helpers/trim";
+
+// context
 import UserContext from "../context/UserContext";
 import MoreDetailsContext from "../context/MoreDetailContext";
-import trimData from "../helpers/trim";
-import notif from "../helpers/notif";
+import TargetUserContext from "../context/TargetUserContext";
 
-const ProfilHead = ({ user }) => {
+const ProfilHead = () => {
+  // context
   const { login, changeLogin } = useContext(UserContext);
   const { showMoreDetail, changeShowMoreDetail } =
     useContext(MoreDetailsContext);
+  const { targetUser, setTargetUser } = useContext(TargetUserContext);
 
+  // state
   const [isThirdUser, setIsThirdUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // user = current fetched user
-    // login.user = the login user
-    if (user.id !== login.user.id) {
+    console.log(targetUser);
+    // targetUser = current fetched targetUser
+    // login.user = the login targetUser
+    if (targetUser.id !== login.user.id) {
       setIsThirdUser(true);
     } else {
       setIsThirdUser(false);
     }
-  }, [user]);
+  }, [targetUser]);
 
   // more and less features
   const [moreName, setMoreName] = useState(20);
@@ -36,37 +43,37 @@ const ProfilHead = ({ user }) => {
 
   useEffect(() => {
     // name
-    if (moreName < user.name.length) {
+    if (moreName < targetUser.name.length) {
       setShowMoreName(true);
     } else {
       setShowMoreName(false);
     }
 
     // username
-    if (moreUserName < user.username.length) {
+    if (moreUserName < targetUser.username.length) {
       setShowMoreUserName(true);
     } else {
       setShowMoreUserName(false);
     }
 
     // desc
-    if (moreDesc < user.desc.length) {
+    if (moreDesc < targetUser.desc.length) {
       setShowMoreDesc(true);
     } else {
       setShowMoreDesc(false);
     }
-  }, [user]);
+  }, [targetUser]);
 
-  // creating current user instance data array for more details component
+  // creating current targetUser instance data array for more details component
   useEffect(() => {
     setMoreDetailData([
-      { title: "username", info: `@${user.username}` },
-      { title: "display name", info: user.name },
-      { title: "description", info: user.desc },
-      { title: "location", info: user.country },
-      { title: "website", info: user.website },
+      { title: "username", info: `@${targetUser.username}` },
+      { title: "display name", info: targetUser.name },
+      { title: "description", info: targetUser.desc },
+      { title: "location", info: targetUser.country },
+      { title: "website", info: targetUser.website },
     ]);
-  }, [user]);
+  }, [targetUser]);
 
   // handle more btn
   const [moreDetailData, setMoreDetailData] = useState([]);
@@ -75,196 +82,287 @@ const ProfilHead = ({ user }) => {
   };
 
   // handle become fan button
-  // const handleBecomeFan = async (e, type) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
+  const handleFollow = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-  //   const data = {
-  //     currentUserId: login.user.id,
-  //     targetUserId: user.id,
-  //     type,
-  //   };
+    const data = {
+      currentUserId: login.user.id,
+      targetUserId: targetUser.id,
+      currentName: login.user.username,
+      targetName: targetUser.username,
+    };
 
-  //   try {
-  //     let headers = new Headers();
-  //     headers.append("Content-Type", "application/json");
-  //     headers.append("Accept", "application/json");
-  //     headers.append("GET", "POST", "OPTIONS");
-  //     headers.append(
-  //       "Access-Control-Allow-Origin",
-  //       `${process.env.REACT_APP_DOMAIN}`
-  //     );
-  //     headers.append("Access-Control-Allow-Credentials", "true");
+    try {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("Accept", "application/json");
+      headers.append("GET", "POST", "OPTIONS");
+      headers.append(
+        "Access-Control-Allow-Origin",
+        `${process.env.REACT_APP_DOMAIN}`
+      );
+      headers.append("Access-Control-Allow-Credentials", "true");
 
-  //     const response = await fetch(
-  //       `${process.env.REACT_APP_DOMAIN}/twitter/api/user/follow-unfollow`,
-  //       {
-  //         mode: "cors",
-  //         method: "POST",
-  //         headers: headers,
-  //         body: JSON.stringify(data),
-  //         credentials: "include",
-  //       }
-  //     );
+      const response = await fetch(
+        `${process.env.REACT_APP_DOMAIN}/twitter/api/user/follow`,
+        {
+          mode: "cors",
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data),
+          credentials: "include",
+        }
+      );
 
-  //     const serverMessage = await response.json();
-  //     notif(serverMessage.message);
-  //     setIsLoading(false);
+      const serverMessage = await response.json();
+      notif(serverMessage.message);
+      setIsLoading(false);
 
-  //     if (serverMessage.code === "ok") {
-  //       // actions
-  //       console.log("good");
-  //     }
-  //   } catch (err) {
-  //     notif("server error try again later");
-  //     console.log(err);
-  //     setIsLoading(false);
-  //   }
-  // };
+      if (serverMessage.code === "ok") {
+        // actions
+        let targetUserSnapshot = targetUser;
+        targetUserSnapshot.alreadyFollow = true;
+        targetUserSnapshot.followers = Number(targetUserSnapshot.followers) + 1;
+        setTargetUser(targetUserSnapshot);
+      }
+    } catch (err) {
+      notif("server error try again later");
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+  // handle unfollow fan button
+  const handleUnFollow = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const data = {
+      currentUserId: login.user.id,
+      targetUserId: targetUser.id,
+    };
+
+    try {
+      let headers = new Headers();
+      headers.append("Content-Type", "application/json");
+      headers.append("Accept", "application/json");
+      headers.append("GET", "POST", "OPTIONS");
+      headers.append(
+        "Access-Control-Allow-Origin",
+        `${process.env.REACT_APP_DOMAIN}`
+      );
+      headers.append("Access-Control-Allow-Credentials", "true");
+
+      const response = await fetch(
+        `${process.env.REACT_APP_DOMAIN}/twitter/api/user/unfollow`,
+        {
+          mode: "cors",
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(data),
+          credentials: "include",
+        }
+      );
+
+      const serverMessage = await response.json();
+      notif(serverMessage.message);
+      setIsLoading(false);
+
+      if (serverMessage.code === "ok") {
+        // actions
+        let targetUserSnapshot = targetUser;
+        targetUserSnapshot.alreadyFollow = false;
+        targetUserSnapshot.followers = Number(targetUserSnapshot.followers) - 1;
+        setTargetUser(targetUserSnapshot);
+      }
+    } catch (err) {
+      notif("server error try again later");
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <div className="profil-head">
-      {login ? (
-        <div
-          className="profil-head-img"
-          style={{ backgroundImage: `url(${user.profileback.normal})` }}
-        ></div>
-      ) : (
-        <div
-          className="profil-head-img"
-          style={{
-            backgroundImage: `url(https://res.cloudinary.com/dm7pcraut/image/upload/v1666500653/u_profile_main/dvux_fyhbql.png)`,
-          }}
-        ></div>
-      )}
-
-      <div className="profil-button">
+    <>
+      <div className="profil-head">
         {login ? (
           <div
-            className="profil-main-img"
-            style={{ backgroundImage: `url(${user.profileicon.normal})` }}
+            className="profil-head-img"
+            style={{ backgroundImage: `url(${targetUser.profileback.normal})` }}
           ></div>
         ) : (
           <div
-            className="profil-main-img"
+            className="profil-head-img"
             style={{
-              backgroundImage: `url(https://res.cloudinary.com/dm7pcraut/image/upload/v1666499517/u_profile_main/1946429_dpitlh.png)`,
+              backgroundImage: `url(https://res.cloudinary.com/dm7pcraut/image/upload/v1666500653/u_profile_main/dvux_fyhbql.png)`,
             }}
           ></div>
         )}
-        {isThirdUser ? (
-          <NavLink to={"#"}>
-            <button className="btn btn-active capitalize become-fan">
-              Become Fan
-            </button>
-          </NavLink>
-        ) : (
-          <NavLink to="/settings">
-            <button className="btn btn-active btn-neutral capitalize">
-              Edit profile
-            </button>
-          </NavLink>
-        )}
-      </div>
 
-      <div className="profil-details">
-        <div className="profil-detail">
-          {/* user display name */}
-          {login && showMoreName ? (
-            <>
-              <h4>
-                {trimData(user.name, moreName)}{" "}
-                <span className="btn btn-xs capitalize" onClick={handleMore}>
-                  more
-                </span>
-              </h4>
-            </>
+        <div className="profil-button">
+          {login ? (
+            <div
+              className="profil-main-img"
+              style={{
+                backgroundImage: `url(${targetUser.profileicon.normal})`,
+              }}
+            ></div>
           ) : (
-            <h4>{trimData(user.name, moreName)}</h4>
+            <div
+              className="profil-main-img"
+              style={{
+                backgroundImage: `url(https://res.cloudinary.com/dm7pcraut/image/upload/v1666499517/u_profile_main/1946429_dpitlh.png)`,
+              }}
+            ></div>
           )}
-          {/* username */}
-          <p className="profil-username">
-            {login && showMoreUserName ? (
+
+          {/* button */}
+          {isLoading && (
+            <NavLink to="#">
+              <button className="btn btn-active btn-neutral loading capitalize">
+                Loading...
+              </button>
+            </NavLink>
+          )}
+
+          {!isLoading && (
+            <>
+              {isThirdUser ? (
+                targetUser.alreadyFollow ? (
+                  <NavLink to={"#"}>
+                    <button
+                      className="btn btn-active capitalize un-fan"
+                      onClick={handleUnFollow}
+                    >
+                      Unfollow
+                    </button>
+                  </NavLink>
+                ) : (
+                  <NavLink to={"#"}>
+                    <button
+                      className="btn btn-active capitalize become-fan"
+                      onClick={handleFollow}
+                    >
+                      Become Fan
+                    </button>
+                  </NavLink>
+                )
+              ) : (
+                <NavLink to="/settings">
+                  <button className="btn btn-active btn-neutral capitalize">
+                    Edit profile
+                  </button>
+                </NavLink>
+              )}
+            </>
+          )}
+        </div>
+
+        <div className="profil-details">
+          <div className="profil-detail">
+            {/* targetUser display name */}
+            {login && showMoreName ? (
               <>
-                <span>
-                  @{trimData(user.username, moreUserName)}{" "}
+                <h4>
+                  {trimData(targetUser.name, moreName)}{" "}
                   <span className="btn btn-xs capitalize" onClick={handleMore}>
                     more
                   </span>
-                </span>
+                </h4>
               </>
             ) : (
-              <span>@{trimData(user.username, moreUserName)}</span>
+              <h4>{trimData(targetUser.name, moreName)}</h4>
             )}
-          </p>
-          {/* desc */}
-          {login && showMoreDesc ? (
-            <>
+            {/* username */}
+            <p className="profil-username">
+              {login && showMoreUserName ? (
+                <>
+                  <span>
+                    @{trimData(targetUser.username, moreUserName)}{" "}
+                    <span
+                      className="btn btn-xs capitalize"
+                      onClick={handleMore}
+                    >
+                      more
+                    </span>
+                  </span>
+                </>
+              ) : (
+                <span>@{trimData(targetUser.username, moreUserName)}</span>
+              )}
+            </p>
+            {/* desc */}
+            {login && showMoreDesc ? (
+              <>
+                <p className="profil-desc">
+                  {trimData(targetUser.desc, moreDesc)}{" "}
+                  <span className="btn btn-xs capitalize" onClick={handleMore}>
+                    more
+                  </span>
+                </p>
+              </>
+            ) : (
               <p className="profil-desc">
-                {trimData(user.desc, moreDesc)}{" "}
-                <span className="btn btn-xs capitalize" onClick={handleMore}>
-                  more
-                </span>
+                {trimData(targetUser.desc, moreDesc)}
               </p>
-            </>
-          ) : (
-            <p className="profil-desc">{trimData(user.desc, moreDesc)}</p>
-          )}
-
-          <div className="profil-others">
-            {login && user.country !== "no country yet" && (
-              <div>
-                <FiMapPin />
-                <p className="location">{trimData(user.country, 10)}</p>
-              </div>
             )}
 
-            {login && user.website !== "no link yet" && (
-              <a
-                className="link link-primary"
-                href={
-                  user.website.includes("http")
-                    ? user.website
-                    : `http://${user.website}`
-                }
-                target="BLANK"
-              >
+            <div className="profil-others">
+              {login && targetUser.country !== "no country yet" && (
                 <div>
-                  <BiLinkAlt />
-                  <p className="link link-primary">
-                    {trimData(user.website, 15)}
-                  </p>
+                  <FiMapPin />
+                  <p className="location">{trimData(targetUser.country, 10)}</p>
                 </div>
-              </a>
-            )}
-            <div>
-              <BiCalendarEvent />
-              <p>joined {login ? user.date.slice(0, 10) : "null"}</p>
+              )}
+
+              {login && targetUser.website !== "no link yet" && (
+                <a
+                  className="link link-primary"
+                  href={
+                    targetUser.website.includes("http")
+                      ? targetUser.website
+                      : `http://${targetUser.website}`
+                  }
+                  target="BLANK"
+                >
+                  <div>
+                    <BiLinkAlt />
+                    <p className="link link-primary">
+                      {trimData(targetUser.website, 15)}
+                    </p>
+                  </div>
+                </a>
+              )}
+              <div>
+                <BiCalendarEvent />
+                <p>joined {login ? targetUser.date.slice(0, 10) : "null"}</p>
+              </div>
+              <div>
+                <button className="btn btn-xs capitalize" onClick={handleMore}>
+                  Quick View
+                </button>
+              </div>
             </div>
-            <div>
-              <button className="btn btn-xs capitalize" onClick={handleMore}>
-                Quick View
-              </button>
-            </div>
-          </div>
-          <div className="profil-follow">
-            <div className="following">
-              <NavLink to="/follow">
-                <span> {login ? user.following : "null"}</span> following
-              </NavLink>
-            </div>
-            <div className="followers">
-              <NavLink to="/follow">
-                <span> {login ? user.followers : "null"}</span> fans
-              </NavLink>
+            <div className="profil-follow">
+              <div className="following">
+                <NavLink to={`/followings/${targetUser.username}`}>
+                  <span> {login ? targetUser.following : "null"}</span>{" "}
+                  following(s)
+                </NavLink>
+              </div>
+              <div className="followers">
+                <NavLink to={`/followers/${targetUser.username}`}>
+                  <span> {login ? targetUser.followers : "null"}</span> fan(s)
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* more details box */}
-      {showMoreDetail && <MoreDetail data={moreDetailData} />}
-    </div>
+        {/* more details box */}
+        {showMoreDetail && <MoreDetail data={moreDetailData} />}
+      </div>
+    </>
   );
 };
 

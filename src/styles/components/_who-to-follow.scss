@@ -26,6 +26,13 @@
       font-size: 47px;
       color: #9c9c9c;
 
+      img {
+        border-radius: 100px;
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+      }
+
       svg {
         margin-left: -5px;
       }

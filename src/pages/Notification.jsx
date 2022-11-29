@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Appbar from "../components/Appbar";
 import Third from "../components/Third";
 import Notification from "../components/Notification";
 import Header from "../components/Header";
 import MobilHeader from "../components/MobilHeader";
 
+// context
+import UserContext from "../context/UserContext";
+import Checks from "../components/Checks";
+
 const Explore = (e) => {
+  // context
+  const { login, changeLogin } = useContext(UserContext);
+
   let mention;
 
   const mentions = () => {
@@ -44,22 +51,27 @@ const Explore = (e) => {
 
   return (
     <>
-      <Header title={"Notifications"} />
-      <div className="notification md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
-        <Appbar />
-        <div className="actual-notification">
-          <MobilHeader title={"Notifications"} />
-          <div className="tab">
-            <p onClick={(e) => activeTabAll(e)} className="activeA">
-              All
-            </p>
-            <p onClick={(e) => activeTabMention(e)}>Mentions</p>
+      <Checks />
+      {login && (
+        <>
+          <Header title={"Notifications"} />
+          <div className="notification md:max-w-7xl xl:max-w-screen-xl mx-auto p-4 md:px-10 xl:px-5">
+            <Appbar />
+            <div className="actual-notification">
+              <MobilHeader title={"Notifications"} />
+              <div className="tab">
+                <p onClick={(e) => activeTabAll(e)} className="activeA">
+                  All
+                </p>
+                <p onClick={(e) => activeTabMention(e)}>Mentions</p>
+              </div>
+              {actualMention === "all" && all()}
+              {actualMention === "mention" && mentions()}
+            </div>
+            <Third />
           </div>
-          {actualMention === "all" && all()}
-          {actualMention === "mention" && mentions()}
-        </div>
-        <Third />
-      </div>
+        </>
+      )}
     </>
   );
 };

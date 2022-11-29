@@ -135,3 +135,56 @@ a {
     padding: 0 1rem;
   }
 }
+
+// ads
+.ad {
+  .ad-container {
+    width: 100%;
+    height: calc(100px + 4rem);
+    background-color: #3e3e3e0c;
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    @include b.breakpoint("1280") {
+      height: calc(130px + 5rem);
+      height: calc(130px + 4rem);
+      border-radius: 20px;
+    }
+
+    h3 {
+      line-height: 1;
+      font-size: 12px;
+      font-weight: 600;
+
+      @include b.breakpoint("1280") {
+        font-size: 15px;
+      }
+    }
+  }
+  .featured {
+    width: calc(100% - 2rem);
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #cdcdcd;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 5px rgba(118, 117, 117, 0.087);
+
+    @include b.breakpoint("1280") {
+      width: calc(100% - 4rem);
+      height: 130px;
+    }
+  }
+}

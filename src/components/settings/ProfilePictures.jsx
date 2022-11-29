@@ -133,9 +133,9 @@ const ProfilePictures = () => {
     setType("icon");
     setRemoveData({
       default:
-        "https://res.cloudinary.com/dm7pcraut/image/upload/v1666499517/u_profile_main/1946429_dpitlh.png",
+        "https://res.cloudinary.com/dm7pcraut/image/upload/v1669652946/profiles/Untitled_design_46_1_s9rdj8.jpg",
       thumb:
-        "https://res.cloudinary.com/dm7pcraut/image/upload/c_limit,h_60,w_90/v1666499517/u_profile_main/1946429_dpitlh.png",
+        "https://res.cloudinary.com/dm7pcraut/image/upload/v1669652946/profiles/Untitled_design_46_1_s9rdj8.jpg",
     });
   };
 
@@ -143,9 +143,9 @@ const ProfilePictures = () => {
     setType("back");
     setRemoveData({
       default:
-        "https://res.cloudinary.com/dm7pcraut/image/upload/v1666500653/u_profile_main/dvux_fyhbql.png",
+        "https://res.cloudinary.com/dm7pcraut/image/upload/v1669652946/profiles/Untitled_design_18_1_oatvts.jpg",
       thumb:
-        "https://res.cloudinary.com/dm7pcraut/image/upload/c_limit,h_60,w_90/v1666499517/u_profile_main/1946429_dpitlh.png",
+        "https://res.cloudinary.com/dm7pcraut/image/upload/v1669652946/profiles/Untitled_design_18_1_oatvts.jpg",
     });
   };
 

@@ -18,7 +18,7 @@ const UserCard = ({ data }) => {
             </div>
             <p className="profil-desc">{data.desc}</p>
 
-            <button className="btn btn-sm bg-black user-action">Follow</button>
+            <button className="btn btn-sm bg-black user-action">Visit</button>
           </div>
         </div>
       </Link>

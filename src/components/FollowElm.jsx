@@ -1,19 +1,22 @@
 import React from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { MdOutlineAccountCircle } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const FollowElm = () => {
+const FollowElm = ({ data }) => {
   return (
-    <div className="elm">
-      <MdOutlineAccountCircle />
-      <div className="user-detail">
-        <p className="user-first">Paris Saint</p>
-        <p className="user-name">@paris</p>
+    <Link to={`/${data.username}`}>
+      <div className="elm">
+        <img src={data.profileicon.thumb} alt="" />
+        <div className="user-detail">
+          <p className="user-first">{data.name}</p>
+          <p className="user-name">@{data.username}</p>
+        </div>
+
+        <button className="btn btn-sm">
+          <AiOutlinePlus />
+        </button>
       </div>
-      <button className="btn">
-        <AiOutlinePlus />
-      </button>
-    </div>
+    </Link>
   );
 };
 

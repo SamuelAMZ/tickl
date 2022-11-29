@@ -22,29 +22,5 @@
     gap: 2rem;
     overflow: auto;
     overflow: hidden;
-
-    .tab {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      justify-content: center;
-      border-radius: 20px;
-      overflow: hidden;
-
-      p {
-        text-align: center;
-        padding: 1rem;
-        font-size: 17px;
-        cursor: pointer;
-        font-weight: 600;
-
-        &:nth-child(1) {
-          border-right: 1px solid $heading;
-        }
-        &.active {
-          background: #3e3e3e1a;
-        }
-      }
-    }
   }
 }

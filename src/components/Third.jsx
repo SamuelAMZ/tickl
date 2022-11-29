@@ -21,72 +21,21 @@ const Third = () => {
         <div className="who-follow">
           <WhoToFollow />
         </div>
-
+        {/* 
         <a
           href="http://www.pickeringangels.com/"
           target="_blank"
           rel="noopener noreferrer"
+          className="ad"
         >
-          <div
-            className="featured"
-            style={{ backgroundImage: "url(/img/pickering.jpg)" }}
-          ></div>
-        </a>
-        <a
-          href="http://lavillaspa.ca/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div
-            className="featured"
-            style={{ backgroundImage: "url(/img/oshawa.jpg)" }}
-          ></div>
-        </a>
-        <a
-          href="https://carriesvip.ca/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div
-            className="featured"
-            style={{ backgroundImage: "url(/img/carries.jpg)" }}
-          ></div>
-        </a>
-
-        <div className="who-follow">
-          <WhoToFollow />
-        </div>
-
-        <a
-          href="http://www.pickeringangels.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div
-            className="featured"
-            style={{ backgroundImage: "url(/img/pickering.jpg)" }}
-          ></div>
-        </a>
-        <a
-          href="http://lavillaspa.ca/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div
-            className="featured"
-            style={{ backgroundImage: "url(/img/oshawa.jpg)" }}
-          ></div>
-        </a>
-        <a
-          href="https://carriesvip.ca/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div
-            className="featured"
-            style={{ backgroundImage: "url(/img/carries.jpg)" }}
-          ></div>
-        </a>
+          <div className="ad-container">
+            <h3>Promoted</h3>
+            <div
+              className="featured"
+              style={{ backgroundImage: "url(/img/pickering.jpg)" }}
+            ></div>
+          </div>
+        </a> */}
 
         <div className="empty"></div>
       </div>

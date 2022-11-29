@@ -173,10 +173,9 @@
 
 // logo
 .login-logo {
-  position: absolute;
-  top: 1rem;
-  left: 2rem;
-  z-index: 10;
+  position: relative;
+  z-index: 2;
+  padding: 2rem 0 0 2rem;
 
   img {
     width: 130px;
