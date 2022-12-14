@@ -1,50 +1,25 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 import notifLoading from "../../helpers/notifLoading";
 import notif from "../../helpers/notif";
+
+// context
 import UserContext from "../../context/UserContext";
+import CloudResultContext from "../../context/CloudResultContext";
 
 const ProfilePictures = () => {
-  const { login, changeLogin } = useContext(UserContext);
   const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [type, setType] = useState("");
-  const [cloudResult, setCloudResult] = useState(null);
   const [removeData, setRemoveData] = useState(null);
+
+  // context
+  const { login, changeLogin } = useContext(UserContext);
+  const { cloudResult, setCloudResult } = useContext(CloudResultContext);
+  const [cloudinaryWidget] = useOutletContext(); //cloudinary widget from setting page (parent)
 
   const cloudinary = useRef();
   cloudinary.current = window.cloudinary;
-  const cloudinaryWidget = useRef();
-
-  // upload files func
-  const uploadFiles = () => {
-    const cloudName = "dm7pcraut"; // replace with your own cloud name
-    const uploadPreset = "rqrjioh3"; // replace with your own upload preset
-
-    cloudinaryWidget.current = cloudinary.current.createUploadWidget(
-      {
-        cloudName: cloudName,
-        uploadPreset: uploadPreset,
-        cropping: true, //add a cropping step
-        folder: "profiles",
-        sources: ["local"], // restrict the upload sources to URL and local files
-        multiple: false, //restrict upload to a single file
-        clientAllowedFormats: ["jpg", "jpeg", "png"], //restrict uploading to image files only
-        maxImageFileSize: 5000000, //restrict file size to less than 2MB
-        maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-        theme: "blue", //change to a purple theme
-      },
-      (error, result) => {
-        if (error) {
-          console.log(error);
-        }
-        if (!error && result && result.event === "success") {
-          console.log(result);
-          setCloudResult(result);
-        }
-      }
-    );
-    // myWidget.open();
-  };
 
   // upload files main
   const handleUploadMain = () => {
@@ -56,16 +31,6 @@ const ProfilePictures = () => {
     setType("back");
     cloudinaryWidget.current.open();
   };
-
-  // creating widget on comp mount
-  useEffect(() => {
-    uploadFiles();
-
-    // remove widget from dome on unmount
-    return () => {
-      cloudinaryWidget.current.destroy({ removeThumbnails: true });
-    };
-  }, []);
 
   // sending files to server
   useEffect(() => {

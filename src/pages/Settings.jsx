@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import Checks from "../components/Checks";
 import Appbar from "../components/Appbar";
 import { RiArrowRightSLine } from "react-icons/ri";
@@ -13,14 +13,20 @@ import Header from "../components/Header";
 import SingleHeader from "../components/SingleHeader";
 import Loading from "../components/Loading";
 import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
+
+// context
 import UserContext from "../context/UserContext";
+import CloudResultContext from "../context/CloudResultContext";
 
 const Settings = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { login, changeLogin } = useContext(UserContext);
   const [mobileStyle, setMobileStyle] = useState(true);
   const [subPage, setSubPage] = useState(false);
+
+  // context
+  const { login, changeLogin } = useContext(UserContext);
+  const { cloudResult, setCloudResult } = useContext(CloudResultContext);
 
   // auto move user to username route
   useEffect(() => {
@@ -55,6 +61,83 @@ const Settings = () => {
     }
     console.log(subString, subPage);
   }, [location.pathname]);
+
+  // create upload widget and remove on unmount
+  const cloudinary = useRef();
+  cloudinary.current = window.cloudinary;
+  const cloudinaryWidget = useRef();
+
+  // upload files func  (cloudinary)
+  const uploadFiles = () => {
+    const cloudName = "dm7pcraut";
+    const uploadPreset = "rqrjioh3";
+
+    cloudinaryWidget.current = cloudinary.current.createUploadWidget(
+      {
+        cloudName: cloudName,
+        uploadPreset: uploadPreset,
+        cropping: true, //add a cropping step
+        folder: "profiles",
+        sources: ["local"], // restrict the upload sources to URL and local files
+        multiple: false, //restrict upload to a single file
+        clientAllowedFormats: ["jpg", "jpeg", "png"], //restrict uploading to image files only
+        maxImageFileSize: 5000000, //restrict file size to less than 2MB
+        maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
+        styles: {
+          palette: {
+            window: "#FFFFFF",
+            windowBorder: "#90A0B3",
+            tabIcon: "#225887",
+            menuIcons: "#5A616A",
+            textDark: "#000000",
+            textLight: "#FFFFFF",
+            link: "#225887",
+            action: "#FF620C",
+            inactiveTabIcon: "#0E2F5A",
+            error: "#F44235",
+            inProgress: "#225887",
+            complete: "#20B832",
+            sourceBg: "#E4EBF1",
+          },
+          fonts: {
+            default: null,
+            "'Poppins', sans-serif": {
+              url: "https://fonts.googleapis.com/css?family=Poppins",
+              active: true,
+            },
+          },
+        },
+        language: "en",
+        text: {
+          en: {
+            crop: {
+              title: "Crop your image",
+              skip_btn: "Post",
+            },
+          },
+        },
+      },
+      (error, result) => {
+        if (error) {
+          console.log(error);
+        }
+        if (!error && result && result.event === "success") {
+          console.log(result);
+          setCloudResult(result);
+        }
+      }
+    );
+  };
+
+  // creating widget on comp mount
+  useEffect(() => {
+    uploadFiles();
+
+    // remove widget from dome on unmount
+    return () => {
+      cloudinaryWidget.current.destroy({ removeThumbnails: true });
+    };
+  }, []);
 
   return (
     <>
@@ -155,7 +238,7 @@ const Settings = () => {
                 </div>
                 <div className="settings-values">
                   {/* sub routes */}
-                  <Outlet />
+                  <Outlet context={[cloudinaryWidget]} />
                 </div>
               </div>
             </div>

@@ -16,10 +16,23 @@ const Login = () => {
     setIsLoading(true);
 
     if (email !== "" && password !== "") {
-      const data = {
-        email: email.toLowerCase().trim(),
-        password: password.trim(),
-      };
+      let data;
+
+      // if user use email to login
+      if (isAnEmail(email)) {
+        data = {
+          emailOrUsername: email.toLowerCase().trim(),
+          password: password.trim(),
+        };
+      }
+
+      // if user use username to login
+      if (isAUsername(email)) {
+        data = {
+          emailOrUsername: email.trim(),
+          password: password.trim(),
+        };
+      }
 
       try {
         let headers = new Headers();
@@ -58,6 +71,42 @@ const Login = () => {
     } else {
       setIsLoading(false);
       return notif("Verify your fields");
+    }
+  };
+
+  // check for email or username use for login
+  // email
+  const isAnEmail = (input) => {
+    const inputSplited = input.split("");
+    const emailSymbolFound = [];
+
+    inputSplited.forEach((elm) => {
+      if (elm === "@") {
+        emailSymbolFound.push(1);
+      }
+    });
+
+    if (emailSymbolFound.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  // username
+  const isAUsername = (input) => {
+    const inputSplited = input.split("");
+    const emailSymbolFound = [];
+
+    inputSplited.forEach((elm) => {
+      if (elm === "@") {
+        emailSymbolFound.push(1);
+      }
+    });
+
+    if (emailSymbolFound.length > 0) {
+      return false;
+    } else {
+      return true;
     }
   };
 
