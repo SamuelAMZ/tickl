@@ -12,8 +12,6 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import UserContext from "../context/UserContext";
 import DesktopPostActiveContext from "../context/DesktopPostContext";
-import notifLoading from "../helpers/notifLoading";
-import notif from "../helpers/notif";
 import trimData from "../helpers/trim";
 
 const Appbar = () => {

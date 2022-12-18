@@ -14,30 +14,48 @@ import postReq from "../helpers/postReq";
 
 // components
 import PostImagesBox from "./images/PostImagesBox";
+import RepostPost from "./post/RepostPost";
 
 // react query
 import { useQuery } from "react-query";
 
 // context
 import UserContext from "../context/UserContext";
+import RepostPostActiveContext from "../context/RepostPostActiveContext";
+import CurrentRepostPostIdContext from "../context/CurrentRepostPostId";
 
 const Post = ({ data }) => {
   let dateTrimed = data.date.split("T")[0];
   const [isLoading, setIsLoading] = useState(false);
   const [owner, setOwner] = useState(null);
+  const [originalOwner, setOriginalOwner] = useState(null);
   const [actions, setActions] = useState(null);
   const [likesCount, setLikesCount] = useState(data ? data.actionLikes : 0);
   const [unLikesCount, setUnLikesCount] = useState(data ? data.actionLikes : 0);
+  const [repostCount, setRepostCount] = useState(data ? data.actionReposts : 0);
 
   // context
   const { login, changeLogin } = useContext(UserContext);
+  const { repostActive, changeRepostActive } = useContext(
+    RepostPostActiveContext
+  );
+  const { currentRepostPostId, setCurrentRepostPostId } = useContext(
+    CurrentRepostPostIdContext
+  );
 
-  // find individual post owner based on ownerid
+  // -------- find individual post owner based on ownerid
   useEffect(() => {
     const send = async () => {
       // send search request to backend
       setIsLoading(true);
-      const ownerData = { ownerId: data.ownerId };
+      let ownerData = { ownerId: "", repostId: "" };
+
+      if (data.postType === "normal") {
+        ownerData = { ownerId: data.ownerId, repostId: "" };
+      }
+      if (data.postType === "repost") {
+        ownerData = { ownerId: data.ownerId, repostId: data.originalUId };
+      }
 
       try {
         let headers = new Headers();
@@ -70,6 +88,7 @@ const Post = ({ data }) => {
           notif("can't find post awner");
         } else {
           setOwner(serverMessage.data);
+          setOriginalOwner(serverMessage.originalU);
         }
       } catch (err) {
         notif("error try again later");
@@ -81,7 +100,7 @@ const Post = ({ data }) => {
     send();
   }, []);
 
-  // actions checks
+  // -------- actions checks
   useEffect(() => {
     const send = async () => {
       // send search request to backend
@@ -198,6 +217,23 @@ const Post = ({ data }) => {
     }
   }, [unLikesData]);
 
+  //  -------- repost (open repost popup)
+  const handleRepost = () => {
+    // set active repost id to context
+    setCurrentRepostPostId(data._id);
+    // // make it appear
+    changeRepostActive(true);
+    // update repost count +1
+    setRepostCount(Number(repostCount) + 1);
+    // change color to blue
+    setActions({ ...actions, repost: true });
+  };
+
+  const redirectTooriginalPost = () => {
+    // should navigate to original post page
+    console.log("go");
+  };
+
   return (
     <>
       {owner && (
@@ -227,13 +263,31 @@ const Post = ({ data }) => {
               <p className="date">{dateTrimed}</p>
             </div>
 
-            {/* post description */}
-            {data.postText && <div className="desc">{data.postText}</div>}
-
-            {/* post images */}
-            {data.postImages.length >= 1 && (
-              <PostImagesBox images={data.postImages} />
+            {/* if repost render repost node */}
+            {originalOwner && (
+              <div className="desc repostnote">{data.repostNote}</div>
             )}
+
+            <div
+              className={originalOwner && "repost-style"}
+              onClick={redirectTooriginalPost}
+            >
+              {/* reposts render */}
+              {originalOwner && (
+                <div className="repost-data-originalu">
+                  <img src={originalOwner.profileicon.thumb} />
+                  <p>{originalOwner.name}</p>
+                </div>
+              )}
+
+              {/* post description */}
+              {data.postText && <div className="desc">{data.postText}</div>}
+
+              {/* post images */}
+              {data.postImages.length >= 1 && (
+                <PostImagesBox images={data.postImages} />
+              )}
+            </div>
 
             {/* actions */}
             <div className="actions">
@@ -241,10 +295,19 @@ const Post = ({ data }) => {
                 <BiCommentDetail />
                 <p>{data.actionComments}</p>
               </div>
-              <div className="btn btn-sm repost">
-                <FiRepeat />
-                <p>{data.actionReposts}</p>
-              </div>
+              {data.postType !== "repost" && (
+                <div
+                  className={
+                    actions && actions.repost
+                      ? "btn btn-sm repost blue"
+                      : "btn btn-sm repost"
+                  }
+                  onClick={handleRepost}
+                >
+                  <FiRepeat />
+                  <p>{repostCount}</p>
+                </div>
+              )}
               <div
                 className={
                   actions && actions.like
@@ -291,6 +354,11 @@ const Post = ({ data }) => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* show desktop poster */}
+      {repostActive && data._id === currentRepostPostId && (
+        <RepostPost postData={data} ownerData={owner} />
       )}
     </>
   );

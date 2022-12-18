@@ -64,8 +64,6 @@ const ImagesBox = () => {
       }
     });
 
-    console.log(imagesScreenShot);
-
     // update images state
     setImages([...imagesScreenShot]);
   };
