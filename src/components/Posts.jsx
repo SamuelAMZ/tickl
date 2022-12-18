@@ -89,10 +89,6 @@ const Posts = () => {
     return () => changeData([]);
   }, [timeToReload]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <>
       {/* posts */}

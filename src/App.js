@@ -39,117 +39,134 @@ import { TargetUserProvider } from "./context/TargetUserContext";
 import { ImagesUploadedProvider } from "./context/ImagesUploadedContext";
 import { CloudResultProvider } from "./context/CloudResultContext";
 
+// react query
+import { QueryClient, QueryClientProvider } from "react-query";
+
 function App() {
+  // react query
+  const client = new QueryClient();
+
   return (
     <>
-      <div className="pages">
-        <UserProvider>
-          <MenuActiveProvider>
-            <MobileShowProvider>
-              <CurrentSearchTermProvider>
-                <MoreDetailsProvider>
-                  <LoginFormProvider>
-                    <HomePostsDataProvider>
-                      <HomeReRenderProvider>
-                        <DesktopPostActiveProvider>
-                          <TargetUserProvider>
-                            <ImagesUploadedProvider>
-                              <CloudResultProvider>
-                                <Routes>
-                                  <Route
-                                    path="/"
-                                    exact
-                                    element={<LoginPages />}
-                                  />
-                                  <Route path="/home" element={<Home />} />
-                                  <Route
-                                    path="/explore"
-                                    element={<Explore />}
-                                  />
-                                  <Route
-                                    path="/notification"
-                                    element={<Notification />}
-                                  />
-                                  <Route
-                                    path="/bookmark"
-                                    element={<Bookmark />}
-                                  />
+      <QueryClientProvider client={client}>
+        <div className="pages">
+          <UserProvider>
+            <MenuActiveProvider>
+              <MobileShowProvider>
+                <CurrentSearchTermProvider>
+                  <MoreDetailsProvider>
+                    <LoginFormProvider>
+                      <HomePostsDataProvider>
+                        <HomeReRenderProvider>
+                          <DesktopPostActiveProvider>
+                            <TargetUserProvider>
+                              <ImagesUploadedProvider>
+                                <CloudResultProvider>
+                                  <Routes>
+                                    <Route
+                                      path="/"
+                                      exact
+                                      element={<LoginPages />}
+                                    />
+                                    <Route path="/home" element={<Home />} />
+                                    <Route
+                                      path="/explore"
+                                      element={<Explore />}
+                                    />
+                                    <Route
+                                      path="/notification"
+                                      element={<Notification />}
+                                    />
+                                    <Route
+                                      path="/bookmark"
+                                      element={<Bookmark />}
+                                    />
 
-                                  <Route
-                                    path="/suggetions"
-                                    element={<Suggetions />}
-                                  />
-                                  <Route path="/new" element={<NewPost />} />
-                                  <Route path="/logout" element={<Logout />} />
-                                  <Route
-                                    path="/followers/:username"
-                                    element={<Follow />}
-                                  />
-                                  <Route
-                                    path="/followings/:username"
-                                    element={<Follow />}
-                                  />
-                                  <Route
-                                    path="/settings"
-                                    element={<Settings />}
-                                  >
                                     <Route
-                                      path="username"
-                                      element={<Username />}
+                                      path="/suggetions"
+                                      element={<Suggetions />}
+                                    />
+                                    <Route path="/new" element={<NewPost />} />
+                                    <Route
+                                      path="/logout"
+                                      element={<Logout />}
                                     />
                                     <Route
-                                      path="images"
-                                      element={<ProfilePictures />}
+                                      path="/followers/:username"
+                                      element={<Follow />}
                                     />
                                     <Route
-                                      path="description"
-                                      element={<Description />}
-                                    />
-                                    <Route path="email" element={<Email />} />
-                                    <Route
-                                      path="country"
-                                      element={<Country />}
-                                    />
-                                    <Route path="gender" element={<Gender />} />
-                                    <Route
-                                      path="birthdate"
-                                      element={<Birthdate />}
+                                      path="/followings/:username"
+                                      element={<Follow />}
                                     />
                                     <Route
-                                      path="password"
-                                      element={<Password />}
-                                    />
-                                    <Route path="*" element={<Username />} />
-                                  </Route>
-                                  <Route path="/search" element={<Search />}>
-                                    <Route path="people" element={<People />} />
-                                    <Route path="*" element={<People />} />
-                                  </Route>
+                                      path="/settings"
+                                      element={<Settings />}
+                                    >
+                                      <Route
+                                        path="username"
+                                        element={<Username />}
+                                      />
+                                      <Route
+                                        path="images"
+                                        element={<ProfilePictures />}
+                                      />
+                                      <Route
+                                        path="description"
+                                        element={<Description />}
+                                      />
+                                      <Route path="email" element={<Email />} />
+                                      <Route
+                                        path="country"
+                                        element={<Country />}
+                                      />
+                                      <Route
+                                        path="gender"
+                                        element={<Gender />}
+                                      />
+                                      <Route
+                                        path="birthdate"
+                                        element={<Birthdate />}
+                                      />
+                                      <Route
+                                        path="password"
+                                        element={<Password />}
+                                      />
+                                      <Route path="*" element={<Username />} />
+                                    </Route>
+                                    <Route path="/search" element={<Search />}>
+                                      <Route
+                                        path="people"
+                                        element={<People />}
+                                      />
+                                      <Route path="*" element={<People />} />
+                                    </Route>
 
-                                  {/* dynamic user profile pages */}
-                                  <Route
-                                    path="/:username"
-                                    element={<Profil />}
-                                  />
-                                  {/* 404 for not found global subroutes */}
-                                  <Route
-                                    path="*"
-                                    element={<NotFoundGlobal />}
-                                  />
-                                </Routes>
-                              </CloudResultProvider>
-                            </ImagesUploadedProvider>
-                          </TargetUserProvider>
-                        </DesktopPostActiveProvider>
-                      </HomeReRenderProvider>
-                    </HomePostsDataProvider>
-                  </LoginFormProvider>
-                </MoreDetailsProvider>
-              </CurrentSearchTermProvider>
-            </MobileShowProvider>
-          </MenuActiveProvider>
-        </UserProvider>
-      </div>
+                                    {/* dynamic user profile pages */}
+                                    <Route
+                                      path="/:username"
+                                      element={<Profil />}
+                                    />
+                                    {/* 404 for not found global subroutes */}
+                                    <Route
+                                      path="*"
+                                      element={<NotFoundGlobal />}
+                                    />
+                                  </Routes>
+                                </CloudResultProvider>
+                              </ImagesUploadedProvider>
+                            </TargetUserProvider>
+                          </DesktopPostActiveProvider>
+                        </HomeReRenderProvider>
+                      </HomePostsDataProvider>
+                    </LoginFormProvider>
+                  </MoreDetailsProvider>
+                </CurrentSearchTermProvider>
+              </MobileShowProvider>
+            </MenuActiveProvider>
+          </UserProvider>
+        </div>
+      </QueryClientProvider>
     </>
   );
 }
