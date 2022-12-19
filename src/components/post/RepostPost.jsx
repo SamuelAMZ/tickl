@@ -3,12 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // icons
 import { IoClose } from "react-icons/io5";
-import {
-  BsImage,
-  BsFillCameraVideoFill,
-  BsFillEmojiSmileFill,
-} from "react-icons/bs";
-import { RiFileGifFill } from "react-icons/ri";
 
 // context
 import UserContext from "../../context/UserContext";
@@ -34,7 +28,7 @@ const RepostPost = ({ postData, ownerData }) => {
     CurrentRepostPostIdContext
   );
 
-  //   stete
+  //   states
   const [repostNote, setRepostNote] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -78,7 +72,7 @@ const RepostPost = ({ postData, ownerData }) => {
     }
   }, []);
 
-  // post new tickl request
+  // repost tickl request
   const rePost = async (e) => {
     e.preventDefault();
     setIsLoading(true);

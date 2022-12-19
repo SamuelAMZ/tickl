@@ -1,13 +1,24 @@
+@use "../../global/breakpoints" as b;
+@import "../../global/variables";
+
 .repost-data-container {
   background-color: rgba(230, 230, 230, 0.232) !important;
   border: 1px solid #d2d2d2;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 0.5rem 0.8rem;
   margin-bottom: 1rem;
 
-  p {
-    font-size: 17px !important;
+  @include b.breakpoint("768") {
+    padding: 1rem;
   }
+
+  p {
+    font-size: 14px !important;
+    @include b.breakpoint("768") {
+      font-size: 17px !important;
+    }
+  }
+
   .remove-image {
     display: none;
   }
@@ -18,6 +29,16 @@
   gap: 0.5rem;
   align-items: center;
   margin-bottom: 0.5rem;
+
+  img {
+    width: 40px !important;
+    height: 40px !important;
+
+    @include b.breakpoint("768") {
+      width: 50px !important;
+      height: 50px !important;
+    }
+  }
 
   img {
     background-color: #fff !important;

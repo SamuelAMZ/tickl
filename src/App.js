@@ -9,6 +9,7 @@ import Settings from "./pages/Settings";
 import Follow from "./pages/Follow";
 import Suggetions from "./pages/Suggetions";
 import NewPost from "./pages/NewPost";
+import Repost from "./pages/Repost";
 import Search from "./pages/Search";
 import NotFoundGlobal from "./pages/NotFoundGlobal";
 import Logout from "./components/Logout";
@@ -40,6 +41,7 @@ import { ImagesUploadedProvider } from "./context/ImagesUploadedContext";
 import { CloudResultProvider } from "./context/CloudResultContext";
 import { CurrentRepostPostIdProvider } from "./context/CurrentRepostPostId";
 import { RepostPostActiveProvider } from "./context/RepostPostActiveContext";
+import { RepostStateMobileProvider } from "./context/RepostStateMobileContext";
 
 // react query
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -66,115 +68,121 @@ function App() {
                                 <CloudResultProvider>
                                   <CurrentRepostPostIdProvider>
                                     <RepostPostActiveProvider>
-                                      <Routes>
-                                        <Route
-                                          path="/"
-                                          exact
-                                          element={<LoginPages />}
-                                        />
-                                        <Route
-                                          path="/home"
-                                          element={<Home />}
-                                        />
-                                        <Route
-                                          path="/explore"
-                                          element={<Explore />}
-                                        />
-                                        <Route
-                                          path="/notification"
-                                          element={<Notification />}
-                                        />
-                                        <Route
-                                          path="/bookmark"
-                                          element={<Bookmark />}
-                                        />
+                                      <RepostStateMobileProvider>
+                                        <Routes>
+                                          <Route
+                                            path="/"
+                                            exact
+                                            element={<LoginPages />}
+                                          />
+                                          <Route
+                                            path="/home"
+                                            element={<Home />}
+                                          />
+                                          <Route
+                                            path="/explore"
+                                            element={<Explore />}
+                                          />
+                                          <Route
+                                            path="/notification"
+                                            element={<Notification />}
+                                          />
+                                          <Route
+                                            path="/bookmark"
+                                            element={<Bookmark />}
+                                          />
 
-                                        <Route
-                                          path="/suggetions"
-                                          element={<Suggetions />}
-                                        />
-                                        <Route
-                                          path="/new"
-                                          element={<NewPost />}
-                                        />
-                                        <Route
-                                          path="/logout"
-                                          element={<Logout />}
-                                        />
-                                        <Route
-                                          path="/followers/:username"
-                                          element={<Follow />}
-                                        />
-                                        <Route
-                                          path="/followings/:username"
-                                          element={<Follow />}
-                                        />
-                                        <Route
-                                          path="/settings"
-                                          element={<Settings />}
-                                        >
                                           <Route
-                                            path="username"
-                                            element={<Username />}
+                                            path="/suggetions"
+                                            element={<Suggetions />}
                                           />
                                           <Route
-                                            path="images"
-                                            element={<ProfilePictures />}
+                                            path="/new"
+                                            element={<NewPost />}
                                           />
                                           <Route
-                                            path="description"
-                                            element={<Description />}
+                                            path="/repost"
+                                            element={<Repost />}
                                           />
                                           <Route
-                                            path="email"
-                                            element={<Email />}
+                                            path="/logout"
+                                            element={<Logout />}
                                           />
                                           <Route
-                                            path="country"
-                                            element={<Country />}
+                                            path="/followers/:username"
+                                            element={<Follow />}
                                           />
                                           <Route
-                                            path="gender"
-                                            element={<Gender />}
+                                            path="/followings/:username"
+                                            element={<Follow />}
                                           />
                                           <Route
-                                            path="birthdate"
-                                            element={<Birthdate />}
-                                          />
+                                            path="/settings"
+                                            element={<Settings />}
+                                          >
+                                            <Route
+                                              path="username"
+                                              element={<Username />}
+                                            />
+                                            <Route
+                                              path="images"
+                                              element={<ProfilePictures />}
+                                            />
+                                            <Route
+                                              path="description"
+                                              element={<Description />}
+                                            />
+                                            <Route
+                                              path="email"
+                                              element={<Email />}
+                                            />
+                                            <Route
+                                              path="country"
+                                              element={<Country />}
+                                            />
+                                            <Route
+                                              path="gender"
+                                              element={<Gender />}
+                                            />
+                                            <Route
+                                              path="birthdate"
+                                              element={<Birthdate />}
+                                            />
+                                            <Route
+                                              path="password"
+                                              element={<Password />}
+                                            />
+                                            <Route
+                                              path="*"
+                                              element={<Username />}
+                                            />
+                                          </Route>
                                           <Route
-                                            path="password"
-                                            element={<Password />}
+                                            path="/search"
+                                            element={<Search />}
+                                          >
+                                            <Route
+                                              path="people"
+                                              element={<People />}
+                                            />
+                                            <Route
+                                              path="*"
+                                              element={<People />}
+                                            />
+                                          </Route>
+
+                                          {/* dynamic user profile pages */}
+                                          <Route
+                                            path="/:username"
+                                            element={<Profil />}
                                           />
+                                          {/* 404 for not found global subroutes */}
                                           <Route
                                             path="*"
-                                            element={<Username />}
+                                            element={<NotFoundGlobal />}
                                           />
-                                        </Route>
-                                        <Route
-                                          path="/search"
-                                          element={<Search />}
-                                        >
-                                          <Route
-                                            path="people"
-                                            element={<People />}
-                                          />
-                                          <Route
-                                            path="*"
-                                            element={<People />}
-                                          />
-                                        </Route>
-
-                                        {/* dynamic user profile pages */}
-                                        <Route
-                                          path="/:username"
-                                          element={<Profil />}
-                                        />
-                                        {/* 404 for not found global subroutes */}
-                                        <Route
-                                          path="*"
-                                          element={<NotFoundGlobal />}
-                                        />
-                                      </Routes>
+                                        </Routes>
+                                      </RepostStateMobileProvider>
                                     </RepostPostActiveProvider>
                                   </CurrentRepostPostIdProvider>
                                 </CloudResultProvider>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 // icons
 import { FiMoreHorizontal } from "react-icons/fi";
@@ -23,6 +23,7 @@ import { useQuery } from "react-query";
 import UserContext from "../context/UserContext";
 import RepostPostActiveContext from "../context/RepostPostActiveContext";
 import CurrentRepostPostIdContext from "../context/CurrentRepostPostId";
+import RepostStateMobileContext from "../context/RepostStateMobileContext";
 
 const Post = ({ data }) => {
   let dateTrimed = data.date.split("T")[0];
@@ -42,6 +43,12 @@ const Post = ({ data }) => {
   const { currentRepostPostId, setCurrentRepostPostId } = useContext(
     CurrentRepostPostIdContext
   );
+  const { repostData, changeRepostMobile } = useContext(
+    RepostStateMobileContext
+  );
+
+  // router
+  const navigate = useNavigate();
 
   // -------- find individual post owner based on ownerid
   useEffect(() => {
@@ -219,14 +226,19 @@ const Post = ({ data }) => {
 
   //  -------- repost (open repost popup)
   const handleRepost = () => {
-    // set active repost id to context
     setCurrentRepostPostId(data._id);
-    // // make it appear
-    changeRepostActive(true);
-    // update repost count +1
-    setRepostCount(Number(repostCount) + 1);
-    // change color to blue
-    setActions({ ...actions, repost: true });
+    if (window.screen.width >= 768) {
+      // on desktop and tablet show repost popup
+      // set active repost id to context
+      // // make it appear
+      changeRepostActive(true);
+    } else {
+      // redirect to repost page on mobile and set repost mobile state
+      // state
+      changeRepostMobile({ postData: data, ownerData: owner });
+      // redirect
+      navigate("/repost");
+    }
   };
 
   const redirectTooriginalPost = () => {
@@ -356,7 +368,7 @@ const Post = ({ data }) => {
         </div>
       )}
 
-      {/* show desktop poster */}
+      {/* show desktop reposter */}
       {repostActive && data._id === currentRepostPostId && (
         <RepostPost postData={data} ownerData={owner} />
       )}
