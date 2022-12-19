@@ -3,9 +3,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 // icons
 import { FiMoreHorizontal } from "react-icons/fi";
-import { BiCommentDetail, BiLike } from "react-icons/bi";
+import { BiCommentDetail, BiLike, BiBookmark } from "react-icons/bi";
 import { FiRepeat } from "react-icons/fi";
-import { BsUpload } from "react-icons/bs";
 
 // helpers
 import trimData from "../helpers/trim";
@@ -224,7 +223,7 @@ const Post = ({ data }) => {
     }
   }, [unLikesData]);
 
-  //  -------- repost (open repost popup)
+  //  -------- repost (open repost popup or redirect to mobile repost route)
   const handleRepost = () => {
     setCurrentRepostPostId(data._id);
     if (window.screen.width >= 768) {
@@ -244,6 +243,33 @@ const Post = ({ data }) => {
   const redirectTooriginalPost = () => {
     // should navigate to original post page
     console.log("go");
+  };
+
+  //  -------- bookmark
+  const sendBookmarkReq = async () => {
+    // data
+    const inputData = { postId: data._id, userId: login.user.id };
+    // get request
+    await postReq(inputData, "/twitter/api/post/newbookmark");
+    notif("bookmarked successfully");
+    return;
+  };
+
+  const {
+    data: bookmarkData,
+    isLoading: bookmarkQueryLoading,
+    refetch: sendBookmark,
+  } = useQuery(["newbookmark"], sendBookmarkReq, {
+    refetchOnWindowFocus: false,
+    enabled: false,
+  });
+  const handleBookmark = async (e) => {
+    // set loading icon
+    e.target.classList.add("loading");
+    e.target.children[0].classList.add("hidden");
+    await sendBookmark();
+    e.target.classList.remove("loading");
+    e.target.children[0].classList.remove("hidden");
   };
 
   return (
@@ -303,10 +329,12 @@ const Post = ({ data }) => {
 
             {/* actions */}
             <div className="actions">
+              {/* comment */}
               <div className="btn btn-sm comment">
                 <BiCommentDetail />
                 <p>{data.actionComments}</p>
               </div>
+              {/* repost */}
               {data.postType !== "repost" && (
                 <div
                   className={
@@ -320,6 +348,7 @@ const Post = ({ data }) => {
                   <p>{repostCount}</p>
                 </div>
               )}
+              {/* like */}
               <div
                 className={
                   actions && actions.like
@@ -331,9 +360,15 @@ const Post = ({ data }) => {
                 <BiLike />
                 <p>{likesCount}</p>
               </div>
-              <div className="btn btn-sm more-actions">
-                <BsUpload />
-              </div>
+              {/* bookmark */}
+              {data.postType !== "repost" && (
+                <div
+                  className="btn btn-sm more-actions"
+                  onClick={handleBookmark}
+                >
+                  <BiBookmark />
+                </div>
+              )}
             </div>
           </div>
 

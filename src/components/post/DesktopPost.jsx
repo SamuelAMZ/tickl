@@ -37,10 +37,6 @@ const DesktopPost = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(location);
-  }, []);
-
   function OnInput(e) {
     this.style.height = 0;
     this.style.height = this.scrollHeight + "px";
@@ -229,6 +225,13 @@ const DesktopPost = () => {
       notifLoading(`uploading.. ${uploadTracker} done!`, "upload");
     }
   }, [uploadTracker]);
+
+  // reset images on unmount
+  useEffect(() => {
+    return () => {
+      return setImages([]);
+    };
+  }, []);
 
   return (
     <>
