@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 // react query
 import { useQuery } from "react-query";
@@ -15,6 +15,8 @@ import PostImagesBox from "../images/PostImagesBox";
 import { FiMoreHorizontal } from "react-icons/fi";
 
 const SingleBookmark = ({ data }) => {
+  const navigate = useNavigate();
+
   // states
   const [singleBook, setSingleBook] = useState(null);
   const [owner, setOwner] = useState(null);
@@ -48,9 +50,10 @@ const SingleBookmark = ({ data }) => {
     }
   }, [bookmarkData]);
 
-  useEffect(() => {
-    console.log(singleBook);
-  }, [singleBook]);
+  // redirect to single post page
+  const handleRedirectToSinglePage = () => {
+    navigate(`/post/${data}`);
+  };
 
   return (
     <>
@@ -84,7 +87,9 @@ const SingleBookmark = ({ data }) => {
             <div>
               {/* post description */}
               {singleBook.postText && (
-                <div className="desc">{singleBook.postText}</div>
+                <div className="desc" onClick={handleRedirectToSinglePage}>
+                  {singleBook.postText}
+                </div>
               )}
 
               {/* post images */}

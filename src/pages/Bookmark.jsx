@@ -1,9 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import Appbar from "../components/Appbar";
-import Third from "../components/Third";
-import Post from "../components/Post";
-import Header from "../components/Header";
-import MobilHeader from "../components/MobilHeader";
 
 // loader
 import { BarLoader } from "react-spinners";
@@ -14,6 +9,10 @@ import UserContext from "../context/UserContext";
 // components
 import Checks from "../components/Checks";
 import SingleBookmark from "../components/bookmark/SingleBookmark";
+import Appbar from "../components/Appbar";
+import Third from "../components/Third";
+import Header from "../components/Header";
+import MobilHeader from "../components/MobilHeader";
 
 // react query
 import { useQuery } from "react-query";
@@ -57,8 +56,6 @@ const Explore = () => {
       sendBookmark();
     }
   }, [login]);
-
-  // send single bookmark post
 
   return (
     <>

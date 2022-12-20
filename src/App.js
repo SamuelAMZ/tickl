@@ -9,6 +9,7 @@ import Settings from "./pages/Settings";
 import Follow from "./pages/Follow";
 import Suggetions from "./pages/Suggetions";
 import NewPost from "./pages/NewPost";
+import SingleNormalPost from "./pages/SingleNormalPost";
 import Repost from "./pages/Repost";
 import Search from "./pages/Search";
 import NotFoundGlobal from "./pages/NotFoundGlobal";
@@ -99,6 +100,10 @@ function App() {
                                           <Route
                                             path="/new"
                                             element={<NewPost />}
+                                          />
+                                          <Route
+                                            path="/post/:postid"
+                                            element={<SingleNormalPost />}
                                           />
                                           <Route
                                             path="/repost"

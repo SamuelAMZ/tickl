@@ -49,6 +49,11 @@ const Post = ({ data }) => {
   // router
   const navigate = useNavigate();
 
+  // redirect to single post page
+  const handleRedirectToSinglePage = () => {
+    navigate(`/post/${data._id}`);
+  };
+
   // -------- find individual post owner based on ownerid
   useEffect(() => {
     const send = async () => {
@@ -189,7 +194,6 @@ const Post = ({ data }) => {
   }, [likesData]);
 
   // -------- unlikes
-
   const sendUnLikesReq = async () => {
     // data
     const inputData = { postId: data._id, userId: login.user.id };
@@ -242,7 +246,9 @@ const Post = ({ data }) => {
 
   const redirectTooriginalPost = () => {
     // should navigate to original post page
-    console.log("go");
+    if (data && data.originalPostId) {
+      navigate(`/post/${data.originalPostId}`);
+    }
   };
 
   //  -------- bookmark
@@ -303,7 +309,12 @@ const Post = ({ data }) => {
 
             {/* if repost render repost node */}
             {originalOwner && (
-              <div className="desc repostnote">{data.repostNote}</div>
+              <div
+                className="desc repostnote"
+                onClick={handleRedirectToSinglePage}
+              >
+                {data.repostNote}
+              </div>
             )}
 
             <div
@@ -319,7 +330,11 @@ const Post = ({ data }) => {
               )}
 
               {/* post description */}
-              {data.postText && <div className="desc">{data.postText}</div>}
+              {data.postText && (
+                <div className="desc" onClick={handleRedirectToSinglePage}>
+                  {data.postText}
+                </div>
+              )}
 
               {/* post images */}
               {data.postImages.length >= 1 && (
