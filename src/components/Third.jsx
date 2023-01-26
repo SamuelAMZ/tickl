@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import WhoToFollow from "./WhoToFollow";
+import SideFeatured from "./SideFeatured/SideFeatured";
 import { FaFeatherAlt } from "react-icons/fa";
 
 const Third = () => {
@@ -21,21 +22,9 @@ const Third = () => {
         <div className="who-follow">
           <WhoToFollow />
         </div>
-        {/* 
-        <a
-          href="http://www.pickeringangels.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ad"
-        >
-          <div className="ad-container">
-            <h3>Promoted</h3>
-            <div
-              className="featured"
-              style={{ backgroundImage: "url(/img/pickering.jpg)" }}
-            ></div>
-          </div>
-        </a> */}
+        <div className="who-follow">
+          <SideFeatured />
+        </div>
 
         <div className="empty"></div>
       </div>

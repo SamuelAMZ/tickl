@@ -14,6 +14,7 @@ import Repost from "./pages/Repost";
 import Search from "./pages/Search";
 import NotFoundGlobal from "./pages/NotFoundGlobal";
 import Logout from "./components/Logout";
+
 // search subroutes
 import People from "./components/search/People";
 
