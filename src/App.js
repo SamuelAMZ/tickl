@@ -14,6 +14,7 @@ import Repost from "./pages/Repost";
 import Search from "./pages/Search";
 import NotFoundGlobal from "./pages/NotFoundGlobal";
 import Logout from "./components/Logout";
+import Pre from "./pages/Pre";
 
 // search subroutes
 import People from "./components/search/People";
@@ -74,6 +75,11 @@ function App() {
                                         <Routes>
                                           <Route
                                             path="/"
+                                            exact
+                                            element={<Pre />}
+                                          />
+                                          <Route
+                                            path="/login"
                                             exact
                                             element={<LoginPages />}
                                           />

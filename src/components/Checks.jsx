@@ -74,9 +74,9 @@ const Checks = ({ idx }) => {
       .then((data) => {
         if (data.user === "null") {
           changeLogin(null);
-          notif("Need to login");
+          // notif("Need to login");
           // redirection to login page
-          navigate("/");
+          navigate("/login");
         }
         if (data.user !== "null") {
           // redirect to home if already login

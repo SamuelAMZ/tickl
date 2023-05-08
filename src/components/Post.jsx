@@ -25,6 +25,7 @@ import CurrentRepostPostIdContext from "../context/CurrentRepostPostId";
 import RepostStateMobileContext from "../context/RepostStateMobileContext";
 
 const Post = ({ data }) => {
+  // components states
   let dateTrimed = data.date.split("T")[0];
   const [isLoading, setIsLoading] = useState(false);
   const [owner, setOwner] = useState(null);
@@ -161,6 +162,10 @@ const Post = ({ data }) => {
 
   // -------- likes
   const sendLikesReq = async () => {
+    // check if login
+    if (!login) {
+      return navigate("/login");
+    }
     // data
     const inputData = { postId: data._id, userId: login.user.id };
     // get request
@@ -195,6 +200,10 @@ const Post = ({ data }) => {
 
   // -------- unlikes
   const sendUnLikesReq = async () => {
+    // check if login
+    if (!login) {
+      return navigate("/login");
+    }
     // data
     const inputData = { postId: data._id, userId: login.user.id };
     // get request
@@ -229,6 +238,11 @@ const Post = ({ data }) => {
 
   //  -------- repost (open repost popup or redirect to mobile repost route)
   const handleRepost = () => {
+    // check if login
+    if (!login) {
+      return navigate("/login");
+    }
+
     setCurrentRepostPostId(data._id);
     if (window.screen.width >= 768) {
       // on desktop and tablet show repost popup
@@ -253,6 +267,10 @@ const Post = ({ data }) => {
 
   //  -------- bookmark
   const sendBookmarkReq = async () => {
+    // check if login
+    if (!login) {
+      return navigate("/login");
+    }
     // data
     const inputData = { postId: data._id, userId: login.user.id };
     // get request

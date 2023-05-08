@@ -27,10 +27,14 @@ const MobilHeader = ({ title }) => {
 
       <div className="mobil-header px-4 py-2">
         <div className="mobil-logo">
-          <NavLink to={"/" + login.user.username}>
+          <NavLink to={"/" + login?.user.username}>
             {login && (
-              <img src={`${login.user.profileicon.thumb}`} alt="profile icon" />
+              <img
+                src={`${login?.user.profileicon.thumb}`}
+                alt="profile icon"
+              />
             )}
+            {!login && <img src="/img/logo.png" alt="logo" />}
           </NavLink>
         </div>
         <div className="page-name">
@@ -67,7 +71,7 @@ const MobilHeader = ({ title }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/${login.user.username}`}>
+            <NavLink to={`/${login?.user.username}`}>
               <MdOutlineAccountCircle />
             </NavLink>
           </li>

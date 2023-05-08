@@ -48,7 +48,7 @@ const Sidemenu = () => {
           </li>
           <li>
             <NavLink
-              to={`/${login.user.username}`}
+              to={`/${login?.user.username}`}
               onClick={() => changeActive(false)}
             >
               <MdOutlineAccountCircle />
@@ -56,11 +56,13 @@ const Sidemenu = () => {
             </NavLink>
           </li>
 
-          <li className="btn logout">
-            <NavLink to={"/logout"}>
-              <p>Logout</p>
-            </NavLink>
-          </li>
+          {login && (
+            <li className="btn logout">
+              <NavLink to={"/logout"}>
+                <p>Logout</p>
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>
